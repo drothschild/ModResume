@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   resources :resumes
   resources :objectives
-  root 'resumes#index'
+  # root 'resumes#index'
+  root 'root#index'
 end

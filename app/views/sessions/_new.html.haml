@@ -1,0 +1,10 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .field.login-input
+    = f.email_field :email, autofocus: true, placeholder: 'Email address'
+    = f.password_field :password, autocomplete: "off", placeholder: 'Password'
+  .actions.login-submit
+    = f.submit "Log in"
+  - if devise_mapping.rememberable?
+    .field
+      = f.check_box :remember_me
+      = f.label :remember_me

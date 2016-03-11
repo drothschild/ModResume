@@ -202,8 +202,8 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise (~> 3.5, >= 3.5.6)
-  faker
   dotenv-rails
+  faker
   haml-rails (~> 0.9)
   hirb
   jbuilder (~> 2.0)

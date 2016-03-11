@@ -1,3 +1,6 @@
 hello
 
-= react_component 'Resumes', {data: @resumes}
+= react_component 'Resumes', {resumes: @resumes}
+
+- @resumes.each do |resume|
+  =link_to 'Resume', resume

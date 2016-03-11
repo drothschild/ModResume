@@ -8,13 +8,24 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    %nav.navbar.navbar-default
-      .container-fluid
-        .navbar-header
-          %h1 ModResume
-        .navbar-form.navbar-right
-          - if !user_signed_in?
-            = render 'sessions/new'
+    .container
+      %nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            %a.navbar-brand ModResume
+          #navbar.navbar-collapse.collapse
+            %ul.nav.navbar-nav
+              %li
+                %a item2
+              %li
+                %a item1
+              %li
+                %a hello
+            .navbar-form.navbar-right
+              - if !user_signed_in?
+                = render 'sessions/new'
+              - else
+
 
     .container
       %p.notice

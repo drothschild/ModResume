@@ -1,12 +1,12 @@
-class ResumesController < ApplicationController
+class ObjectivesController < ApplicationController
 
   def index
-    # @resumes = Resume.all
-    @resumes = Resume.all
+    # @Objectives = Objective.all
+    @objectives = Objective.all
   end
 
   def show
-    @resume = Resume.find(params[:id])
+    @objective = Objective.find(params[:id])
     # @resume = Resume.create(target_job: "Rockstar", document_data: "Who runs the world? Squirrels!")
     # render json: @resume
   end

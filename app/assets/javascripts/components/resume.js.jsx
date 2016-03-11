@@ -6,8 +6,8 @@ var Resume = React.createClass({
 
   getInitialState: function (){
     return{
-      targetJob: this.props.resume.target_job,
-      documentData: this.props.resume.document_data
+      targetJob: this.props.target_job,
+      documentData: this.props.document_data
     }
   },
 

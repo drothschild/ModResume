@@ -3,5 +3,8 @@ Rails.application.routes.draw do
 
   resources :resumes
   resources :objectives
+
+  get':controller(/:action(/:id))'
+
   root 'resumes#index'
 end

@@ -2,5 +2,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :resumes
-  root 'welcome#index'
+  root 'resumes#index'
 end

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: {
+        sessions: 'users/sessions'
+      }
 
   resources :tags
 
@@ -8,5 +11,5 @@ Rails.application.routes.draw do
 
   get':controller(/:action(/:id))'
 
-  root 'resumes#index'
+  root 'root#index'
 end

@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+# User authentication
+gem 'devise', '~> 3.5', '>= 3.5.6'
+
+# JS front-end
+gem 'react-rails', '~>1.0'
+
+# HAML
+gem "haml-rails", "~> 0.9"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

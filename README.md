@@ -32,10 +32,13 @@ Workflow
 Technology Stack
   Rails
   React
+  https://github.com/reactjs/react-rails
   Devise
   Tinymce
   HAML
+  https://github.com/indirect/haml-rails
   Sass
+  https://github.com/rails/sass-rails
   Heroku
   Redis (stretch or if necessary)
   Sidekiq (stretch or if necessary)

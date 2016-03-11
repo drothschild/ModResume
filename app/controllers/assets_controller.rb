@@ -6,5 +6,6 @@ class AssetsController < ApplicationController
     @experiences = Experience.all
     @projects = Project.all
     @educations = Education.all
+    @tags = Tag.all
   end
 end

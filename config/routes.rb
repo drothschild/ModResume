@@ -4,6 +4,10 @@ Rails.application.routes.draw do
         sessions: 'users/sessions'
       }
 
+  resources :users do
+    resources :assets
+  end
+
   resources :tags
 
   resources :resumes

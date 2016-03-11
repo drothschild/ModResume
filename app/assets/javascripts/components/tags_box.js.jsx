@@ -82,9 +82,8 @@ var TagForm = React.createClass({
 var Tag = React.createClass({
   render: function(){
     return(
-      <div className="tag">
-        {this.props.children}
-      </div>
+      // <div className="tag">{this.props.children}</div>
+      <a href="/taggings" className="tag">{this.props.children}</a>
     )
   }
 })

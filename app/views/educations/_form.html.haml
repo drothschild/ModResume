@@ -1,0 +1,21 @@
+= form_for [@user, @education] do |f|
+  %fieldset.form-group
+    = f.label :institution_name, "Institution Name"
+    = f.text_field :institution_name, class: "form-control"
+  %fieldset.form-group
+    = f.label :location, "Location"
+    = f.text_field :location, class: "form-control"
+  %fieldset.form-group
+    = f.label :focus, "Area of Studies"
+    = f.text_field :focus, class: "form-control"
+  %fieldset.form-group
+    = f.label :about_institution, "About Institution"
+    = f.text_field :description, class: "form-control"
+  %fieldset.form-group
+    = f.label :completion
+    = f.date_select :completion, class: "form-control", discard_day: true
+  %fieldset.form_group
+    = f.label :details
+    = text_field_tag "education[details][][detail]",nil,  class: "form-control detail"
+    = button_tag "+", id: "add_detail"
+    = f.submit

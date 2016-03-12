@@ -9,4 +9,4 @@
     = asset.description
     %br
     %em= asset.location
-    =render '/tags/list', tags: @tags
+    =render '/tags/list', asset_type: asset_type, asset: asset, tags: @tags

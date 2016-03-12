@@ -1,0 +1,5 @@
+toolbar:
+  - bullist | styleselect | bold italic | undo redo
+  - link
+plugins:
+  - link

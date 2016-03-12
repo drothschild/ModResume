@@ -12,9 +12,17 @@ class ResumesController < ApplicationController
 
   def show
     @resume = Resume.find(params[:id])
-    p @resume_assets
-    @resume_assets = ResumeAsset.where("resume_id = ?", params[:id])
-    # @list = ["Red","Green","Blue","Yellow","Black","White","Orange"]
+
+    asset_types
+
+
+    @objectives = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Objective")
+    @skills = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Skill")
+    @volunteerings = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Volunteering")
+    @experiences = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Experience")
+    @projects = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Project")
+    @educations = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Education")
+    @resume_assets = { "objectives" => @objectives, "experiences" => @experiences, "projects" => @projects, "educations" => @educations, "skills" => @skills, "volunteerings" => @volunteerings}
   end
 
   def new

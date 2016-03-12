@@ -2,7 +2,12 @@ class ResumesController < ApplicationController
 
   def index
     # @resumes = Resume.all
-    @resumes = Resume.all
+    if current_user
+      @resumes = Resume.where(user_id: current_user.id)
+    else
+      # flash error please login
+      redirect_to '/'
+    end
   end
 
   def show

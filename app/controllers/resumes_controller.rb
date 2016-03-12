@@ -21,6 +21,7 @@ class ResumesController < ApplicationController
   end
 
   def create
+    
   end
 
   # edit html text

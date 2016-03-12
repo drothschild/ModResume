@@ -18,7 +18,7 @@ class ObjectivesController < ApplicationController
     @user = User.find(params[:user_id])
     objective = @user.objectives.new(objective_params)
     if objective.save
-      redirect_to [@user, @user.objectives]
+      redirect_to :new_user_asset
     else
       flash.now[:danger] = @objective.errors.full_messages
       render :new

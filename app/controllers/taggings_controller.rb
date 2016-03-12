@@ -1,13 +1,20 @@
 class TaggingsController < ApplicationController
-  before_filter :find_tagger
+  before_filter :find_tagger, only: [:create]
 
   def create
-    p "*" * 80
-    p params
     @tagging = Tagging.create(tagging_params)
     respond_to do |format|
       format.html{}
-      format.json{render json: @tagging}
+      format.json{ render json: @tagging}
+    end
+  end
+
+  def destroy
+    @tagging=Tagging.find(params[:id])
+    @tagging.destroy
+    respond_to do |format|
+      format.html{}
+      format.json{ render :nothing => true}
     end
   end
 

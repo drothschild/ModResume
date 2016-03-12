@@ -1,37 +1,37 @@
 class ExperiencesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
-    @experience = Experience.new
+    @volunteering = Volunteering.new
   end
 
   def edit
     @user = User.find(params[:user_id])
-    @experience = Experience.find(params[:id])
+    @volunteering = Volunteering.find(params[:id])
   end
 
   def show
-    @experience = Experience.find(params[:id])
-    # render :json @experience.to_json
+    @volunteering = Volunteering.find(params[:id])
+    # render :json @volunteering.to_json
   end
 
   def create
     pass_params = experience_params
     descriptions = pass_params.delete(:details)
-    @experience = current_user.experiences.new(pass_params)
-    if @experience.save
-      addDescriptions(@experience, descriptions)
+    @volunteering = current_user.experiences.new(pass_params)
+    if @volunteering.save
+      addDescriptions(@volunteering, descriptions)
     else
-      flash.now[:danger] = @experience.errors.full_messages
+      flash.now[:danger] = @volunteering.errors.full_messages
       render :new
     end
     redirect_to :new_user_asset
   end
 
   def update
-    @experience = Experience.find(params[:id])
+    @volunteering = Volunteering.find(params[:id])
     pass_params = experience_params
     descriptions = pass_params.delete(:details)
-    @experience.update(pass_params)
+    @volunteering.update(pass_params)
     addDescriptions(@experience, descriptions)
     redirect_to :new_user_asset
   end

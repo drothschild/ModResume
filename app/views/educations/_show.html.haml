@@ -8,3 +8,6 @@
     %br
     %em= asset.location
     =render '/tags/list', asset_type: asset_type, asset: asset, tags: @tags
+    %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume"}
+      %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+

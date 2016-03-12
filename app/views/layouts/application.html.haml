@@ -3,16 +3,17 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title ModResume
-    %link{href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel: "stylesheet", integrity: "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin: "anonymous"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %link{href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel: "stylesheet", integrity: "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin: "anonymous"}
     %link{:href => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css", :rel => "stylesheet"}
       %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"}
+    %script{:crossorigin => "anonymous", :integrity => "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"}
   %body
     .container
       %nav.navbar.navbar-default
-        .container-fluid
+        .container
           .navbar-header
             %a.navbar-brand{:href => "/"} ModResume
           #navbar.navbar-collapse.collapse
@@ -21,7 +22,7 @@
                 %li
                   = link_to 'Resume Dashboard', user_resumes_path(current_user.id)
                 %li
-                  %a My Assets
+                  %a{href: "/users/#{current_user.id}/assets/new"}My Assets
                 %li.dropdown
                   %a.dropdown-toggle{:href=>"#","data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded"=> "false"}
                     User Settings
@@ -38,7 +39,7 @@
                 = render 'sessions/new'
 
 
-    .container
+
       %p.notice
         = notice
       %p.alert

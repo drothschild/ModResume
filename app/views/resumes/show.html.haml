@@ -1,6 +1,19 @@
-%ul{id: "sortable"}
-  -@resume_assets.each do |resume_asset|
-    - if resume_asset.buildable_type != "Skill"
-      %li.ui-state-default= resume_asset.buildable.description
+.row
+  .col-md-6.col-s-6.col-centered.text-center.resume-template
+    .row
+      .col-md-12.col-s-12.resume-header
+        ="#{current_user.first_name} #{current_user.last_name}"
+        %br
+        ="#{current_user.email}"
+    .row
+      .col-md-12.col-s-12.resume-top-content
+        =@resume_assets["objectives"][0].buildable.description
+        =@resume_assets[:experiences]
+
+
+  / %ul{id: "sortable"}
+  /   -@resume_assets.each do |resume_asset|
+  /     - if resume_asset.buildable_type != "Skill"
+  /       %li.ui-state-default= resume_asset.buildable.description
 
 

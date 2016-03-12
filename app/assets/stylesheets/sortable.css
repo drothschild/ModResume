@@ -1,3 +1,21 @@
+.resume-top-content{
+  height: 150px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.resume-template{
+  height: 700px;
+  background-color: grey;
+}
+
+.resume-header{
+  height: 150px;
+  background-color: white;
+  border: 1px solid black;
+  text-align: left;
+}
+
 #sortable{
   list-style-type: none;
   margin: 0;
@@ -10,4 +28,9 @@
   padding-left: 1.5em;
   font-size: 1em;
   height: 18px;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
 }

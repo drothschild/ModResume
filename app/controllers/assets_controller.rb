@@ -10,4 +10,9 @@ class AssetsController < ApplicationController
     # @assets = {Objectives: @objectives, Skills: @skills, Volunteer: @volunteerings, Experience: @experiences, Projects: @projects}
     @assets = { "objectives" => @objectives, "experiences" => @experiences, "projects" => @projects, "educations" => @educations, "skills" => @skills, "volunteerings" => @volunteerings}
   end
+
+  def new
+    @asset_types = asset_types
+  end
+
 end

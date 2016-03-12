@@ -1,6 +1,6 @@
 .btn-group{"data-toggle" => "buttons"}
 -@tags.each do |tag|
-  %label.btn.btn-default
+  %label.btn.btn-primary
     - if is_tagged?(asset, tag)
       - tagging_id = get_tagging_id(asset, tag)
       %input{:autocomplete => "off", :checked => "true", :class=> "asset-tag", :type => "checkbox", "data-tagging-id" => "#{tagging_id}"}

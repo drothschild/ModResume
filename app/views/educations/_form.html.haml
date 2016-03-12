@@ -1,0 +1,23 @@
+= form_for [@user, @education] do |f|
+  %fieldset.form-group
+    = f.label :institution_name, "Institution Name"
+    = f.text_field :institution_name
+  %fieldset.form-group
+    = f.label :location, "Location"
+    = f.text_field :location
+  %fieldset.form-group
+    = f.label :focus, "Area of Studies"
+    = f.text_field :focus
+  %fieldset.form-group
+    = f.label :completion, "Completion"
+    = f.date_field :completion
+  %fieldset.form-group
+    = f.label :about_institution, "About Institution"
+    = f.text_area :description
+  %fieldset.form-group
+    = f.label :add_bullet, "Add bullets"
+    %button.btm.btn-primary
+      +
+
+  = f.submit "Save"
+

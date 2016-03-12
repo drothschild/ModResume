@@ -1,0 +1,7 @@
+%h1 Educations
+.educations_list
+  - @educations.each do |obj|
+
+    .education
+      = obj.description.html_safe
+

@@ -11,6 +11,9 @@
     = f.label :end_date 
     = f.date_select :end_date, class: "form-control", discard_day: true
   %fieldset.form_group
+    = f.label :location 
+    = f.text_field :location
+  %fieldset.form_group
     = f.label :details
     = text_field_tag "experience[details][][detail]",nil,  class: "form-control detail"
     = button_tag "+", id: "add_detail"

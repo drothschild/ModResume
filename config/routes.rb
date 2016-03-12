@@ -5,13 +5,22 @@ Rails.application.routes.draw do
       }
 
   resources :users do
+    resources :websites
+    resources :tags
+
     resources :assets
+    resources :objectives
+    resources :educations
+    resources :experiences
+    resources :projects
+    resources :skills
+    resources :volunteerings
+
+    resources :resumes
+
   end
 
-  resources :tags
 
-  resources :resumes
-  resources :objectives
 
   get':controller(/:action(/:id))'
 

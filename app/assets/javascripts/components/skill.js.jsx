@@ -8,8 +8,9 @@ var Skill = React.createClass({
     }
   },
   render: function(){
+    debugger;
     return (
-      <div>Title: {this.state.title} <a href="/tags">Tag</a></div>
+      <div>Title: {this.props.title}</div>
     );
   }
 });

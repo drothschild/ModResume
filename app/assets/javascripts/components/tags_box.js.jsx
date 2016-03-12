@@ -33,7 +33,7 @@ var TagBox = React.createClass({
 
 var TagList = React.createClass({
   render: function(){
-    var tagNodes = this.props.data.map(function(tag){
+    var tagNodes = this.props.tags.map(function(tag){
     return(
       <Tag name={tag.name} key={tag.id}>
         {tag.name}

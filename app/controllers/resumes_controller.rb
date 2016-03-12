@@ -11,18 +11,18 @@ class ResumesController < ApplicationController
   end
 
   def show
+    @tags = Tag.all
     @resume = Resume.find(params[:id])
+    @assets = {}
+    @asset_types = asset_types
 
-    asset_types
-
-
-    @objectives = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Objective")
-    @skills = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Skill")
-    @volunteerings = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Volunteering")
-    @experiences = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Experience")
-    @projects = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Project")
-    @educations = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], "Education")
-    @resume_assets = { "objectives" => @objectives, "experiences" => @experiences, "projects" => @projects, "educations" => @educations, "skills" => @skills, "volunteerings" => @volunteerings}
+    @asset_types.each do |asset_type|
+      @assets["#{asset_type}"] = []
+      resume_assets = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], asset_type.capitalize.singularize)
+      resume_assets.each do |resume_asset|
+        @assets["#{asset_type}"] << resume_asset.buildable
+      end
+    end
   end
 
   def new

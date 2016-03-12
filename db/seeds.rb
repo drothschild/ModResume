@@ -20,7 +20,7 @@ Project.destroy_all
 Education.destroy_all
 
 
-10.times do 
+10.times do
   # *****************************
   # Create User
   # *****************************
@@ -46,11 +46,11 @@ Education.destroy_all
   # *****************************
   # Create User's Tags
   # *****************************
-  rand(1..4).times do 
+  rand(1..4).times do
     Tag.create(user_id: new_user.id, name: Faker::StarWars.planet)
   end
 
-  rand(1..2).times do 
+  rand(1..2).times do
     Tag.create(user_id: new_user.id, name: Faker::StarWars.droid)
   end
 
@@ -60,8 +60,8 @@ Education.destroy_all
   # *****************************
   rand(1..3).times do
     asset = Experience.create(
-      company: Faker::Company.name, 
-      title: Faker::Company.profession, 
+      company: Faker::Company.name,
+      title: Faker::Company.profession,
       begin_date: Faker::Date.between(5.years.ago, Date.today),
       end_date: Faker::Date.between(5.years.ago, Date.today),
       description: Faker::Company.bs,
@@ -70,7 +70,7 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
-    rand(1..7).times do 
+    rand(1..7).times do
       description = Description.create(detail: Faker::Company.bs)
       asset.descriptions << description
     end
@@ -82,8 +82,8 @@ Education.destroy_all
   # *****************************
   rand(1..3).times do
     asset = Volunteering.create(
-      organization: Faker::Company.name, 
-      title: Faker::Company.profession, 
+      organization: Faker::Company.name,
+      title: Faker::Company.profession,
       begin_date: Faker::Date.between(5.years.ago, Date.today),
       end_date: Faker::Date.between(5.years.ago, Date.today),
       description: Faker::Company.bs,
@@ -92,7 +92,7 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
-    rand(1..7).times do 
+    rand(1..7).times do
       description = Description.create(detail: Faker::Company.bs)
       asset.descriptions << description
     end
@@ -104,7 +104,7 @@ Education.destroy_all
   # *****************************
   rand(1..3).times do
     asset = Education.create(
-      institution_name: Faker::University.name, 
+      institution_name: Faker::University.name,
       completion: Faker::Date.between(5.years.ago, Date.today),
       description: Faker::Company.bs,
       focus: "Studies",
@@ -113,7 +113,7 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
-    rand(1..7).times do 
+    rand(1..7).times do
       description = Description.create(detail: Faker::Company.buzzword)
       asset.descriptions << description
     end
@@ -129,7 +129,7 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
-    rand(1..7).times do 
+    rand(1..7).times do
       description = Description.create(detail: Faker::Company.catch_phrase)
       asset.descriptions << description
     end
@@ -146,7 +146,7 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
-    rand(1..7).times do 
+    rand(1..7).times do
       description = Description.create(detail: Faker::Company.profession)
       asset.descriptions << description
     end
@@ -163,7 +163,7 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
-    rand(1..7).times do 
+    rand(1..7).times do
       description = Description.create(detail: Faker::Commerce.product_name)
       asset.descriptions << description
     end
@@ -180,30 +180,32 @@ Education.destroy_all
   # *****************************
   # Create Resume Assets
   # *****************************
-  new_resume.experiences << new_user.experiences.sample
-  new_resume.objectives << new_user.objectives.sample
-  new_resume.projects << new_user.projects.sample
-  new_resume.skills << new_user.skills.sample
-  new_resume.educations << new_user.educations.sample
-  new_resume.volunteerings << new_user.volunteerings.sample
+  2.times do
+    new_resume.experiences << new_user.experiences.sample
+    new_resume.objectives << new_user.objectives.sample
+    new_resume.projects << new_user.projects.sample
+    new_resume.skills << new_user.skills.sample
+    new_resume.educations << new_user.educations.sample
+    new_resume.volunteerings << new_user.volunteerings.sample
+  end
 
 end
 
 puts "New Users Summary:"
 puts "******************"
 User.all.each do |user|
-  puts "#{user.first_name} #{user.last_name} (#{user.email})"  
+  puts "#{user.first_name} #{user.last_name} (#{user.email})"
   # puts
   # puts "Websites:"
   # puts "*********"
-  # user.websites.each do |site|  
-  #   puts "#{site.description}: #{site.url}"    
+  # user.websites.each do |site|
+  #   puts "#{site.description}: #{site.url}"
   # end
-  # puts 
+  # puts
   # puts "Tags:"
   # puts "*****"
-  # user.tags.each do |tag|  
-  #   puts "#{tag.name}"    
-  # end  
-end  
+  # user.tags.each do |tag|
+  #   puts "#{tag.name}"
+  # end
+end
 

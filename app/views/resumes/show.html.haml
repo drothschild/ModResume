@@ -7,8 +7,17 @@
         ="#{current_user.email}"
     .row
       .col-md-12.col-s-12.resume-top-content
-        =@resume_assets["objectives"][0].buildable.description
-        =@resume_assets[:experiences]
+        %ul{id: "sortable"}
+          %li.ui-state-default
+            %ul{id: "sortable"}
+            -@assets["objectives"].each do |objective|
+              %li.ui-state-default=render "objectives/show", asset_type: "objectives", asset: objective
+          -@assets["experiences"].each do |experience|
+            %li.ui-state-default=render "experiences/show", asset_type: "experiences", asset: experience
+
+
+        / =@resume_assets["objectives"][0].buildable.description
+        / =@resume_assets[:experiences]
 
 
   / %ul{id: "sortable"}

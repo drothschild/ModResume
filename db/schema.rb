@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160312041049) do
+ActiveRecord::Schema.define(version: 20160312172706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,8 +72,9 @@ ActiveRecord::Schema.define(version: 20160312041049) do
     t.integer  "resume_id"
     t.integer  "buildable_id"
     t.string   "buildable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_sort",      default: 0
   end
 
   create_table "resumes", force: :cascade do |t|

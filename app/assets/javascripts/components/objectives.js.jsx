@@ -8,6 +8,6 @@ var Objectives = React.createClass({
       <div className= "objectives-list">
         {objectiveNodes}
         </div>
-      )
+    );
   }
 });

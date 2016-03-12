@@ -10,9 +10,7 @@ var Objective = React.createClass({
 
   render: function() {
     return (
-      <div>
         <div>Description: {this.state.description}</div>
-      </div>
     );
   }
 });

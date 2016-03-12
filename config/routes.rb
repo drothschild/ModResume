@@ -4,8 +4,25 @@ Rails.application.routes.draw do
         sessions: 'users/sessions'
       }
 
-  resources :resumes
-  resources :objectives
-  # root 'resumes#index'
+  resources :users do
+    resources :websites
+    resources :tags
+
+    resources :assets
+    resources :objectives
+    resources :educations
+    resources :experiences
+    resources :projects
+    resources :skills
+    resources :volunteerings
+
+    resources :resumes
+
+  end
+
+
+
+  get':controller(/:action(/:id))'
+
   root 'root#index'
 end

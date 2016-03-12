@@ -1,4 +1,4 @@
-class ExperiencesController < ApplicationController
+class VolunteeringsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @volunteering = Volunteering.new
@@ -15,9 +15,13 @@ class ExperiencesController < ApplicationController
   end
 
   def create
-    pass_params = experience_params
+    pass_params = volunteering_params
+    p "*" * 80
+    p pass_params
     descriptions = pass_params.delete(:details)
-    @volunteering = current_user.experiences.new(pass_params)
+    p pass_params
+    p descriptions
+    @volunteering = current_user.volunteerings.new(pass_params)
     if @volunteering.save
       addDescriptions(@volunteering, descriptions)
     else
@@ -29,23 +33,23 @@ class ExperiencesController < ApplicationController
 
   def update
     @volunteering = Volunteering.find(params[:id])
-    pass_params = experience_params
+    pass_params = volunteering_params
     descriptions = pass_params.delete(:details)
     @volunteering.update(pass_params)
-    addDescriptions(@experience, descriptions)
+    addDescriptions(@volunteering, descriptions)
     redirect_to :new_user_asset
   end
 
 
   private
 
-    def experience_params
-      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail])
+    def volunteering_params
+      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :details =>[:detail])
     end
-    def addDescriptions(experience, descriptions)
+    def addDescriptions(volunteering, descriptions)
       descriptions.each do |description|
         if description[:detail] != ""
-          experience.descriptions.create(description)
+          volunteering.descriptions.create(description)
         end
       end
     end

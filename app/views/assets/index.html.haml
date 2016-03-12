@@ -1,7 +1,5 @@
 - @assets.each do |key, values|
   %h2
     =key.capitalize
-    -values.each do |asset|
-      =render "/#{key}/show", education: asset
-      =key.singularize
-      / =render '/educations/show', education: asset
+  -values.each do |asset|
+    =render "/#{key}/show", asset: asset, tags: @tags

@@ -1,14 +1,12 @@
 .panel.panel-default
   .panel-heading
-    %strong= experience.title
-    %em= experience.company
-    = experience.begin_date.strftime('%b %Y')
+    %strong= asset.title
+    %em= asset.company
+    = asset.begin_date.strftime('%b %Y')
     to
-    = experience.end_date.strftime('%b %Y')
+    = asset.end_date.strftime('%b %Y')
   .panel-body
-
-
-
-    = experience.description
+    = asset.description
     %br
-    %em= experience.location
+    %em= asset.location
+    =render '/tags/list', tags: @tags

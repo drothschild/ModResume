@@ -15,8 +15,8 @@ class ExperiencesController < ApplicationController
     detail_attributes = pass_params.delete(:details)
     @experience = current_user.experiences.new(pass_params)
     if @experience.save
-      detail_attributes.each do |detail_attrib|  
-        description = @experience.descriptions.create(detail_attrib) 
+      detail_attributes.each do |detail_attrib|
+        description = @experience.descriptions.create(detail_attrib)
       end
     else
       flash.now[:danger] = @experience.errors.full_messages

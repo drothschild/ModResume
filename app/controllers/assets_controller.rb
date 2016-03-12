@@ -15,4 +15,5 @@ class AssetsController < ApplicationController
     @asset_types = asset_types
   end
 
+
 end

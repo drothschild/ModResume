@@ -1,0 +1,14 @@
+.panel.panel-default
+  .panel-heading
+    %strong= experience.title
+    %em= experience.company
+    = experience.begin_date.strftime('%b %Y')
+    to
+    = experience.end_date.strftime('%b %Y')
+  .panel-body
+
+
+
+    = experience.description
+    %br
+    %em= experience.location

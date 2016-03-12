@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    %strong= education.institution_name
+    %em= education.focus
+    = education.completion.strftime('%b %Y')
+  .panel-body
+    = education.description
+    %br
+    %em= education.location

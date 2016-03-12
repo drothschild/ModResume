@@ -2,6 +2,7 @@ class ExperiencesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @experience = Experience.new
+    render partial: 'form'
   end
 
 

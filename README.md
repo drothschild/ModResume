@@ -43,3 +43,10 @@ Technology Stack
   Redis (stretch or if necessary)
   Sidekiq (stretch or if necessary)
   Heroku-based email (stretch)
+
+
+
+  # Database Schema
+
+  ![Schema](/db_schema.png)
+  

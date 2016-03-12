@@ -1,4 +1,9 @@
--@asset_types.each do |asset_type|
-  %a{href: "/users/#{current_user.id}/#{asset_type}/new"}
-    =asset_type
-  %br
+%h1.text-center Create a new Asset
+.row
+  .col-m-12.col-s-12.text-center
+    .btn-group{role: "group"}
+    -@asset_types.each do |asset_type|
+      %button.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
+        =asset_type
+.row
+  .col-m-12.col-s-12{id: "form-container"}

@@ -12,9 +12,12 @@ class ObjectivesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @objective = Objective.new
+    render partial: 'form'
   end
 
   def create
+    p "*"* 80
+    p params
     @user = User.find(params[:user_id])
     objective = @user.objectives.new(objective_params)
     if objective.save

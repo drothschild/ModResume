@@ -12,21 +12,22 @@ class EducationsController < ApplicationController
   def new
     @user = User.find(current_user.id)
     @education = Education.new
+    @description  = Description.new
   end
 
   def create
-    @user = User.find(current_user.id)
-    education = Education.new(education_params)
-    if education.save
-      @user.educations << education
-      redirect_to user_educations_url
-    else
-      flash.now[:danger] = @education.errors.full_messages
-      render :new
+
+    pass_params = education_params
+    detail_attributes = pass_params.delete(:details)
+    @education = current_user.educations.create(pass_params)
+    detail_attributes.each do |detail_attrib|
+      description = @education.descriptions.create(detail_attrib)
     end
+    redirect_to :new_user_asset
+
   end
 
   def education_params
-    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :user_id)
+    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :details =>[:detail])
   end
 end

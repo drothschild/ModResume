@@ -70,6 +70,10 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
+    rand(1..7).times do 
+      description = Description.create(detail: Faker::Company.bs)
+      asset.descriptions << description
+    end
   end
 
 
@@ -88,6 +92,10 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
+    rand(1..7).times do 
+      description = Description.create(detail: Faker::Company.bs)
+      asset.descriptions << description
+    end
   end
 
 
@@ -105,6 +113,10 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
+    rand(1..7).times do 
+      description = Description.create(detail: Faker::Company.buzzword)
+      asset.descriptions << description
+    end
   end
 
   # *****************************
@@ -116,6 +128,10 @@ Education.destroy_all
       user_id: new_user.id)
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
+    end
+    rand(1..7).times do 
+      description = Description.create(detail: Faker::Company.catch_phrase)
+      asset.descriptions << description
     end
   end
 
@@ -130,6 +146,10 @@ Education.destroy_all
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
     end
+    rand(1..7).times do 
+      description = Description.create(detail: Faker::Company.profession)
+      asset.descriptions << description
+    end
   end
 
   # *****************************
@@ -142,6 +162,10 @@ Education.destroy_all
       user_id: new_user.id)
     rand(1..(new_user.tags.count)).times do
       asset.tags << new_user.tags.sample
+    end
+    rand(1..7).times do 
+      description = Description.create(detail: Faker::Commerce.product_name)
+      asset.descriptions << description
     end
   end
 
@@ -165,21 +189,21 @@ Education.destroy_all
 
 end
 
+puts "New Users Summary:"
+puts "******************"
 User.all.each do |user|
-  puts "User Summary:"
-  puts "*************"
   puts "#{user.first_name} #{user.last_name} (#{user.email})"  
-  puts
-  puts "Websites:"
-  puts "*********"
-  user.websites.each do |site|  
-    puts "#{site.description}: #{site.url}"    
-  end
-  puts 
-  puts "Tags:"
-  puts "*****"
-  user.tags.each do |tag|  
-    puts "#{tag.name}"    
-  end  
+  # puts
+  # puts "Websites:"
+  # puts "*********"
+  # user.websites.each do |site|  
+  #   puts "#{site.description}: #{site.url}"    
+  # end
+  # puts 
+  # puts "Tags:"
+  # puts "*****"
+  # user.tags.each do |tag|  
+  #   puts "#{tag.name}"    
+  # end  
 end  
 

@@ -1,11 +1,25 @@
+
+
+.panel{
+  margin-bottom: 5px;
+}
+
+.panel-body{
+  padding: 2px;
+}
+
+.panel-heading{
+  padding: 2px;
+}
+
 .resume-middle-content{
-  height: 150px;
+  height: 400px;
   background-color: white;
   border: 1px solid black;
 }
 
 .resume-top-content{
-  height: 400px;
+  height: 200px;
   background-color: white;
   border: 1px solid black;
 }
@@ -22,6 +36,10 @@
   text-align: left;
 }
 
+.ui-state-default{
+  border: 0px;
+}
+
 #sortable{
   list-style-type: none;
   margin: 0;
@@ -30,7 +48,7 @@
 }
 #sortable li {
   margin: 0 3px 3px 3px;
-  padding: 0.4em;
+  /*padding: 0.4em;*/
   padding-left: 1.5em;
   font-size: 1em;
 }

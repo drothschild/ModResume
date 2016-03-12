@@ -1,4 +1,4 @@
-class EducationsController < AssetsController
+class EducationsController < ApplicationController
   def index
 
     @user = User.find(current_user.id)
@@ -10,14 +10,16 @@ class EducationsController < AssetsController
   end
 
   def new
+    @user = User.find(current_user.id)
     @education = Education.new
   end
 
   def create
-    super
-    education = @user.educations.new(education_params)
+    @user = User.find(current_user.id)
+    education = Education.new(education_params)
     if education.save
-      redirect_to [@user, @user.educations]
+      @user.educations << education
+      redirect_to user_educations_url
     else
       flash.now[:danger] = @education.errors.full_messages
       render :new
@@ -25,6 +27,6 @@ class EducationsController < AssetsController
   end
 
   def education_params
-    params.require(:education).permit(:description)
+    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :user_id)
   end
 end

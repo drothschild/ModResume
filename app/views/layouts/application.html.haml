@@ -17,7 +17,7 @@
             - if user_signed_in?
               %ul.nav.navbar-nav
                 %li
-                  %a Resume Dashboard
+                  = link_to 'Resume Dashboard', user_resumes_path(current_user.id)
                 %li
                   %a My Assets
                 %li.dropdown

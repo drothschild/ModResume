@@ -20,12 +20,16 @@ class EducationsController < ApplicationController
 
     pass_params = education_params
     detail_attributes = pass_params.delete(:details)
-    @education = current_user.educations.create(pass_params)
-    detail_attributes.each do |detail_attrib|
-      description = @education.descriptions.create(detail_attrib)
+    @education = current_user.educations.new(pass_params)
+    if @education.save
+      detail_attributes.each do |detail_attrib|
+        description = @education.descriptions.create(detail_attrib)
+      end
+    else
+      flash.now[:danger] = @education.errors.full_messages
+      render :new
     end
     redirect_to :new_user_asset
-
   end
 
   def education_params

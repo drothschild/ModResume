@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     @asset_types = ["objectives", "experiences", "projects", "educations", "skills", "volunteerings"]
   end
 
+
   def set_assets
     @user = User.find(current_user.id)
     @asset_types.each do |asset_type|
@@ -18,7 +19,6 @@ class ApplicationController < ActionController::Base
     end
 
   end
-
 
 
   def after_sign_in_path_for(resource)

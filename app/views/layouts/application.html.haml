@@ -12,19 +12,28 @@
       %nav.navbar.navbar-default
         .container-fluid
           .navbar-header
-            %a.navbar-brand ModResume
+            %a.navbar-brand{:href => "/"} ModResume
           #navbar.navbar-collapse.collapse
-            %ul.nav.navbar-nav
-              %li
-                %a item2
-              %li
-                %a item1
-              %li
-                %a hello
-            .navbar-form.navbar-right
-              - if !user_signed_in?
+            - if user_signed_in?
+              %ul.nav.navbar-nav
+                %li
+                  %a Resume Dashboard
+                %li
+                  %a My Assets
+                %li.dropdown
+                  %a.dropdown-toggle{:href=>"#","data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded"=> "false"}
+                    User Settings
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a Other setting
+                %li
+                  =link_to 'Logout', destroy_user_session_path, method: :delete
+                .navbar-text
+                  = "Welcome #{current_user.first_name} #{current_user.last_name}"
+            - else
+              .navbar-form.navbar-right
                 = render 'sessions/new'
-              - else
 
 
     .container

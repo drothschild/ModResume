@@ -1,6 +1,6 @@
 class ResumesController < ApplicationController
   before_action :set_resume, only: [:edit, :show, :update, :destroy]
-  
+
   def index
     if current_user
       @resumes = Resume.where(user_id: current_user.id)
@@ -11,8 +11,10 @@ class ResumesController < ApplicationController
   end
 
   def show
-    # @resume = Resume.create(target_job: "Rockstar", document_data: "Who runs the world? Squirrels!")
-    # render json: @resume
+    @resume = Resume.find(params[:id])
+    p @resume_assets
+    @resume_assets = ResumeAsset.where("resume_id = ?", params[:id])
+    # @list = ["Red","Green","Blue","Yellow","Black","White","Orange"]
   end
 
   def new
@@ -21,7 +23,7 @@ class ResumesController < ApplicationController
   end
 
   def create
-    
+
   end
 
   # edit html text

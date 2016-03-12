@@ -1,0 +1,5 @@
+.btn-group{"data-toggle" => "buttons"}
+-@tags.each do |tag|
+  %button.btn.btn-default
+    %input{:autocomplete => "off", :type => "checkbox"}
+      =tag.name

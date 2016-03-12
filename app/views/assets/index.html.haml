@@ -1,9 +1,5 @@
-= react_component 'TagBox', {data: @tags}
-
-= react_component 'TagList', {data: @tags}
-
-%h2 Objectives
-= react_component 'Objectives', {objectives: @objectives}
-
-%h2 Skills
-= react_component 'Skills', {skills: @skills, tags: @tags}
+- @assets.each do |key, values|
+  %h2
+    =key.capitalize
+  -values.each do |asset|
+    =render "/#{key}/show", asset: asset, tags: @tags

@@ -1,1 +1,9 @@
-= react_component 'Objectives', {objectives: @objectives}
+%h1 Objectives
+.objectives_list
+  - @objectives.each do |obj|
+
+    .objective
+      = obj.description.html_safe
+.objectives-form
+  = render 'form'
+

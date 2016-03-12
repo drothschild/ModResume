@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :projects
     resources :skills
     resources :volunteerings
+    resources :taggings
 
     resources :resumes
 

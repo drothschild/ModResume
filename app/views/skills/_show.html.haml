@@ -1,4 +1,4 @@
 .panel.panel-default
   .panel-body
     = asset.title
-    =render '/tags/list', tags: @tags
+    =render '/tags/list', asset_type: asset_type, asset: asset, tags: @tags

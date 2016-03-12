@@ -2,4 +2,4 @@
   %h2
     =key.capitalize
   -values.each do |asset|
-    =render "/#{key}/show", asset: asset, tags: @tags
+    =render "/#{key}/show", asset_type: key, asset: asset, tags: @tags

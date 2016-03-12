@@ -1,6 +1,7 @@
 = form_for [@user, @objective] do |f|
-  = f.text_area :description, :class => "tinymce", :rows => 10, :cols => 50
-  = tinymce
+  %fieldset.form-group
+    = f.text_area :description, :class => "tinymce form-control", :id => "obj-description", :rows => 10, :cols => 50
+    = tinymce
   = render '/tags/form'
   = f.submit "Save"
 

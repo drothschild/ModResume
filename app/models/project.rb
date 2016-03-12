@@ -4,4 +4,6 @@ class Project < ActiveRecord::Base
   has_many :taggings, as: :taggable
   has_many :resumes, through: :resume_assets
   has_many :resume_assets, as: :buildable
+  has_many :descriptions, through: :describings
+  has_many :describings, as: :describable
 end

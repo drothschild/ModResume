@@ -1,0 +1,7 @@
+%h1 Experiences
+%p Testing proof of concept for polymorphic descriptions
+
+%h2=@experience.company
+%ul
+  - @experience.descriptions.each do |descript|
+    %li=descript.detail

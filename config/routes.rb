@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :objectives
     resources :educations
     resources :experiences
+      resources :descriptions
     resources :projects
     resources :skills
     resources :volunteerings

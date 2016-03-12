@@ -1,0 +1,6 @@
+.panel.panel-default
+  .panel-heading
+    %strong= asset.title
+  .panel-body
+    = asset.description
+    =render '/tags/list', tags: @tags

@@ -1,0 +1,10 @@
+.panel.panel-default
+  .panel-heading
+    %strong= asset.institution_name
+    %em= asset.focus
+    = asset.completion.strftime('%b %Y')
+  .panel-body
+    = asset.description
+    %br
+    %em= asset.location
+    =render '/tags/list', tags: @tags

@@ -1,0 +1,4 @@
+= form_for [@user, @objective] do |f|
+  = f.text_area :description, :class => "tinymce", :rows => 10, :cols => 50
+  = tinymce
+  = f.submit "Save"

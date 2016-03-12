@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
     @asset_types = ["objectives", "experiences", "projects", "educations", "skills", "volunteerings"]
   end
 
-
-
   def after_sign_in_path_for(resource)
     user_resumes_path(resource)
   end

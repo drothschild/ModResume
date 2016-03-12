@@ -1,7 +1,18 @@
-hello
 
-= react_component 'Resumes', {resumes: @resumes}
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      %h3 Your Resumes
+  %table.table.table-hover
+    %tr
+      %th Resume For:
+      %th Last updated:
+    - @resumes.each do |resume|
+      %tr
+        -# =link_to 'Resume', resume
+        %td= link_to resume.target_job, user_resume_path(user_id: current_user.id, id: resume.id)
+        %td= resume.updated_at.to_datetime.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%Y  %l:%M %p")
+        %td Edit Assets
+        %td Edit Text
+        %td= link_to 'Delete', user_resume_path(user_id: current_user.id, id: resume.id), method: :delete
 
-- @resumes.each do |resume|
-  -# =link_to 'Resume', resume
-  = resume

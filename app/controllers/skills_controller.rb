@@ -1,6 +1,5 @@
 class SkillsController < ApplicationController
   def index
-
     @user = User.find(current_user.id)
     @skills = @user.skills
   end
@@ -13,6 +12,7 @@ class SkillsController < ApplicationController
     @user = User.find(current_user.id)
     @skill = Skill.new
     @description  = Description.new
+    render partial: 'form'
   end
 
   def create

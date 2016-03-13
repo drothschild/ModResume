@@ -6,4 +6,5 @@
     = f.label :details
     = text_field_tag "skill[details][][detail]",nil,  class: "form-control detail"
     = button_tag "+", id: "add_detail"
+    = render '/tags/form'
     = f.submit

@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
     @user = User.find(current_user.id)
     @project = Project.new
     @description  = Description.new
+    render partial: 'form'
   end
 
   def create

@@ -2,6 +2,7 @@ class VolunteeringsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @volunteering = Volunteering.new
+    render partial: 'form'
   end
 
   def edit

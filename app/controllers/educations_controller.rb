@@ -13,6 +13,7 @@ class EducationsController < ApplicationController
     @user = User.find(current_user.id)
     @education = Education.new
     @description  = Description.new
+    render partial: 'form'
   end
 
   def create

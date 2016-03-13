@@ -1,9 +1,14 @@
 %h1.text-center Create a new Asset
+
+-tag_names = all_tag_names
+= all_tag_names
+%div#tag-names{"data-tag-names" => tag_names.to_json}
+
 .row
-  .col-m-12.col-s-12.text-center
+  .col-md-12.col-sm-12.text-center
     .btn-group{role: "group"}
-    -@asset_types.each do |asset_type|
-      %button.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
-        =asset_type
+      -@asset_types.each do |asset_type|
+        %button.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
+          =asset_type.capitalize
 .row
-  .col-m-12.col-s-12{id: "form-container"}
+  .col-md-6.col-sm-6.col-centered#form-container

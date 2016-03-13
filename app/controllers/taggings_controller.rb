@@ -2,11 +2,14 @@ class TaggingsController < ApplicationController
   # before_filter :find_tagger, only: [:create]
 
   def create
-    @tagging = Tagging.new(taggable_id: tagging_params[:taggable_id], taggable_type: tagging_params[:taggable_type])
-    @tag = Tag.find_by("name = ?", tagging_params[:tag_names])
-    @tagging.tag = @tag
-    @tagging.save
-    render json: @tagging
+    tags = parse_tags_names( tagging_params[:tag_names])
+    @taggings = []
+
+    tags.each do |tag|
+      tagging = Tagging.find_or_create_by(taggable_id: tagging_params[:taggable_id], taggable_type: tagging_params[:taggable_type], tag:tag)
+      @taggings << tagging
+    end
+    render json: tags
   end
 
   def destroy

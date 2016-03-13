@@ -1,6 +1,6 @@
 class Description < ActiveRecord::Base
   belongs_to :user
-  has_many :describings
+  has_many :describings, dependent: :destroy
   has_many :experiences, through: :describings, source: :describable, source_type: "Experience"
   has_many :resumes, through: :describings, source: :describable, source_type: "Resume"
   has_many :experiences, through: :describings, source: :describable, source_type: "Experience"

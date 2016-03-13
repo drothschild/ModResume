@@ -1,9 +1,9 @@
 %h1.text-center Create a new Asset
 .row
-  .col-m-12.col-s-12.text-center
+  .col-md-12.col-sm-12.text-center
     .btn-group{role: "group"}
-    -@asset_types.each do |asset_type|
-      %button.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
-        =asset_type
+      -@asset_types.each do |asset_type|
+        %button.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
+          =asset_type.capitalize
 .row
-  .col-m-8.col-s-8.col-center{id: "form-container"}
+  .col-md-6.col-sm-6.col-centered{id: "form-container"}

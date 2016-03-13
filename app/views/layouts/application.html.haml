@@ -13,29 +13,27 @@
     = csrf_meta_tags
   %body
     .container
-      %nav.navbar.navbar-default
-        .navbar-inner
-          .navbar-header.navbar-custom
-            %a.navbar-brand{:href => "/"} ModResume
-          .navbar-collapse.collapse
+      .row
+        %nav
+          .col-md-6.col-s-6.nav-left
+            %a{:href => "/"} ModResume
+          .col-md-6.col-s-6.nav-right
             - if user_signed_in?
-              %ul.nav.navbar-nav.pull-right.navbar-custom
-                %li
-                  = link_to 'Resume Dashboard', user_resumes_path(current_user.id)
-                %li
-                  %a{href: "/users/#{current_user.id}/assets/new"}My Assets
-                %li
-                  =link_to 'Logout', destroy_user_session_path, method: :delete
-
-                .navbar-text{user_id: current_user.id}
-                  = "Welcome #{current_user.first_name} #{current_user.last_name}"
+              %table
+                %tr
+                  %td
+                    = link_to 'Resume Dashboard', user_resumes_path(current_user.id)
+                  %td
+                    %a{href: "/users/#{current_user.id}/assets/new"}My Assets
+                  %td
+                    =link_to 'Logout', destroy_user_session_path, method: :delete
+                  %td{user_id: current_user.id}
+                    = "Welcome, #{current_user.first_name} #{current_user.last_name}"
             - else
-              .navbar-form.navbar-right
-                = render 'sessions/new'
+              = render 'sessions/new'
 
-
-      .bottom-image
-        .all-content
+      .row
+        .col-md-12.col-s-12.all-content
           %p.notice
             = notice
           %p.alert

@@ -1,6 +1,6 @@
 %span#resumeID= "#{session[:new_resume_id]}"
 .row
-  .col-m-12.col-s-12.text-center
+  .col-md-10.col-sm-10.text-center.col-centered
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
@@ -8,9 +8,10 @@
         =tag.name
 
 
-
-- @assets.each do |key, values|
-  %h2
-    =key.capitalize
-  -values.each do |asset|
-    =render "/#{key}/show", asset_type: key, asset: asset, tags: @tags
+.row
+  .col-md-10.col-sm-10.col-centered
+    - @assets.each do |key, values|
+      %h2
+        =key.capitalize
+      -values.each do |asset|
+        =render "/#{key}/show", asset_type: key, asset: asset, tags: @tags

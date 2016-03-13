@@ -19,7 +19,7 @@
             %a{:href => "/"} ModResume
           .col-md-6.col-s-6.nav-right
             - if user_signed_in?
-              %table
+              %table.nav-links
                 %tr
                   %td
                     = link_to 'Resume Dashboard', user_resumes_path(current_user.id)

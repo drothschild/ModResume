@@ -1,29 +1,51 @@
 .panel{
   margin-bottom: 5px;
+  text-align: left;
 }
 
 .panel-body{
-  padding: 2px;
+  padding: 1px;
+  text-align: left;
 }
 
 .panel-heading{
   padding: 2px;
+  text-align: left;
+  min-height: 15px;
+  background-color: #00b8e6;
 }
 
+ul{
+  margin-bottom: -10px;
+  font-size: 0px;
+}
 li{
-  padding-left: 4px;
+  font-size: 1em;
+  margin: 0px;
+  padding: 0px 0px 0px 4px;
 }
 
-.resume-middle-content{
-  height: 400px;
+.asset-portlet{
+  background-color: grey;
+
+}
+
+.asset-portlet-header{
+  text-align: left;
+}
+
+.resume-middle-split-content{
+  height: 450px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px dashed grey;
+  padding: 4px;
 }
 
 .resume-top-content{
-  height: 200px;
+  height: 150px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px dashed grey;
+  padding: 4px;
 }
 
 .resume-template{
@@ -31,31 +53,27 @@ li{
   background-color: grey;
 }
 
+.library{
+  height: 700px;
+  background-color: #cceeff;
+}
+
 .resume-header{
   height: 100px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px dashed grey;
   text-align: left;
 }
 
-.ui-state-default{
-  border: 0px;
+.section-header{
+  text-align: left;
+  margin: 1px;
 }
 
-#sortable{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-#sortable li {
-  margin: 0 3px 3px 3px;
-  /*padding: 0.4em;*/
-  padding-left: 1.5em;
-  font-size: 1em;
-}
 
 .col-centered{
   float: none;
   margin: 0 auto;
 }
+
+

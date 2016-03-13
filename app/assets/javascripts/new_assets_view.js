@@ -1,9 +1,11 @@
 var newAssetsView = function(){}
 
 newAssetsView.prototype.loadForm = function(event){
-  var uri = $(event.currentTarget).attr("href")
+  tinyMCE.remove();
+  var uri = $(event.currentTarget).attr("href");
   $.ajax({url: uri, method: "GET"}).done(function(response){
     $('#form-container').html(response);
+
   })
 }
 

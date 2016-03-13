@@ -1,7 +1,0 @@
-.row
-  .col-md-10.col-sm-10.col-centered
-    - @assets.each do |key, values|
-      %h2
-        =key.capitalize
-      -values.each do |asset|
-        =render "/#{key}/show", asset_type: key, asset: asset, tags: @tags

@@ -1,4 +1,8 @@
 %h1.text-center Create a new Asset
+
+-tag_names = all_tag_names
+%div#tag-names{"data-tag-names" => tag_names.to_json}
+
 .row
   .col-md-12.col-sm-12.text-center
     .btn-group{role: "group"}
@@ -6,4 +10,4 @@
         %button.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
           =asset_type.capitalize
 .row
-  .col-md-6.col-sm-6.col-centered{id: "form-container"}
+  .col-md-6.col-sm-6.col-centered#form-container

@@ -4,7 +4,7 @@
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
-      %button.btn.btn-default.tag-button
+      %button.btn.btn-default.tag-button{"tag_id" => tag.id, "selected" => false}
         =tag.name
 
 

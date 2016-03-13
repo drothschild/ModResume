@@ -54,10 +54,10 @@ $(document).ready(function(){
       assetsView.addTag(e);
     }
   })
-  $('.asset-resume').on("click", function(e){
-    e.preventDefault();
-    assetsView.addAssetToResume(e);
-    console.log("click")
-  })
+  // $('.asset-resume').on("click", function(e){
+  //   e.preventDefault();
+  //   assetsView.addAssetToResume(e);
+  //   console.log("click")
+  // })
 
 })

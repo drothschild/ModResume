@@ -2,7 +2,20 @@
   .panel-body
     %ul
     - asset.descriptions.each do |description|
-      %li= description.detail
+      %li
+        = description.detail
+        = check_box_tag "objectives[]", description.id, true, class: "asset-check-box"
     / =render '/tags/list', asset_type: asset_type, asset: asset, tags: @tags
     %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
       %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+
+
+
+
+
+
+
+-# Category.all.each do |category|
+      = #%div
+        = # check_box_tag "category_ids[]", category.id, @item.categories.include?(category)
+        = # category.name

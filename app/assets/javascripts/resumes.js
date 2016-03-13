@@ -6,6 +6,7 @@ $(document).ready(function() {
 
 var bindListeners = function() {
   $('.asset-resume').on("click", addAsset);
+  $('#new-resume-button').on("click", newResume);
 }
 
 var addAsset = function(e) {
@@ -17,7 +18,8 @@ var addAsset = function(e) {
   var data = {
     current_user_id: $(this).attr("current_user_id"),
     data_asset_id: $(this).attr("data-asset-id"),
-    data_asset_type: $(this).attr("data-asset-type")
+    data_asset_type: $(this).attr("data-asset-type"),
+    objectives: $(this).
   };
   console.log(data);
   $.ajax({
@@ -30,6 +32,29 @@ var addAsset = function(e) {
   })
   .fail(function(response) {
     console.log("Failed Patch");
+    console.log(response);
+  })
+}
+
+var newResume = function(e) {
+  e.preventDefault();
+  var userId = $('.navbar-text').attr("user_id");
+  console.log("Add New Resume Button Clicked");
+  console.log(this);
+  $.ajax({
+    url: "/users/" + userId + "/resumes/new",
+    method: "GET"
+  })
+  .done(function(response) {
+    console.log("Successful GET");
+    console.log("****************");
+    console.log(response);
+    console.log("****************");
+    $('div#new-resume-form').append(response);
+    $('#new-resume-button').hide();
+  })
+  .fail(function(response) {
+    console.log("Failed GET");
     console.log(response);
   })
 }

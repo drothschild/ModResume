@@ -31,6 +31,10 @@ class ResumesController < ApplicationController
     @user = current_user
     @tags = current_user.tags
     @new_resume = Resume.new()
+    p "*" * 50
+    p "NEW RESUME FORM"
+    p "*" * 50
+    render partial: 'form'
   end
 
   def create

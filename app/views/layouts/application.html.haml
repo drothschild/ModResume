@@ -4,7 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %title ModResume
-    %link{href: 'https://fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,900', rel:'stylesheet', type:'text/css'}
+    %link{href: 'https://fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,100,900', rel:'stylesheet', type:'text/css'}
     %link{href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel: "stylesheet", integrity: "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin: "anonymous"}
     %link{:href => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css", :rel => "stylesheet"}
       %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"}
@@ -34,9 +34,10 @@
                     = "Welcome, #{current_user.first_name} #{current_user.last_name}"
             - else
               = render 'sessions/new'
-
-      %p.notice
-        = notice
-      %p.alert
-        = alert
+      -if notice
+        %p.notice
+          = notice
+      -if alert
+        %p.alert
+          = alert
       = yield

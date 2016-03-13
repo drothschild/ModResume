@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
   $('.resume-content').sortable({
     connectWith: ".resume-content",
     handle: '.asset-portlet-header',
@@ -7,7 +7,7 @@ $(function() {
   console.log("hello")
 });
 
-$(function() {
+$(document).ready(function() {
   $('.nested-sort').sortable({
     connectWith: ".nested-sort",
     handle: '.panel-heading',

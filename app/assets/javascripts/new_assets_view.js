@@ -1,23 +1,44 @@
 var newAssetsView = function(){}
 
 newAssetsView.prototype.loadForm = function(event){
-  // console.log($(event.currentTarget).attr("href"))
   var uri = $(event.currentTarget).attr("href")
   $.ajax({url: uri, method: "GET"}).done(function(response){
-    console.log(response);
     $('#form-container').html(response);
-    // $('#form-container').innerHTML=response.toString();
-    console.log($('#form-container'))
   })
+}
 
+newAssetsView.prototype.saveForm = function(event){
+  console.log($(this))
+  var data = $('form').serialize()
+  var tags = $('input#tags')[0].value
+  var uri = event.target.action
+  $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+    console.log(response)
+    var response = response
+    response["tag_names"]=tags
+    var data = {tagging: response}
+    console.log(response)
+    var uri = window.location.pathname.replace("/assets/new", "")
+    var uri = uri + "/taggings"
+    $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+      console.log(response)
+    })
+  })
 }
 
 var newAssets = new newAssetsView();
 $(document).ready(function(){
-  console.log("new assets view here!")
   $('.asset-type-button').on("click", function(e){
     e.preventDefault();
+    $(e.target.parentNode.children).removeClass("active");
+    $(e.target).addClass("active");
+    $('#form-container').html("");
     newAssets.loadForm(e);
+  })
+  $('#form-container').on("submit", 'form', function(e){
+    e.preventDefault();
+    //load a saved div
+    newAssets.saveForm(e);
   })
 
 })

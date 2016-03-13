@@ -1,0 +1,13 @@
+= form_for [@user, @project] do |f|
+  %fieldset.form-group
+    = f.label :title, "Title"
+    = f.text_field :title, class: "form-control"
+  %fieldset.form-group
+    = f.label :about_project, "About Project"
+    = f.text_field :description, class: "form-control"
+  %fieldset.form_group
+    = f.label :details
+    = text_field_tag "project[details][][detail]",nil,  class: "form-control detail"
+    = button_tag "+", id: "add_detail"
+    = render '/tags/form'
+    = f.submit

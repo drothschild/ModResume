@@ -1,7 +1,7 @@
-= form_for [@user, @experience] do |f|
+= form_for [@user, @volunteering] do |f|
   %fieldset.form-group
-    = f.label :company
-    = f.text_field :company, class: "form-control"
+    = f.label :organization
+    = f.text_field :organization, class: "form-control"
   %fieldset.form-group
     = f.label :title
     = f.text_field :title, class: "form-control"
@@ -18,13 +18,12 @@
     = f.label :details
     = f.fields_for :descriptions do |d|
       =d.text_field :detail, class: "form-control detail"
-    = text_field_tag "experience[details][][detail]",nil,  class: "form-control detail"
+    = text_field_tag "volunteering[details][][detail]",nil,  class: "form-control detail"
 
     = button_tag "+", id: "add_detail"
     = button_tag "-", id: "remove_detail"
     = render '/tags/form'
     = f.submit
-
 
 
 

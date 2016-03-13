@@ -1,12 +1,15 @@
 class TaggingsController < ApplicationController
-  before_filter :find_tagger, only: [:create]
+  # before_filter :find_tagger, only: [:create]
 
   def create
-    @tagging = Tagging.create(tagging_params)
-    respond_to do |format|
-      format.html{}
-      format.json{ render json: @tagging}
+    tags = parse_tags_names( tagging_params[:tag_names])
+    @taggings = []
+
+    tags.each do |tag|
+      tagging = Tagging.find_or_create_by(taggable_id: tagging_params[:taggable_id], taggable_type: tagging_params[:taggable_type], tag:tag)
+      @taggings << tagging
     end
+    render json: tags
   end
 
   def destroy
@@ -21,7 +24,7 @@ class TaggingsController < ApplicationController
   private
 
   def tagging_params
-    params.require(:tagging).permit(:id, :tag_id, :taggable_id, :taggable_type)
+    params.require(:tagging).permit(:id, :tag_id, :tag_names, :taggable_id, :taggable_type)
   end
 
   def find_tagger

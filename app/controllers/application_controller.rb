@@ -19,7 +19,16 @@ class ApplicationController < ActionController::Base
     end
 
   end
-
+  def parse_tags_names(words)
+    word_list = words.split(',')
+    tags = []
+    word_list.each do |word|
+      word = word.strip
+      tag =Tag.find_or_create_by(name: word, user: current_user)
+      tags << tag
+    end
+    tags
+  end
 
   def after_sign_in_path_for(resource)
     user_resumes_path(resource)

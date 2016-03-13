@@ -1,5 +1,5 @@
   $(function() {
-    var availableTags = JSON.parse($("#tags")[0].dataset.tagNames)
+    var availableTags = JSON.parse($("#tag-names")[0].dataset.tagNames)
     function split( val ) {
       return val.split( /,\s*/ );
     }

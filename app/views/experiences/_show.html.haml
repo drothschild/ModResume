@@ -6,7 +6,9 @@
     to
     = asset.end_date.strftime('%b %Y')
   .panel-body
-    = asset.description
+    %ul
+    - asset.descriptions.each do |description|
+      %li= description.detail
     %br
     %em= asset.location
     / =render '/tags/list', asset_type: asset_type, asset: asset, tags: @tags

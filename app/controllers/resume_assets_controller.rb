@@ -8,6 +8,12 @@ class ResumeAssetsController < ApplicationController
     end
   end
 
+
+  def update
+    p params
+  end
+
+
 private
 
   def resume_asset_params

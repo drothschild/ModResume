@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   belongs_to :user
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :resumes, through: :taggings, source: :taggable, source_type: "Resume"
   has_many :experiences, through: :taggings, source: :taggable, source_type: "Experience"
   has_many :objectives, through: :taggings, source: :taggable, source_type: "Objective"

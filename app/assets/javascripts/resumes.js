@@ -1,6 +1,5 @@
 $(document).ready(function() {
   console.log("Page Ready");
-
   bindListeners();
 });
 
@@ -19,7 +18,6 @@ var addAsset = function(e) {
     current_user_id: $(this).attr("current_user_id"),
     data_asset_id: $(this).attr("data-asset-id"),
     data_asset_type: $(this).attr("data-asset-type"),
-    objectives: $(this).
   };
   console.log(data);
   $.ajax({

@@ -26,8 +26,9 @@
                   %a{href: "/users/#{current_user.id}/assets/new"}My Assets
                 %li
                   =link_to 'Logout', destroy_user_session_path, method: :delete
-                .navbar-text
-                  = "Welcome, #{current_user.first_name} #{current_user.last_name}"
+
+                .navbar-text{user_id: current_user.id}
+                  = "Welcome #{current_user.first_name} #{current_user.last_name}"
             - else
               .navbar-form.navbar-right
                 = render 'sessions/new'

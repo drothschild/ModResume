@@ -1,9 +1,11 @@
 .panel.panel-default
   .panel-heading
     %strong= asset.title
-  .panel-body
-    = asset.description
-    / =render '/tags/list', asset_type: asset_type, asset: asset, tags: @tags
-    -if current_url.include?("asset")
-      %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
-        %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+  .row
+    .panel-body
+      .col-md-10.col-sm-10
+        = asset.description
+      .col-md-2.col-sm-2
+        -if current_url.include?("asset")
+          %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
+            %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}

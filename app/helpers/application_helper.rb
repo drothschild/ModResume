@@ -33,6 +33,15 @@ module ApplicationHelper
     return @tag_names
   end
 
+  def get_asset_tag_ids(asset)
+    asset_tags = []
+    asset.tags.each do |tag|
+      asset_tags << "|#{tag.id}|"
+    end
+
+    return asset_tags
+  end
+
   def get_tagging_id(asset, tag)
       @taggings = Tagging.where("tag_id = ? AND taggable_id=?", tag.id, asset.id)
       return @taggings.first.id

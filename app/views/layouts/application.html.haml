@@ -32,10 +32,8 @@
             - else
               = render 'sessions/new'
 
-      .row
-        .col-md-12.col-s-12.all-content
-          %p.notice
-            = notice
-          %p.alert
-            = alert
-          = yield
+      %p.notice
+        = notice
+      %p.alert
+        = alert
+      = yield

@@ -4,6 +4,8 @@ class ResumesController < ApplicationController
   def index
     if current_user
       @resumes = Resume.where(user_id: current_user.id)
+      @user = current_user
+      @new_resume = Resume.new
     else
       # flash error please login
       redirect_to '/'
@@ -26,17 +28,44 @@ class ResumesController < ApplicationController
   end
 
   def new
+    @user = current_user
     @tags = current_user.tags
-    @resume = Resume.new()
+    @new_resume = Resume.new()
   end
 
   def create
-
+    p "*" * 50
+    p params
+    p "*" * 50
+    pass_params = resume_params
+    @new_resume = Resume.new(pass_params)
+    if @new_resume.save
+      session[:new_resume_id] = @new_resume.id
+      redirect_to user_assets_path
+    end
   end
 
   # edit html text
   def edit
     # @resume = Resume.find(params[:id])
+  end
+
+  def update
+    asset_type = params[:data_asset_type].singularize.capitalize
+    resume = Resume.find(params[:id])
+    asset_type.constantize.find(params[:data_asset_id]).resumes << resume 
+    p "*" * 50
+    p params
+    p asset_type
+    p resume
+    p "*" * 50
+    if request.xhr?
+      201
+      # render :json resume.to_json
+    else
+      redirect_to user_assets_path
+    end
+
   end
 
   def destroy
@@ -47,6 +76,10 @@ class ResumesController < ApplicationController
 private
   def set_resume
     @resume = Resume.find(params[:id])
+  end
+
+  def resume_params
+    params.require(:resume).permit(:user_id, :target_job)
   end
 
 end

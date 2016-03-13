@@ -1,0 +1,6 @@
+= form_for [@user, @new_resume] do |f|
+  %fieldset.form-group
+    = f.label :target_job
+    = f.text_field :target_job, class: "form-control"
+    = f.hidden_field :user_id, value: current_user.id
+    = f.submit

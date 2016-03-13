@@ -4,14 +4,23 @@
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
-      %button.btn.btn-default.tag-button{"tag_id" => tag.id, "selected" => false}
+      - # %button.btn.btn-default.tag-button{"tag_id" => tag.id, "selected" => false}
+      %a.btn.btn-default.tag-button.tag-button-selected{"tag_id" => tag.id}
         =tag.name
 
+- @assets.each do |key, values|
+  %h2
+    =key.capitalize
+  -values.each do |asset|
+    - p "*" * 50
+    - p "Asset..."
+    - p asset
+    - p asset.tags
+    - p "*" * 50
+    - asset_tags = []
+    - asset.tags.each do |tag|
+      - asset_tags << "|#{tag.id}|"
+    - p asset_tags
+    %div{class: "asset-container", asset_id: "#{asset.id}", tags: asset_tags.to_s}
+      =render "/#{key}/show", asset_type: key, asset: asset, tags: asset_tags.to_s
 
-.row
-  .col-md-10.col-sm-10.col-centered
-    - @assets.each do |key, values|
-      %h2
-        =key.capitalize
-      -values.each do |asset|
-        =render "/#{key}/show", asset_type: key, asset: asset, tags: @tags

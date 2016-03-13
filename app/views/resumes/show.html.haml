@@ -1,10 +1,17 @@
 .row
+  .col-md-6.col-s-6
+    %h2 Your Resume
+  .col-md-6.col-s-6
+    %h2 Your Assets
+
+.row
   .col-md-6.col-s-6.text-center.resume-template
     .row
       .col-md-12.col-s-12.resume-header
-        %h3="#{current_user.first_name} #{current_user.last_name}"
-        %br
-        ="#{current_user.email}"
+        %h4="#{current_user.first_name} #{current_user.last_name}"
+        %p="#{current_user.email}"
+        %p=current_user.phone_number
+        %p=current_user.websites.first.url
 
     .row
       .col-md-12.col-s-12.resume-content.resume-top-content

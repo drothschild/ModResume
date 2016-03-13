@@ -14,6 +14,15 @@ newAssetsView.prototype.saveForm = function(event){
   var uri = event.target.action
   $.ajax({url: uri, method: "POST", data: data}).done(function(response){
     console.log(response)
+    var response = response
+    response["tag_names"]=tags
+    var data = {tagging: response}
+    console.log(response)
+    var uri = window.location.pathname.replace("/assets/new", "")
+    var uri = uri + "/taggings"
+    $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+      console.log(response)
+    })
   })
 }
 

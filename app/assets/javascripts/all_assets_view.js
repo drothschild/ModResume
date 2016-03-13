@@ -6,6 +6,7 @@ allAssetsView.prototype.addAssetToResume = function(event){
   var uri = uri + "/resume_assets"
   var assetId = event.currentTarget.dataset.assetId
   var assetType = event.currentTarget.dataset.assetType
+  debugger;
   $.ajax({url: uri, method: "POST", dataType: "json", data: {resume_asset:{buildable_id: assetId, buildable_type: assetType, resume_id: "54"}}}).done(function(response){
     console.log(response)
   })
@@ -22,7 +23,10 @@ allAssetsView.prototype.addTag = function(event){
   var tagId = event.currentTarget.dataset.tagId
   $.ajax({url: uri, method: "POST", dataType: "json", data: {tagging: {taggable_id: assetId, taggable_type: assetType, tag_id: tagId }}}).done(function(response){
     // $(target).context.checked=true;
+    debugger;
+    console.log(this);
     $(target).toggle(this.checked);
+    console.log(response);
   })
 }
 
@@ -41,23 +45,23 @@ allAssetsView.prototype.removeTag = function(event){
 
 var assetsView = new allAssetsView();
 
-$(document).ready(function(){
-  $('.asset-tag').on("click", function(e){
-    e.preventDefault();
-    var target = e.currentTarget;
-    console.log($(target).attr('checked'))
-    if ($(target).attr('checked')){
-      console.log("true")
-      assetsView.removeTag(e);
-    } else {
-      console.log("false")
-      assetsView.addTag(e);
-    }
-  })
-  $('.asset-resume').on("click", function(e){
-    e.preventDefault();
-    assetsView.addAssetToResume(e);
-    console.log("click")
-  })
+// $(document).ready(function(){
+//   $('.asset-tag').on("click", function(e){
+//     e.preventDefault();
+//     var target = e.currentTarget;
+//     console.log($(target).attr('checked'))
+//     if ($(target).attr('checked')){
+//       console.log("true")
+//       assetsView.removeTag(e);
+//     } else {
+//       console.log("false")
+//       assetsView.addTag(e);
+//     }
+//   })
+  // $('.asset-resume').on("click", function(e){
+  //   e.preventDefault();
+  //   assetsView.addAssetToResume(e);
+  //   console.log("click")
+  // })
 
-})
+// })

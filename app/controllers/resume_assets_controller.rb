@@ -10,7 +10,12 @@ class ResumeAssetsController < ApplicationController
 
 
   def update
+    p '*'*100
+    curent_resume = ResumeAsset.find_by(buildable_type: params[:asset_type], buildable_id: params[:id])
     p params
+    curent_resume.assign_attributes(div_sort: params[:div_sort])
+    curent_resume.save
+    p '*'*100
   end
 
 

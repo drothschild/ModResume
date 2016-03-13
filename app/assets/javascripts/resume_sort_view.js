@@ -21,20 +21,21 @@ $(document).ready(function() {
     // save to database as template
     var resumeTemplate = $('.resume-template')[0].innerHTML
     var assetNodes = $('.panel.panel-default')
-    // for(var i = 0; i assetNodes.length; i++){
-    //   console.log(assetNodes[i]);
-      // var assetTypeId = assetNodes[i].id.split('_')
+    for(var i = 0; i < assetNodes.length; i++){
+
+      var assetTypeId = assetNodes[i].id.split('_');
+      var parentLocationId = assetNodes[i].parentNode.parentNode.parentNode.parentNode.id.split('_');
+
       // ['objective','112']
-      // var parentLocationId = assetNodes[i].parentNode.parentNode.parentNode.parentNode.id.split('_')
+      // var assetTypeId = assetNodes[0].id.split('_')
       // ['divsection','2']
-    // }
+      // var parentLocationId = assetNodes[0].parentNode.parentNode.parentNode.parentNode.id.split('_')
 
-      var TypeId = assetNodes[0].id.split('_')
-      var parentLocationId = assetNodes[0].parentNode.parentNode.parentNode.parentNode.id.split('_')
-
-      var data = {asset_type: TypeId[0], asset_id: TypeId[1], divsection: parentLocationId[1]}
+      // debugger;
+      var data = { asset_type: assetTypeId[0], asset_id: assetTypeId[1], div_sort: parentLocationId[1]};
+      debugger;
       $.ajax({
-        url:
+        url: "/users/" + $(this).attr("current_user_id") + "/resume_assets/" + data.asset_id,
         method: "PATCH",
         data: data
       }).done(function(response){
@@ -42,9 +43,11 @@ $(document).ready(function() {
       }).fail(function(response){
         console.log('fail');
       });
-    debugger;
 
-    })
+    }
+
+  })
+
 
     // Iterate for each $('.panel.panel-default')
     // find the resume_asset field where buildable type equals asset type and id = id
@@ -55,7 +58,7 @@ $(document).ready(function() {
     // the specific row the asset is placed in
     // $('#objective114')[0].parentNode.parentNode.parentNode.parentNode
 
- });
+});
 
 
 // $(function() {

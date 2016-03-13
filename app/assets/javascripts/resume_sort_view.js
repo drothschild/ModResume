@@ -4,17 +4,31 @@ $(document).ready(function() {
     handle: '.asset-portlet-header',
     placeholder: "portlet-placeholder ui-corner-all"
   })
-  console.log("hello")
-});
+  // console.log("hello")
 
-$(document).ready(function() {
   $('.nested-sort').sortable({
     connectWith: ".nested-sort",
     handle: '.panel-heading',
     placeholder: "portlet-placeholder ui-corner-all"
   })
-  console.log("hello")
-});
+  // console.log("hello")
+
+
+
+  $('#save-resume-button').on('click', function(e){
+    e.preventDefault();
+    console.log('Save resume button')
+    console.log($('.text-left.ui-sortable-handle'))
+    console.log($('.asset type'))
+    var resume_temp = $('.resume-template')[0].innerHTML
+    debugger;
+
+    })
+    // $('.asset type')
+    // $('.text-left.ui-sortable-handle')
+
+ });
+
 
 // $(function() {
 //   $('.section').sortable({

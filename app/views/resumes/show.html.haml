@@ -1,32 +1,28 @@
 .row
-  .col-md-6.col-s-6.col-centered.text-center.resume-template
+  .col-md-6.col-s-6.text-center.resume-template
     .row
       .col-md-12.col-s-12.resume-header
         %h3="#{current_user.first_name} #{current_user.last_name}"
         %br
         ="#{current_user.email}"
+
     .row
-      .col-md-12.col-s-12.resume-top-content.section
-        .asset-type.ui-state-default
-          %h3.text-left.section-header Objective
-          -@assets["objectives"].each do |objective|
-            .ui-state-default=render "objectives/show", asset_type: "objectives", asset: objective
+      .col-md-12.col-s-12.resume-content.resume-top-content
+
     .row
-      .col-md-8.col-s-12.resume-middle-content.section
-        .asset-type.ui-state-default
-          %h3.text-left Experience
-          -@assets["experiences"].each do |experience|
-            .ui-state-default=render "experiences/show", asset_type: "experiences", asset: experience
-      .col-md-4.col-s-12.resume-middle-content.section
-        .asset-type.ui-state-default
-          %h3.text-left Skills
-          -@assets["skills"].each do |skill|
-            .ui-state-default=render "skills/show", asset_type: "skills", asset: skill
-      / .col-md-6.col-s-12.resume-middle-content
-      /   .section
-      /     .asset-type.ui-state-default
-      /       %h3.text-left Education
-      /       -@assets["educations"].each do |education|
-      /         .ui-state-default=render "educations/show", asset_type: "educations", asset: education
+      .col-md-12.col-s-12.resume-content.resume-middle-content
+
+
+  .col-md-6.col-s-6.resume-content.library
+    -@asset_types = asset_types
+    -@asset_types.each do |asset_type|
+      .asset-portlet
+        .asset-portlet-header=asset_type.capitalize
+        .nested-sort
+          .asset-portlet-content
+          -@assets["#{asset_type}"].each do |asset|
+            =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset
+
+
 
 

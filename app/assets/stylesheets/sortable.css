@@ -16,7 +16,7 @@
 }
 
 ul{
-  margin-top: -10px;
+  margin-bottom: -10px;
   font-size: 0px;
 }
 li{
@@ -30,16 +30,22 @@ li{
 
 }
 
-.resume-middle-content{
-  height: 400px;
+.asset-portlet-header{
+  text-align: left;
+}
+
+.resume-middle-split-content{
+  height: 450px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px dashed grey;
+  padding: 4px;
 }
 
 .resume-top-content{
-  height: 200px;
+  height: 150px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px dashed grey;
+  padding: 4px;
 }
 
 .resume-template{
@@ -55,7 +61,7 @@ li{
 .resume-header{
   height: 100px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px dashed grey;
   text-align: left;
 }
 

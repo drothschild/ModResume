@@ -38,4 +38,12 @@ module ApplicationHelper
       return @taggings.first.id
   end
 
+  def current_url
+    return request.fullpath
+  end
+
+  def asset_types
+    @asset_types = ["objectives", "experiences", "projects", "educations", "skills", "volunteerings"]
+  end
+
 end

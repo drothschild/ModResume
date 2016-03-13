@@ -16,6 +16,7 @@
 
   %fieldset.form_group
     = f.label :details
+    
     = f.fields_for :descriptions do |d|
       =d.text_field :detail, class: "form-control detail"
     = text_field_tag "experience[details][][detail]",nil,  class: "form-control detail"

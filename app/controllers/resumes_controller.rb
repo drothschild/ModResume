@@ -62,14 +62,12 @@ class ResumesController < ApplicationController
     p params
     p asset_type
     p resume
+    p set_assets(resume_id: resume.id)
     p "*" * 50
-    if request.xhr?
-      201
-      # render :json resume.to_json
-    else
-      redirect_to user_assets_path
+    respond_to do |format|
+      format.json { render json: resume, set_assets(resume_id: resume.id) }
+      format.html { p "RETURNING HTML" }
     end
-
   end
 
   def destroy

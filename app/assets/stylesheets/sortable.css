@@ -1,5 +1,3 @@
-
-
 .panel{
   margin-bottom: 5px;
 }
@@ -10,6 +8,10 @@
 
 .panel-heading{
   padding: 2px;
+}
+
+li{
+  padding-left: 4px;
 }
 
 .resume-middle-content{

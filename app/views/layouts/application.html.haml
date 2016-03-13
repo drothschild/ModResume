@@ -15,18 +15,21 @@
     .container
       .row
         %nav
-          .col-md-6.col-s-6.nav-left
+          .col-md-5.col-s-5.nav-left
             %a{:href => "/"} ModResume
-          .col-md-6.col-s-6.nav-right
+          .col-md-7.col-s-7.nav-right
             - if user_signed_in?
               %table.nav-links
                 %tr
                   %td
-                    = link_to 'Resume Dashboard', user_resumes_path(current_user.id)
+                    =link_to 'Dashboard', user_resumes_path(current_user.id)
+                  %td &middot;
                   %td
                     %a{href: "/users/#{current_user.id}/assets/new"}My Assets
+                  %td &middot;
                   %td
                     =link_to 'Logout', destroy_user_session_path, method: :delete
+                  %td &middot;
                   %td{user_id: current_user.id}
                     = "Welcome, #{current_user.first_name} #{current_user.last_name}"
             - else

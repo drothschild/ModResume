@@ -73,7 +73,7 @@ class ResumesController < ApplicationController
     p "*" * 50
     respond_to do |format|
       format.json { render json: { resume: resume, update_status: update_status } }
-      format.html { p "RETURNING HTML" }
+      format.html
     end
   end
 

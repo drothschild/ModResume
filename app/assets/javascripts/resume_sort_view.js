@@ -22,6 +22,7 @@ $(document).ready(function() {
     console.log('Save resume button')
     // save to database as template
     var resumeTemplate = $('.resume-template')[0].innerHTML
+    // debugger;
     var assetNodes = $('.panel.panel-default')
     for(var i = 0; i < assetNodes.length; i++){
 

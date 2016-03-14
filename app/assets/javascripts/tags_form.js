@@ -1,3 +1,4 @@
+$(document).ready(function(){
   $(function() {
     var availableTags = JSON.parse($("#tag-names")[0].dataset.tagNames) || []
     function split( val ) {
@@ -7,12 +8,10 @@
       return split( term ).pop();
     }
 
-    $( "#tags" )
-      // don't navigate away from the field on tab when selecting an item
-      .bind( "keydown", function( event ) {
-        if ( event.keyCode === $.ui.keyCode.TAB &&
-            $( this ).autocomplete( "instance" ).menu.active ) {
+    $( "#form-container" ).bind( "keydown", "#tags", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB ) {
           event.preventDefault();
+          debugger;
         }
       })
       .autocomplete({
@@ -39,3 +38,4 @@
         }
       });
   });
+})

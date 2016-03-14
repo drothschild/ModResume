@@ -14,6 +14,18 @@ class ResumeAssetsController < ApplicationController
     end
   end
 
+
+  def update
+    resumeAsset = ResumeAsset.where(buildable_type: params[:asset_type], buildable_id: params[:id], resume_id:params[:resume_id])
+    p params
+    resumeAsset.each do |current_resume|
+      current_resume.assign_attributes(div_sort: params[:div_sort])
+      current_resume.save
+    end
+    render json: resumeAsset
+  end
+
+
 private
 
   def resume_asset_params

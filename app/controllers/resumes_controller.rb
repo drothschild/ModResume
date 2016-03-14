@@ -57,7 +57,7 @@ class ResumesController < ApplicationController
   def update
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
-    asset_type.constantize.find(params[:data_asset_id]).resumes << resume 
+    asset_type.constantize.find(params[:data_asset_id]).resumes << resume
     p "*" * 50
     p params
     p asset_type
@@ -65,7 +65,7 @@ class ResumesController < ApplicationController
     p set_assets(resume_id: resume.id)
     p "*" * 50
     respond_to do |format|
-      format.json { render json: resume, set_assets(resume_id: resume.id) }
+      format.json { render json: resume}
       format.html { p "RETURNING HTML" }
     end
   end

@@ -9,8 +9,7 @@ var bindEditListeners = function (){
 }
 
 var EditPopup = function(event) {
-  debugger;
-  var dialog
+  console.log($(this.parentNode.parentNode));
   event.preventDefault();
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
@@ -18,19 +17,9 @@ var EditPopup = function(event) {
   dialog = $("#edit-form").dialog({
     autoOpen: false,
     modal: true,
-    width: 500,
-    height: 700,
-    buttons: {
-        "Create an account": function(){
-
-        },
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
+    width:  1000,
+    height: 700
   });
-
-
   dialog.dialog("open");
   $.ajax({url: uri, method: "GET"}).done(function(response){
     $('#form-container').html(response);

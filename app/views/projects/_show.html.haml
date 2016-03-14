@@ -5,10 +5,13 @@
         %strong= asset.title
       .col-md-2.col-sm-2
         -if current_url.include?("asset")
-          %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
+          %button.btn.btn-default.pull-right.btn-round.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
             %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
           %button.btn.btn-default.pull-right.edit-popup{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Edit item", "current_user_id" => current_user.id}
-            %span.glpyphicon.glyphicon-edit{"aria-hidden"=>"true"}
+            - if asset_type.singularize.capitalize.constantize.find(asset.id).resumes.include? Resume.find(session[:new_resume_id])
+              %span.glpyphicon.glyphicon-minus{"aria-hidden"=>"true"}
+            - else
+              %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
   .row
     .panel-body.col-md-12.col-sm-12
       %p= asset.description

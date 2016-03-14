@@ -12,7 +12,7 @@ body
 nav
   position: relative
   height: 150px
-  background-image: url('bluepaper.png')
+  background-image: url('http://img06.deviantart.net/ab92/i/2012/045/8/2/texture__blue_paper_by_awesomestock-d4pqzkx.png')
 
 a
   color: #FFB200
@@ -45,8 +45,6 @@ nav
 .login-form
   margin: 7em 0 0 17em
 
-#user
-
 // END NAVBAR
 // RESUME INDEX PAGE
 
@@ -65,15 +63,75 @@ a.tag-button
 
 .button-selected
   background-color: #FFB200
-// END ASSET INDEX PAGE
-
-#form-container
-  margin-top: 1em
-
 
 
 .onwards-floater
+  position: fixed
   z-index: 100
-  text-decoration: none
+  bottom: 50%
+  padding: 0 20px
+  border-radius: 100%
+  background-color: transparent
+  border: 1px solid white
+  color: white
+
+.floater-right
+  @extend .onwards-floater
+  right: 5%
+
+.floater-left
+  @extend .onwards-floater
+  left: 5%
+
+  // box-shadow: 5px 5px 5px #d9d9d9
+
+.onwards-floater
+  &:hover
+    @extend .onwards-floater
+    color: #FFB200
+    border-color: #FFB200
+
+// END ASSET INDEX PAGE
+// NEW ASSET PAGE
+.saved
+  display: none
+
+#form-container
+  margin-top: 1em
+  // border: 1px solid white
+  // border-radius: 1%
+  // padding: 5px
+  display: none
+
+.ui-widget
+  z-index: 100
+
+#tag-names
+  visibility: hidden
+
+
+#input-full-width
+  width: 85%
+  margin-bottom: 10px
+
+#experience_details__detail
+  @extend #input-full-width
+
+#education_details__detail
+  @extend #input-full-width
+
+#project_details__detail
+  @extend #input-full-width
+
+#volunteering_details__detail
+  @extend #input-full-width
+
+#skill_details__detail
+  @extend #input-full-width
+
+.tag-input
+  height: 34px
+  width: 100%
+
 
 

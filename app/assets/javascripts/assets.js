@@ -7,21 +7,8 @@ $(document).ready(function() {
 var bindAssetListeners = function() {
   $('.tag-button').on("click", toggleTag);
   $('.asset-resume').on("click", addAsset);
-  onwardsLink();
 }
 
-var onwardsLink = function(){
-  var offset = 0;
-  var duration = 300;
-  $(window).scroll(function(){
-    if ($(this).scrollTop() > offset){
-      $('.onwards-floater').css("position")
-    }
-    else{
-      $('.onwards-floater').fadeOut(duration);
-    }
-  })
-}
 
 var toggleTag = function(e) {
   e.preventDefault();
@@ -66,6 +53,7 @@ var addAsset = function(e) {
     data_asset_type: $(this).attr("data-asset-type"),
   };
   console.log(data);
+  debugger;
   $.ajax({
     accepts: "application/json",
     url: "/users/" + data.current_user_id + "/resumes/" + resumeId,

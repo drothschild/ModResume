@@ -10,7 +10,6 @@ var bindEditListeners = function (){
 }
 
 var editPopup = function(event) {
-  console.log("Edit popup");
   event.preventDefault();
   var assetType = event.currentTarget.dataset.assetType;
   var assetId = event.currentTarget.dataset.assetId;
@@ -26,27 +25,53 @@ var editPopup = function(event) {
   });
   dialog.dialog("open");
   $.ajax({url: uri, method: "GET"}).done(function(response){
-    $('#form-container').html(response);
+    $('#form-container-edit').html(response);
+    tagNames = $('#tags-names').attr("data-tag-names").trim()
+    $("#tags").val(tagNames)
     form = dialog.find("form").on("submit", function(event){
       event.preventDefault();
       editAsset(assetType,assetId);
-    })
+          })
 
   });
    };
 
 var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;
-  console.log($(assetToUpdate));
   var uri = $('form').attr('action');
   var data = $('form').serialize();
-  var tags = $('input#tags')[0].value;
   $.ajax({url: uri, method: "Put", data: data}).done(function(response) {
-    console.log(response);
     dialog.dialog("close");
     $(assetToUpdate).html(response);
+     editTags(assetType,assetId);
   }
     );
+
+}
+var editTags = function(assetType, assetId) {
+  console.log("Hey");
+  var tagObject = {taggable_type: capitalizeFirstLetter(assetType.slice(0, -1)), taggable_id: assetId};
+  tagObject["tag_names"]=$('input#tags')[0].value;
+  var data = {tagging: tagObject};
+  var uri = window.location.pathname.replace("/assets", "");
+  var uri = uri + "/taggings";
+  console.log(uri);
+  $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+    // console.log(response);
+    getUserTags();
+   });
+};
+
+var getUserTags = function() {
+  var uri = window.location.pathname.replace("/assets", "/tags");
+  $.ajax({url: uri, method:"GET"}).done(function(response){
+    $("#tag-buttons").html(response);
+  })
+}
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 

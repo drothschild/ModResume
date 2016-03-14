@@ -13,12 +13,14 @@ class ProjectsController < ApplicationController
     @user = User.find(current_user.id)
     @project = Project.new
     @description  = Description.new
+    @tags_list = ""
     render partial: 'form'
   end
 
   def edit
     @project = Project.find(params[:id])
     @user = User.find(current_user.id)
+    @tags_list = @project.tags.order("name").map{|t| t.name}.join(", ")
     render partial: 'form'
   end
 
@@ -36,7 +38,7 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :new
     end
-    render :json => {taggable_type: "Project", taggable_id: @project.id}
+    render :json => {taggable_type: "projects", taggable_id: @project.id}
   end
 
   def update
@@ -59,8 +61,7 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :edit
     end
-    puts "**********************************"
-    render partial: 'show', locals: {asset: @project}
+    render partial: 'show', locals: {asset: @project, asset_type: "projects"}
   end
 
   def project_params

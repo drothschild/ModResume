@@ -1,6 +1,8 @@
 %div#resumeID{ "resume_id" => session[:new_resume_id] }
 .row
-  .col-md-10.col-sm-10.col-centered
+
+  .col-md-1.col-sm-1
+  .col-md-10.col-sm-10.col-centered#tag-buttons
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
@@ -22,7 +24,7 @@
 
 
 #edit-form{:title => "Edit Asset"}
-  .col-md-8.col-sm-10.col-centered#form-container
+  .col-md-8.col-sm-10.col-centered#form-container-edit
 
 %a.btn-default.onwards-floater{href: user_resume_url(current_user, session[:new_resume_id])}
   %i.fa.fa-angle-right.fa-4x

@@ -22,7 +22,7 @@ class ResumesController < ApplicationController
       @assets["#{asset_type}"] = []
       resume_assets = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], asset_type.capitalize.singularize)
       resume_assets.each do |resume_asset|
-        @assets["#{asset_type}"] << resume_asset.buildable
+        @assets["#{asset_type}"] << resume_asset
       end
     end
     # binding.pry

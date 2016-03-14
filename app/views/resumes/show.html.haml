@@ -11,24 +11,43 @@
 
     .row#divSection_2
       .col-md-12.col-s-12.resume-content.resume-top-content
-        - @resume.resume_assets.where(div_sort: 2)
+        -@asset_types = asset_types
+        -@asset_types.each do |asset_type|
+          .asset-portlet
+            .asset-portlet-header=asset_type.capitalize
+            .nested-sort
+              .asset-portlet-content
+
+              -@assets["#{asset_type}"].each do |asset|
+                - if (asset.div_sort == 2)
+                  =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
 
 
     .row#divSection_3
       .col-md-12.col-s-12.resume-content.resume-middle-split-content
+        -@asset_types = asset_types
+        -@asset_types.each do |asset_type|
+          .asset-portlet
+            .asset-portlet-header=asset_type.capitalize
+            .nested-sort
+              .asset-portlet-content
 
+              -@assets["#{asset_type}"].each do |asset|
+                - if (asset.div_sort == 3)
+                  =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
   .col-md-6.col-s-6.resume-content.library
     -@asset_types = asset_types
-    = @asset_types
     -@asset_types.each do |asset_type|
       .asset-portlet
         .asset-portlet-header=asset_type.capitalize
         .nested-sort
           .asset-portlet-content
+
           -@assets["#{asset_type}"].each do |asset|
-            =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset
+            - if (asset.div_sort == 0)
+              =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
 
 

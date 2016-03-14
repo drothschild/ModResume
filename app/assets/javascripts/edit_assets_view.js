@@ -27,7 +27,6 @@ var editPopup = function(event) {
   dialog.dialog("open");
   $.ajax({url: uri, method: "GET"}).done(function(response){
     $('#form-container').html(response);
-    $('#form-container :submit').remove;
     form = dialog.find("form").on("submit", function(event){
       event.preventDefault();
       editAsset(assetType,assetId);

@@ -56,6 +56,10 @@
             - if (asset.div_sort == 0)
               =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
+%a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
+
+%a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
+
 
 
 

@@ -15,8 +15,8 @@ var toggleTag = function(e) {
   // console.log(this);
   var tagID = $(this).attr("tag_id");
   // console.log(tagID);
-  $(this).toggleClass("tag-button-selected");
-  var visible = $(this).hasClass("tag-button-selected");
+  $(this).toggleClass("button-selected");
+  var visible = $(this).hasClass("button-selected");
   toggleAssets(tagID, visible);
 }
 

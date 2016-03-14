@@ -25,6 +25,7 @@ class ResumesController < ApplicationController
         @assets["#{asset_type}"] << resume_asset.buildable
       end
     end
+    # binding.pry
   end
 
   def new
@@ -57,7 +58,7 @@ class ResumesController < ApplicationController
   def update
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
-    asset_type.constantize.find(params[:data_asset_id]).resumes << resume 
+    asset_type.constantize.find(params[:data_asset_id]).resumes << resume
     p "*" * 50
     p params
     p asset_type

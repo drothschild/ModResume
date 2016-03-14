@@ -71,8 +71,12 @@ a.tag-button
   text-decoration: none
 // END ASSET INDEX PAGE
 // NEW ASSET PAGE
+.saved
+  display: none
+
 #form-container
   margin-top: 1em
+  display: none
 
 .ui-widget
   z-index: 100
@@ -82,7 +86,7 @@ a.tag-button
 
 
 #input-full-width
-  width: 90%
+  width: 85%
   margin-bottom: 10px
 
 #experience_details__detail
@@ -95,6 +99,9 @@ a.tag-button
   @extend #input-full-width
 
 #volunteering_details__detail
+  @extend #input-full-width
+
+#skill_details__detail
   @extend #input-full-width
 
 .tag-input

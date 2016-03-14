@@ -46,7 +46,12 @@ newAssetsView.prototype.loadForm = function(event){
   tinyMCE.remove();
   var uri = $(event.currentTarget).attr("href");
   $.ajax({url: uri, method: "GET", context: this}).done(function(response){
-    $('#form-container').html(response);
+    setTimeout(function(){
+      $('#form-container').html(response);
+      $('#form-container').fadeIn(250, function(){
+        //animation here
+      })
+    },250)
     this.addTags();
   })
 }
@@ -67,6 +72,14 @@ newAssetsView.prototype.saveForm = function(event){
       var uri = uri + "/taggings"
       $.ajax({url: uri, method: "POST", data: data}).done(function(response){
         console.log(response)
+        $("#form-container").fadeOut(250, function(){
+          $('#form-container').html("");
+        })
+        setTimeout(function(){
+          $('.saved').fadeIn(250, function(){
+            //animation complete
+          })
+        }, 300)
       })
     })
   }
@@ -76,9 +89,12 @@ var newAssets = new newAssetsView();
 $(document).ready(function(){
   $('.asset-type-button').on("click", function(e){
     e.preventDefault();
-    $(e.target.parentNode.children).removeClass("active");
-    $(e.target).addClass("active");
-    $('#form-container').html("");
+    $(e.target.parentNode.children).removeClass("button-selected");
+    $(e.target).addClass("button-selected");
+    $(e.target).blur();
+    $('.saved').fadeOut(250, function(){
+            //animation complete
+    })
     newAssets.loadForm(e);
   })
   $('#form-container').on("submit", 'form', function(e){

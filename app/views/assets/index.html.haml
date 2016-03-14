@@ -1,16 +1,14 @@
 %div#resumeID{ "resume_id" => session[:new_resume_id] }
 .row
-  .col-md-1.col-sm-1
-  .col-md-10.col-sm-10
+  .col-md-10.col-sm-10.col-centered
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
       - # %button.btn.btn-default.tag-button{"tag_id" => tag.id, "selected" => false}
       %a.btn.btn-default.tag-button.button-selected{"tag_id" => tag.id}
         =tag.name
-  .col-md-1.col-sm-1
-    %a.btn.btn-default.button-selected.onwards-floater{href: user_resume_url(current_user, session[:new_resume_id])}
-      Next
+
+
 
 .row
   .col-md-10.col-sm-10.col-centered
@@ -26,9 +24,11 @@
 #edit-form{:title => "Edit Asset"}
   .col-md-8.col-sm-10.col-centered#form-container
 
+%a.btn-default.onwards-floater{href: user_resume_url(current_user, session[:new_resume_id])}
+  %i.fa.fa-angle-right.fa-4x
 
-%a.btn.btn-default.button-selected.onwards{href: user_resume_url(current_user, session[:new_resume_id])}
-  Onwards!
+
+
 
 
 

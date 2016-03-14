@@ -1,25 +1,49 @@
+
+%button.btn.btn-primary#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+  Save
+
 .row
   .col-md-6.col-s-6
     %h2 Your Resume
   .col-md-6.col-s-6
     %h2 Your Assets
 
-.row
+.row#divSection_0
   .col-md-6.col-s-6.text-center.resume-template
-    .row
+    .row#divSection_1
       .col-md-12.col-s-12.resume-header
         %h4="#{current_user.first_name} #{current_user.last_name}"
         %p="#{current_user.email}"
         %p=current_user.phone_number
         %p=current_user.websites.first.url
 
-    .row
+    .row#divSection_2
       .col-md-12.col-s-12.resume-content.resume-top-content
+        -@asset_types = asset_types
+        -@asset_types.each do |asset_type|
+          .asset-portlet
+            .asset-portlet-header=asset_type.capitalize
+            .nested-sort
+              .asset-portlet-content
 
-    .row
-      .col-md-8.col-s-8.resume-content.resume-middle-split-content
-      .col-md-4.col-s-4.resume-content.resume-middle-split-content
+              -@assets["#{asset_type}"].each do |asset|
+                - if (asset.div_sort == 2)
+                  =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
+
+
+    .row#divSection_3
+      .col-md-12.col-s-12.resume-content.resume-middle-split-content
+        -@asset_types = asset_types
+        -@asset_types.each do |asset_type|
+          .asset-portlet
+            .asset-portlet-header=asset_type.capitalize
+            .nested-sort
+              .asset-portlet-content
+
+              -@assets["#{asset_type}"].each do |asset|
+                - if (asset.div_sort == 3)
+                  =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
   .col-md-6.col-s-6.resume-content.library
     -@asset_types = asset_types
@@ -28,8 +52,14 @@
         .asset-portlet-header=asset_type.capitalize
         .nested-sort
           .asset-portlet-content
+
           -@assets["#{asset_type}"].each do |asset|
-            =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset
+            - if (asset.div_sort == 0)
+              =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+
+%a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
+
+%a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
 
 
 

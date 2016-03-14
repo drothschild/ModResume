@@ -22,9 +22,10 @@ class ResumesController < ApplicationController
       @assets["#{asset_type}"] = []
       resume_assets = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], asset_type.capitalize.singularize)
       resume_assets.each do |resume_asset|
-        @assets["#{asset_type}"] << resume_asset.buildable
+        @assets["#{asset_type}"] << resume_asset
       end
     end
+    # binding.pry
   end
 
   def new
@@ -57,16 +58,25 @@ class ResumesController < ApplicationController
   def update
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
-    asset_type.constantize.find(params[:data_asset_id]).resumes << resume
+    asset_resumes = asset_type.constantize.find(params[:data_asset_id]).resumes
+    if asset_resumes.include? resume
+      asset_resumes.delete resume
+      update_status = "removed"
+    else
+      asset_resumes << resume
+      update_status = "added"
+    end
+
     p "*" * 50
     p params
     p asset_type
     p resume
-    p set_assets(resume_id: resume.id)
+    # p set_assets(resume_id: resume.id)
     p "*" * 50
     respond_to do |format|
       format.json { render json: resume}
       format.html { p "RETURNING HTML" }
+
     end
   end
 

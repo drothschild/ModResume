@@ -7,6 +7,20 @@ $(document).ready(function() {
 var bindAssetListeners = function() {
   $('.tag-button').on("click", toggleTag);
   $('.asset-resume').on("click", addAsset);
+  onwardsLink();
+}
+
+var onwardsLink = function(){
+  var offset = 0;
+  var duration = 300;
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > offset){
+      $('.onwards-floater').css("position")
+    }
+    else{
+      $('.onwards-floater').fadeOut(duration);
+    }
+  })
 }
 
 var toggleTag = function(e) {
@@ -43,7 +57,7 @@ var addAsset = function(e) {
   e.preventDefault();
   console.log("Add Asset Button Clicked");
   console.log(this);
-  var button = this;
+  var button = $(this);
   var resumeId = $('#resumeID').attr("resume_id");
   console.log(resumeId);
   var data = {
@@ -61,7 +75,16 @@ var addAsset = function(e) {
   .done(function(response) {
     console.log("Successful Patch");
     console.log(response);
-    $(button).addClass("glyphicon-ok");
+    if (response["update_status"] === "added") {
+      button.children('span').removeClass("glyphicon-plus");
+      button.children('span').addClass("glyphicon-minus");
+      button.prop("title","Remove from Resume");
+    }
+    else {
+      button.children('span').removeClass("glyphicon-minus");
+      button.children('span').addClass("glyphicon-plus");
+      button.prop("title","Add to Resume");
+    }
   })
   .fail(function(response) {
     console.log("Failed Patch");

@@ -10,7 +10,15 @@
         %a.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
           =asset_type.capitalize
 .row
-  .col-md-5.col-sm-5.col-centered#form-container
+  .col-md-6.col-sm-6.col-centered#form-container
   .saved
     %h3.text-center Asset Saved. &nbsp; Add another?
+
+=link_to user_resumes_path, class: "btn-default onwards-floater floater-right" do
+  %i.fa.fa-angle-right.fa-4x
+
+
+/ REMOVE HARD CODED VALUE
+=link_to user_resume_path({id: 54}), class: "btn-default onwards-floater floater-left" do
+  %i.fa.fa-angle-left.fa-4x
 

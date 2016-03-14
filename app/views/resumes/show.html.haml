@@ -2,6 +2,9 @@
 %button.btn.btn-primary#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
   Save
 
+%button.btn.btn-primary#add-asset-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+  =link_to 'Add asset', edit_user_resume_path
+
 .row
   .col-md-6.col-s-6
     %h2 Your Resume

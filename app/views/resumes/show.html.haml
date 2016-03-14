@@ -17,8 +17,10 @@
       .col-md-12.col-s-12.resume-header
         %h4="#{current_user.first_name} #{current_user.last_name}"
         %p="#{current_user.email}"
-        %p=current_user.phone_number
-        %p=current_user.websites.first.url
+        - if current_user.phone_number
+          %p=current_user.phone_number
+        - if current_user.websites.first
+          %p=current_user.websites.first.url
 
     .row#divSection_2
       .col-md-12.col-s-12.resume-content.resume-top-content

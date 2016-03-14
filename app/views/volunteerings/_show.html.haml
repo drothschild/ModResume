@@ -10,7 +10,11 @@
       .col-md-2.col-sm-2
         -if current_url.include?("asset")
           %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
-            %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+            - if asset_type.singularize.capitalize.constantize.find(asset.id).resumes.include? Resume.find(session[:new_resume_id])
+              %span.glpyphicon.glyphicon-minus{"aria-hidden"=>"true"}
+            - else
+              %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+
   .row
     .panel-body
       %ul

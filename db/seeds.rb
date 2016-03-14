@@ -191,26 +191,10 @@ Education.destroy_all
 
 end
 
-lindsey = User.create(first_name: "Lindsey", last_name: "Ullman", email: "lindsey.ullman@gmail.com", password: "hello")
-["Healthcare", "Dev", "IT", "Leadership"].each do |tag_name|
-  tag = Tag.create(name: tag_name, user_id: lindsey.id)
-end
-
-company = Experience.create(company: "Optum360", title: "Systems Analyst", location: "Phoenix, AZ", begin_date: '2000-12-27', end_date: '2016-01-15', user_id: lindsey.id)
-company.tags << Tag.find_by(user_id: lindsey.id, name: "Healthcare")
-company.tags << Tag.find_by(user_id: lindsey.id, name: "IT")
-
-company = Experience.create(company: "AllTel Ice Den", title: "Supervisor", location: "Phoenix, AZ", begin_date: '2000-08-01', end_date: '2005-07-05', user_id: lindsey.id)
-company.tags << Tag.find_by(user_id: lindsey.id, name: "Leadership")
-
-company = Experience.create(company: "Dev Bootcamp", title: "Developer", location: "San Francisco, CA", begin_date: '2016-01-18', end_date: '2016-03-25', user_id: lindsey.id)
-company.tags << Tag.find_by(user_id: lindsey.id, name: "Dev")
-
-
 puts "New Users Summary:"
 puts "******************"
 User.all.each do |user|
-  puts "#{user.first_name} #{user.last_name} (#{user.email})"
+  puts "#{user.id}: #{user.first_name} #{user.last_name} (#{user.email})"
   # puts
   # puts "Websites:"
   # puts "*********"
@@ -224,4 +208,3 @@ User.all.each do |user|
   #   puts "#{tag.name}"
   # end
 end
-

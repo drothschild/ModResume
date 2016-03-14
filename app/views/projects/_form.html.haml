@@ -8,12 +8,13 @@
     = f.label :details
   %fieldset.form_group.form-inline
     = f.fields_for :descriptions do |d|
-<<<<<<< HEAD
       =d.text_field :detail, class: "form-control details"
-    = text_field_tag "project[details][][detail]",nil,  class: "form-control detail"
+    = text_field_tag "project[details][][detail]",nil,  class: "form-control details"
     = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
     = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
   %fieldset.form_group
     = render '/tags/form'
     = f.submit "Save", class: "btn btn-default"
+  #tags-names{"data-tag-names" => "#{@tags_list}"}
+
 

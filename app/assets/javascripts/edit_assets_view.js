@@ -25,7 +25,9 @@ var editPopup = function(event) {
   });
   dialog.dialog("open");
   $.ajax({url: uri, method: "GET"}).done(function(response){
-    $('#form-container').html(response);
+    $('#form-container-edit').html(response);
+    tagNames = $('#tags-names').attr("data-tag-names").trim()
+    $("#tags").val(tagNames)
     form = dialog.find("form").on("submit", function(event){
       event.preventDefault();
       editAsset(assetType,assetId);
@@ -48,7 +50,7 @@ var editAsset = function(assetType, assetId) {
 }
 var editTags = function(assetType, assetId) {
   console.log("Hey");
-  var tagObject = {taggable_type: assetType, taggable_id: assetId};
+  var tagObject = {taggable_type: capitalizeFirstLetter(assetType.slice(0, -1)), taggable_id: assetId};
   tagObject["tag_names"]=$('input#tags')[0].value;
   var data = {tagging: tagObject};
   var uri = window.location.pathname.replace("/assets", "");
@@ -67,12 +69,11 @@ var getUserTags = function() {
   })
 }
 
-var getObjectTags = function(assetId) {
-  var uri = window.location.pathname.replace("/assets", "/taggings");
-  $.ajax({url: uri, method:"GET"}).done(function(response){
-    $("#tag-buttons").html(response);
-  })
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 var deleteAsset = function(event) {
   event.preventDefault();

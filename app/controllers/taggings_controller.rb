@@ -4,9 +4,11 @@ class TaggingsController < ApplicationController
   def create
     tags = parse_tags_names( tagging_params[:tag_names])
     @taggings = []
-
+    p "************************"
+    p tagging_params[:taggable_id]
     tags.each do |tag|
       tagging = Tagging.find_or_create_by(taggable_id: tagging_params[:taggable_id], taggable_type: tagging_params[:taggable_type], tag:tag)
+      p tagging
       @taggings << tagging
     end
     render json: tags

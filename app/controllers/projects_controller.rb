@@ -13,12 +13,14 @@ class ProjectsController < ApplicationController
     @user = User.find(current_user.id)
     @project = Project.new
     @description  = Description.new
+    @tags_list = ""
     render partial: 'form'
   end
 
   def edit
     @project = Project.find(params[:id])
     @user = User.find(current_user.id)
+    @tags_list = @project.tags.order("name").map{|t| t.name}.join(", ")
     render partial: 'form'
   end
 

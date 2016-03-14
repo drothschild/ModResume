@@ -9,7 +9,7 @@
         = asset.end_date.strftime('%b %Y')
       .col-md-2.col-sm-2
         -if current_url.include?("asset")
-          %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
+          %button.btn.btn-default.pull-right.btn-round.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
             %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
   .row
     .panel-body

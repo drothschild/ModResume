@@ -14,12 +14,15 @@
   %fieldset.form-group
     = f.label :completion
     = f.date_select :completion, class: "form-control", discard_day: true
-  %fieldset.form_group
+    %p
     = f.label :details
+  %fieldset.form_group.form-inline
     = f.fields_for :descriptions do |d|
       =d.text_field :detail, class: "form-control detail"
     = text_field_tag "education[details][][detail]",nil,  class: "form-control detail"
-    = button_tag "+", id: "add_detail"
-    = button_tag "-", id: "remove_detail"
+    = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
+    = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
+  %fieldset.form_group
     = render '/tags/form'
-    = f.submit
+    %p
+    = f.submit "Save", class: "btn btn-default"

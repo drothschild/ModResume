@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 var bindAssetListeners = function() {
-  $('.tag-button').on("click", toggleTag);
+  $(document).on("click", '.tag-button', toggleTag );
   $('.asset-resume').on("click", addAsset);
   onwardsLink();
 }

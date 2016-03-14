@@ -1,4 +1,9 @@
 class TagsController < ApplicationController
+  def index
+    @user = User.find(current_user.id)
+    @tags = @user.tags.order("name")
+    render partial: 'buttons', locals: {tags: @tags}
+  end
   def create
     @tag = Tag.create(tag_params)
     @tags = Tag.all

@@ -55,10 +55,17 @@ var editTags = function(assetType, assetId) {
   var uri = uri + "/taggings";
   console.log(uri);
   $.ajax({url: uri, method: "POST", data: data}).done(function(response){
-    console.log(response);
-    // dialog.dialog("close");
+    // console.log(response);
+    getUserTags();
    });
 };
+
+var getUserTags = function() {
+  var uri = window.location.pathname.replace("/assets", "/tags");
+  $.ajax({url: uri, method:"GET"}).done(function(response){
+    $("#tag-buttons").html(response);
+  })
+}
 
 var deleteAsset = function(event) {
   event.preventDefault();

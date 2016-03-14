@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :new
     end
-    render :json => {taggable_type: "Project", taggable_id: @project.id}
+    render :json => {taggable_type: "projects", taggable_id: @project.id}
   end
 
   def update
@@ -59,7 +59,7 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :edit
     end
-    render partial: 'show', locals: {asset: @project, asset_type: "Project"}
+    render partial: 'show', locals: {asset: @project, asset_type: "projects"}
   end
 
   def project_params

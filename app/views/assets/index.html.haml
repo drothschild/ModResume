@@ -1,7 +1,7 @@
 %div#resumeID{ "resume_id" => session[:new_resume_id] }
 .row
   .col-md-1.col-sm-1
-  .col-md-10.col-sm-10
+  .col-md-10.col-sm-10#tag-buttons
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|

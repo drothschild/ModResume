@@ -58,6 +58,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'
   gem "factory_girl_rails", "~> 4.0"
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do

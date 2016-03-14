@@ -59,13 +59,11 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :edit
     end
-    render partial: 'show' locals: {}
+    puts "**********************************"
+    render partial: 'show', locals: {asset: @project}
   end
 
   def project_params
-    p "***************"
-    p params[:project][:details]
-
     params.require(:project).permit(:description, :title, :details =>[:detail], :descriptions_attributes => [:detail])
   end
 end

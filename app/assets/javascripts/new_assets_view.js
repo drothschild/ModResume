@@ -10,7 +10,6 @@ newAssetsView.prototype.loadForm = function(event){
 }
 
 newAssetsView.prototype.saveForm = function(event){
-  debugger
   if  (event.currentTarget.className.search("edit")<0){
     var data = $('form').serialize()
     var tags = $('input#tags')[0].value

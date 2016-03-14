@@ -9,8 +9,11 @@ gem 'react-rails', '~>1.0'
 # HAML
 gem "haml-rails", "~> 0.9"
 
-# For to format our text boxes
+# To format our text boxes
 gem 'tinymce-rails'
+
+# For heroku deployment
+gem 'rails_12factor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

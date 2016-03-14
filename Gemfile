@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rake', '< 11.0'
+
 # User authentication
 gem 'devise', '~> 3.5', '>= 3.5.6'
 

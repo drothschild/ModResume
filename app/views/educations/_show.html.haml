@@ -1,17 +1,17 @@
 .panel.panel-default{"id" => "Education_#{asset.id}"}
   .panel-heading
-    %strong= asset.institution_name
-    %em= asset.focus
-    = asset.completion.strftime('%b %Y')
-  .row
-    .panel-body
+    .row
       .col-md-10.col-sm-10
-        %ul
-          - asset.descriptions.each do |description|
-            %li= description.detail
-        %em= asset.location
-      .col-md-2.col-sm-2
+        %strong= asset.institution_name
+        %em= asset.focus
+        = asset.completion.strftime('%b %Y')
+      .col-md-2.col-sm-2.button-col
         -if current_url.include?("asset")
           %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
             %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
-
+  .row
+    .panel-body
+      %ul
+        - asset.descriptions.each do |description|
+          %li= description.detail
+        %em= asset.location

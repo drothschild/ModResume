@@ -58,19 +58,25 @@ class ResumesController < ApplicationController
   def update
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
-    asset_type.constantize.find(params[:data_asset_id]).resumes << resume
+    asset_resumes = asset_type.constantize.find(params[:data_asset_id]).resumes
+    if asset_resumes.include? resume
+      asset_resumes.delete resume
+      update_status = "removed"
+    else
+      asset_resumes << resume
+      update_status = "added"
+    end
+
     p "*" * 50
     p params
     p asset_type
     p resume
+    # p set_assets(resume_id: resume.id)
     p "*" * 50
-    if request.xhr?
-      201
-      # render :json resume.to_json
-    else
-      redirect_to user_assets_path
+    respond_to do |format|
+      format.json { render json: { resume: resume, update_status: update_status } }
+      format.html
     end
-
   end
 
   def destroy

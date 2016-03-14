@@ -4,7 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %title ModResume
-    %link{href: 'https://fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,900', rel:'stylesheet', type:'text/css'}
+    %link{href: 'https://fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,100,900', rel:'stylesheet', type:'text/css'}
     %link{href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel: "stylesheet", integrity: "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin: "anonymous"}
     %link{:href => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css", :rel => "stylesheet"}
       %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"}
@@ -15,25 +15,29 @@
     .container
       .row
         %nav
-          .col-md-6.col-s-6.nav-left
+          .col-md-5.col-s-5.nav-left
             %a{:href => "/"} ModResume
-          .col-md-6.col-s-6.nav-right
+          .col-md-7.col-s-7.nav-right
             - if user_signed_in?
               %table.nav-links
                 %tr
                   %td
-                    = link_to 'Resume Dashboard', user_resumes_path(current_user.id)
+                    =link_to 'Dashboard', user_resumes_path(current_user.id)
+                  %td &middot;
                   %td
                     %a{href: "/users/#{current_user.id}/assets/new"}My Assets
+                  %td &middot;
                   %td
                     =link_to 'Logout', destroy_user_session_path, method: :delete
+                  %td &middot;
                   %td{user_id: current_user.id}
                     = "Welcome, #{current_user.first_name} #{current_user.last_name}"
             - else
               = render 'sessions/new'
-
-      %p.notice
-        = notice
-      %p.alert
-        = alert
+      -if notice
+        %p.notice
+          = notice
+      -if alert
+        %p.alert
+          = alert
       = yield

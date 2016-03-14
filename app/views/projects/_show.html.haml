@@ -1,11 +1,12 @@
 .panel.panel-default{"id" => "Project_#{asset.id}"}
   .panel-heading
-    %strong= asset.title
-  .row
-    .panel-body
+    .row
       .col-md-10.col-sm-10
-        = asset.description
+        %strong= asset.title
       .col-md-2.col-sm-2
         -if current_url.include?("asset")
           %button.btn.btn-default.pull-right.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
             %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+  .row
+    .panel-body.col-md-12.col-sm-12
+      %p= asset.description

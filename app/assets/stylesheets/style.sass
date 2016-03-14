@@ -1,5 +1,6 @@
 body
   font-family: 'Lato'
+  font-weight: 300
   // background-color: #CED7E3
   background-color: #f5f7ff
   background-image: url("http://www.transparenttextures.com/patterns/beige-paper.png")
@@ -24,25 +25,27 @@ a:hover
   height: 150px
   font-family: 'Poiret One'
   font-size: 5em
+  margin-top: 1em
 
 .nav-right
   height: 150px
 
 .nav-links
-  position: absolute
   width: 100%
-  top: 120px
 
-td
-  color: #FFB200
+nav
+  table
+    margin-top: 7em
+    font-size: 1.3em
+    font-weight: 300
+  td
+    padding-left: 4%
+    color: #FFB200
 
-.login-input
-  margin-bottom: .5em
+.login-form
+  margin: 7em 0 0 17em
 
-.login-submit
-  float: right
-  a
-    margin-right: 10px
+#user
 
 // END NAVBAR
 // RESUME INDEX PAGE
@@ -60,9 +63,16 @@ td
 a.tag-button
   color: black
 
-.tag-button-selected
-  background-color: cadetblue
+.button-selected
+  background-color: #FFB200
 // END ASSET INDEX PAGE
 
 #form-container
   margin-top: 1em
+
+.onwards
+  position: fixed
+  bottom: 0
+  right: 0
+  z-index: 100
+

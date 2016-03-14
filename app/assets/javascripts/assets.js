@@ -7,21 +7,8 @@ $(document).ready(function() {
 var bindAssetListeners = function() {
   $(document).on("click", '.tag-button', toggleTag );
   $('.asset-resume').on("click", addAsset);
-  onwardsLink();
 }
 
-var onwardsLink = function(){
-  var offset = 0;
-  var duration = 300;
-  $(window).scroll(function(){
-    if ($(this).scrollTop() > offset){
-      $('.onwards-floater').css("position")
-    }
-    else{
-      $('.onwards-floater').fadeOut(duration);
-    }
-  })
-}
 
 var toggleTag = function(e) {
   e.preventDefault();

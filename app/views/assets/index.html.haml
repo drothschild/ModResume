@@ -17,4 +17,6 @@
         - asset_tags = get_asset_tag_ids(asset)
         %div{class: "asset-container", asset_id: "#{asset.id}", tags: asset_tags.to_s}
           =render "/#{key}/show", asset_type: key, asset: asset, tags: asset_tags.to_s
-
+#edit-form{:title => "Edit Asset"}
+  .row
+  .col-md-6.col-sm-6.col-centered#form-container

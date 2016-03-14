@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :volunteerings
     resources :taggings
     resources :resume_assets
-
+    resources :resume_print
     resources :resumes
 
   end

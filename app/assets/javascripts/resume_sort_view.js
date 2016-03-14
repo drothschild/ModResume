@@ -31,13 +31,14 @@ $(document).ready(function() {
       // ['divsection','2']
       // var parentLocationId = assetNodes[0].parentNode.parentNode.parentNode.parentNode.id.split('_')
 
-      // debugger;
+
       var data = { asset_type: assetTypeId[0], asset_id: assetTypeId[1], div_sort: parentLocationId[1]};
-      debugger;
+
       $.ajax({
         url: "/users/" + $(this).attr("current_user_id") + "/resume_assets/" + data.asset_id,
         method: "PATCH",
-        data: data
+        data: data,
+        dataType: 'json'
       }).done(function(response){
         console.log('success');
       }).fail(function(response){

@@ -5,7 +5,7 @@
     -@tags = all_tags
     -@tags.each do |tag|
       - # %button.btn.btn-default.tag-button{"tag_id" => tag.id, "selected" => false}
-      %a.btn.btn-default.tag-button.tag-button-selected{"tag_id" => tag.id}
+      %a.btn.btn-default.tag-button.button-selected{"tag_id" => tag.id}
         =tag.name
 
 .row
@@ -18,5 +18,6 @@
         %div{class: "asset-container", asset_id: "#{asset.id}", tags: asset_tags.to_s}
           =render "/#{key}/show", asset_type: key, asset: asset, tags: asset_tags.to_s
 
-=link_to user_resume_url()
+%a.btn.btn-default.button-selected.onwards{href: user_resume_url(current_user, session[:new_resume_id])}
+  Onwards!
 

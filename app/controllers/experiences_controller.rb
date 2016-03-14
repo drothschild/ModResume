@@ -25,7 +25,7 @@ class ExperiencesController < ApplicationController
       flash.now[:danger] = @experience.errors.full_messages
       render :new
     end
-    redirect_to :new_user_asset
+    render :json => {taggable_type: "Experience", taggable_id: @experience.id}
   end
 
   def update

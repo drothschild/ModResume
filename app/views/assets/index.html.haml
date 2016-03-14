@@ -15,7 +15,7 @@
         =key.capitalize
       -values.each do |asset|
         - asset_tags = get_asset_tag_ids(asset)
-        %div{class: "asset-container", asset_id: "#{asset.id}", tags: asset_tags.to_s}
+        %div{class: "asset-container", id:"#{key}_#{asset.id}",  asset_id: "#{asset.id}", tags: asset_tags.to_s}
           =render "/#{key}/show", asset_type: key, asset: asset, tags: asset_tags.to_s
 
 #edit-form{:title => "Edit Asset"}

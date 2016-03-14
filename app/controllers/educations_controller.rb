@@ -29,7 +29,7 @@ class EducationsController < ApplicationController
       flash.now[:danger] = @education.errors.full_messages
       render :new
     end
-    redirect_to :new_user_asset
+    render :json => {taggable_type: "Education", taggable_id: @education.id}
   end
 
   def education_params

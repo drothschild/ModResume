@@ -10,22 +10,25 @@ newAssetsView.prototype.loadForm = function(event){
 }
 
 newAssetsView.prototype.saveForm = function(event){
-  console.log($(this))
-  var data = $('form').serialize()
-  var tags = $('input#tags')[0].value
-  var uri = event.target.action
-  $.ajax({url: uri, method: "POST", data: data}).done(function(response){
-    console.log(response)
-    var response = response
-    response["tag_names"]=tags
-    var data = {tagging: response}
-    console.log(response)
-    var uri = window.location.pathname.replace("/assets/new", "")
-    var uri = uri + "/taggings"
+  debugger
+  if  (event.currentTarget.className.search("edit")<0){
+    var data = $('form').serialize()
+    var tags = $('input#tags')[0].value
+    var uri = event.target.action
     $.ajax({url: uri, method: "POST", data: data}).done(function(response){
       console.log(response)
+      var response = response
+      response["tag_names"]=tags
+      var data = {tagging: response}
+      console.log(response)
+      var uri = window.location.pathname.replace("/assets/new", "")
+      var uri = uri.replace("/assets", "")
+      var uri = uri + "/taggings"
+      $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+        console.log(response)
+      })
     })
-  })
+  }
 }
 
 var newAssets = new newAssetsView();

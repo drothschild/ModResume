@@ -12,6 +12,7 @@ class TaggingsController < ApplicationController
     render json: tags
   end
 
+
   def destroy
     @tagging=Tagging.find(params[:id])
     @tagging.destroy
@@ -32,4 +33,8 @@ class TaggingsController < ApplicationController
     @tagger = @klass.find(params[:tagging][:taggable_id])
   end
 
+  def find_tagger
+    @klass = params[:tagging][:taggable_type].capitalize.singularize.constantize
+    @tagger = @klass.find(params[:tagging][:taggable_id])
+  end
 end

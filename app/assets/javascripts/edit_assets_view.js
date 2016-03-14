@@ -67,6 +67,13 @@ var getUserTags = function() {
   })
 }
 
+var getObjectTags = function(assetId) {
+  var uri = window.location.pathname.replace("/assets", "/taggings");
+  $.ajax({url: uri, method:"GET"}).done(function(response){
+    $("#tag-buttons").html(response);
+  })
+}
+
 var deleteAsset = function(event) {
   event.preventDefault();
   var assetId = event.currentTarget.dataset.assetId;

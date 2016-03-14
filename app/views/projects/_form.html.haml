@@ -8,10 +8,11 @@
   %fieldset.form_group
     = f.label :details
     = f.fields_for :descriptions do |d|
-      =d.text_field :detail, class: "form-control detail"
-      
+      =d.text_field :detail, class: "form-control details"
+
     = text_field_tag "project[details][][detail]",nil,  class: "form-control detail"
     = button_tag "+", id: "add_detail"
     = button_tag "-", id: "remove_detail"
     = render '/tags/form'
     = f.submit
+

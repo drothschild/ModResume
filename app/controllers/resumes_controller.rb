@@ -52,6 +52,8 @@ class ResumesController < ApplicationController
 
   # edit html text
   def edit
+    session[:new_resume_id] = Resume.find(params[:id]).id
+    redirect_to user_assets_path
     # @resume = Resume.find(params[:id])
   end
 

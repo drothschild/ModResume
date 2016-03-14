@@ -66,6 +66,7 @@ var addAsset = function(e) {
     data_asset_type: $(this).attr("data-asset-type"),
   };
   console.log(data);
+  debugger;
   $.ajax({
     accepts: "application/json",
     url: "/users/" + data.current_user_id + "/resumes/" + resumeId,

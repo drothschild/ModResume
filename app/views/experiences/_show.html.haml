@@ -18,5 +18,8 @@
     .panel-body
       %ul
         - asset.descriptions.each do |description|
-          %li= description.detail
+          %li
+            -if current_url.include?("asset")
+              = check_box_tag "experiences_#{description.id}", description.id, true, class: "asset-check-box"
+            = description.detail
         %em= asset.location

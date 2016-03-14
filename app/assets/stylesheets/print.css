@@ -1,0 +1,7 @@
+@media print
+  .resume-template
+    float: none
+    max-width: 500px
+
+  @page
+    margin: 0.5cm

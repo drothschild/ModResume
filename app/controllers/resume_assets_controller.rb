@@ -10,11 +10,13 @@ class ResumeAssetsController < ApplicationController
 
 
   def update
-    curent_resume = ResumeAsset.find_by(buildable_type: params[:asset_type], buildable_id: params[:id])
+    resumeAsset = ResumeAsset.where(buildable_type: params[:asset_type], buildable_id: params[:id], resume_id:params[:resume_id])
     p params
-    curent_resume.assign_attributes(div_sort: params[:div_sort])
-    curent_resume.save
-    render json: curent_resume
+    resumeAsset.each do |current_resume|
+      current_resume.assign_attributes(div_sort: params[:div_sort])
+      current_resume.save
+    end
+    render json: resumeAsset
   end
 
 

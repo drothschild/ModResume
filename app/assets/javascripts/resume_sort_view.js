@@ -12,9 +12,9 @@ $(document).ready(function() {
     placeholder: "portlet-placeholder ui-corner-all"
   })
   // console.log("hello")
+});
 
-
-
+$(document).ready(function() {
   $('#save-resume-button').on('click', function(e){
     e.preventDefault();
     console.log('Save resume button')
@@ -25,14 +25,8 @@ $(document).ready(function() {
 
       var assetTypeId = assetNodes[i].id.split('_');
       var parentLocationId = assetNodes[i].parentNode.parentNode.parentNode.parentNode.id.split('_');
-
-      // ['objective','112']
-      // var assetTypeId = assetNodes[0].id.split('_')
-      // ['divsection','2']
-      // var parentLocationId = assetNodes[0].parentNode.parentNode.parentNode.parentNode.id.split('_')
-
-
-      var data = { asset_type: assetTypeId[0], asset_id: assetTypeId[1], div_sort: parentLocationId[1]};
+      var resumeId = $(this).attr("resume_id")
+      var data = { asset_type: assetTypeId[0], asset_id: assetTypeId[1], div_sort: parentLocationId[1], resume_id: resumeId};
 
       $.ajax({
         url: "/users/" + $(this).attr("current_user_id") + "/resume_assets/" + data.asset_id,
@@ -48,16 +42,6 @@ $(document).ready(function() {
     }
 
   })
-
-
-    // Iterate for each $('.panel.panel-default')
-    // find the resume_asset field where buildable type equals asset type and id = id
-    // assign the div_sort field to be the value of (parentNode.parentNode.parentNode.parentNode id div-section#)
-
-
-
-    // the specific row the asset is placed in
-    // $('#objective114')[0].parentNode.parentNode.parentNode.parentNode
 
 });
 

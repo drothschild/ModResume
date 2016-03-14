@@ -1,4 +1,4 @@
-%button.btn.btn-primary#save-resume-button{type: "button", current_user_id: "#{current_user.id}"}
+%button.btn.btn-primary#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
   Save
 
 .row#divSection_0
@@ -12,12 +12,15 @@
     .row#divSection_2
       .col-md-12.col-s-12.resume-content.resume-top-content
 
+
+
     .row#divSection_3
       .col-md-12.col-s-12.resume-content.resume-middle-split-content
 
 
   .col-md-6.col-s-6.resume-content.library
     -@asset_types = asset_types
+    = @asset_types
     -@asset_types.each do |asset_type|
       .asset-portlet
         .asset-portlet-header=asset_type.capitalize

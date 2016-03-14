@@ -59,8 +59,7 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :edit
     end
-    puts "**********************************"
-    render partial: 'show', locals: {asset: @project}
+    render partial: 'show', locals: {asset: @project, asset_type: "Project"}
   end
 
   def project_params

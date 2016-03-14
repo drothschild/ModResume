@@ -50,10 +50,12 @@ gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rspec-rails', '~> 3.0'
   gem 'byebug'
   gem 'hirb'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :development do

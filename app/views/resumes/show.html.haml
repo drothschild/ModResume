@@ -31,6 +31,10 @@
           -@assets["#{asset_type}"].each do |asset|
             =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset
 
+%a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
+
+%a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
+
 
 
 

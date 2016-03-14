@@ -28,7 +28,7 @@ class SkillsController < ApplicationController
       flash.now[:danger] = @skill.errors.full_messages
       render :new
     end
-    redirect_to :new_user_asset
+    render :json => {taggable_type: "Skill", taggable_id: @skill.id}
   end
 
   def skill_params

@@ -16,10 +16,17 @@ class EducationsController < ApplicationController
     render partial: 'form'
   end
 
+  def edit
+    @education = Education.find(params[:id])
+    @user = User.find(current_user.id)
+    @tags_list = @education.tags.order("name").map{|t| t.name}.join(", ")
+    render partial: 'form'
+  end
+
   def create
 
     pass_params = education_params
-    detail_attributes = pass_params.delete(:details)
+    detail_attributes = pass_params.delete(:details) || []
     @education = current_user.educations.new(pass_params)
     if @education.save
       detail_attributes.each do |detail_attrib|
@@ -33,6 +40,7 @@ class EducationsController < ApplicationController
   end
 
   def education_params
+
     params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :details =>[:detail])
   end
 end

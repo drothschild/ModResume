@@ -1,83 +1,84 @@
 / %a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
 / %a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
-%a.btn.btn-default#print2{href: "javascript:pdfer()"} Print Resume
-%a.btn.btn-default#fine-tune-button{href: user_resume_fine_tune_path(@resume)} Fine Tune
+.sortable-wrapper
+  %button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+    Save
 
-%button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
-  Save
+  %button.btn.btn-default#add-asset-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+    =link_to 'Add asset', edit_user_resume_path
 
-%button.btn.btn-default#add-asset-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
-  =link_to 'Add asset', edit_user_resume_path
-
-.row
-  .col-md-6.col-s-6
-    %h2 Your Resume
-  .col-md-6.col-s-6
-    %h2 Your Assets
-
-.row#divSection_0
-  .col-md-6.col-s-6.text-center.resume-template
-    .row#divSection_1
-      .col-md-12.col-s-12.resume-header
-        %h4="#{current_user.first_name} #{current_user.last_name}"
-        %p.email="#{current_user.email}"
-        - if current_user.phone_number
-          %p.phone=current_user.phone_number
-        - if current_user.websites.first
-          %p.web=current_user.websites.first.url
-
-    .row#divSection_2
-      .col-md-12.col-s-12.resume-content.resume-top-content.resume-section
-        -@asset_types = asset_types
-        -@asset_types.each do |asset_type|
-          .asset-portlet
-            .nested-sort
-              .asset-portlet-content
-              -@assets["#{asset_type}"].each do |asset|
-                - if (asset.div_sort == 2)
-                  =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+  %a.btn.btn-default#fine-tune-button{href: user_resume_save_document_data_path(@resume)} Fine Tune
 
 
+  .row
+    .col-md-6.col-s-6
+      %h2 Your Resume
+    .col-md-6.col-s-6
+      %h2 Your Assets
 
-    .row#divSection_3
-      .col-md-8.col-s-8.resume-content.resume-middle-split-content.resume-section
-        -@asset_types = asset_types
-        -@asset_types.each do |asset_type|
-          .asset-portlet
-            .nested-sort
-              .asset-portlet-content
-              -@assets["#{asset_type}"].each do |asset|
-                - if (asset.div_sort == 3)
-                  =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
-      #divSection_4
-        .col-md-4.col-s-4.resume-content.resume-middle-split-content.resume-section
+  .row#divSection_0
+    .col-md-6.col-s-6.text-center.resume-template
+      .row#divSection_1
+        .col-md-12.col-s-12.resume-header
+          %h4="#{current_user.first_name} #{current_user.last_name}"
+          %p.email="#{current_user.email}"
+          - if current_user.phone_number
+            %p.phone=current_user.phone_number
+          - if current_user.websites.first
+            %p.web=current_user.websites.first.url
+
+      .row#divSection_2
+        .col-md-12.col-s-12.resume-content.resume-top-content.resume-section
           -@asset_types = asset_types
           -@asset_types.each do |asset_type|
             .asset-portlet
               .nested-sort
                 .asset-portlet-content
                 -@assets["#{asset_type}"].each do |asset|
-                  - if (asset.div_sort == 4)
+                  - if (asset.div_sort == 2)
                     =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
 
-  .col-md-6.col-s-6.resume-content.library
-    -@asset_types = asset_types
-    -@asset_types.each do |asset_type|
-      .asset-portlet
-        .asset-portlet-header=asset_type.capitalize
-        .nested-sort
-          .asset-portlet-content
 
-          -@assets["#{asset_type}"].each do |asset|
-            - if (asset.div_sort == 0)
-              =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+      .row#divSection_3
+        .col-md-8.col-s-8.resume-content.resume-middle-split-content.resume-section
+          -@asset_types = asset_types
+          -@asset_types.each do |asset_type|
+            .asset-portlet
+              .nested-sort
+                .asset-portlet-content
+                -@assets["#{asset_type}"].each do |asset|
+                  - if (asset.div_sort == 3)
+                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+        #divSection_4
+          .col-md-4.col-s-4.resume-content.resume-middle-split-content.resume-section
+            -@asset_types = asset_types
+            -@asset_types.each do |asset_type|
+              .asset-portlet
+                .nested-sort
+                  .asset-portlet-content
+                  -@assets["#{asset_type}"].each do |asset|
+                    - if (asset.div_sort == 4)
+                      =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
 
-%a.btn-default.onwards-floater.floater-right{href: "#"}
-  %i.fa.fa-angle-right.fa-4x
-%a.btn-default.onwards-floater.floater-left{href: user_assets_url(current_user)}
-  %i.fa.fa-angle-left.fa-4x
+    .col-md-6.col-s-6.resume-content.library
+      -@asset_types = asset_types
+      -@asset_types.each do |asset_type|
+        .asset-portlet
+          .asset-portlet-header=asset_type.capitalize
+          .nested-sort
+            .asset-portlet-content
+
+            -@assets["#{asset_type}"].each do |asset|
+              - if (asset.div_sort == 0)
+                =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+
+
+  %a.btn-default.onwards-floater.floater-right{href: "#"}
+    %i.fa.fa-angle-right.fa-4x
+  %a.btn-default.onwards-floater.floater-left{href: user_assets_url(current_user)}
+    %i.fa.fa-angle-left.fa-4x
 
 
 

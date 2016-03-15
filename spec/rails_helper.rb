@@ -28,6 +28,7 @@ require 'devise'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+ActiveRecord::Base.logger.level = 1
 RSpec.configure do |config|
 
   config.include Rails.application.routes.url_helpers
@@ -85,4 +86,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Include Factory Girl syntax to simplify calls to factories
+  config.include FactoryGirl::Syntax::Methods
 end

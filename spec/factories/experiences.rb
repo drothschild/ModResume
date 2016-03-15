@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :experience do
+    association :user
     company  {Faker::Company.name}
     title {Faker::Company.profession}
     begin_date {Faker::Date.between(5.years.ago, Date.today)}
@@ -8,4 +9,3 @@ FactoryGirl.define do
     location {Faker::Address.city}
   end
 end
-

@@ -6,20 +6,20 @@ Rails.application.routes.draw do
       }
 
   resources :users do
-    resources :websites
+    resources :websites, except: [:index, :show]
     resources :tags
 
-    resources :assets
-    resources :objectives
-    resources :educations
-    resources :experiences
-      resources :descriptions
-    resources :projects
-    resources :skills
-    resources :volunteerings
-    resources :taggings
-    resources :resume_assets
-    resources :resume_print
+    resources :assets, only: [:index, :new]
+    resources :objectives, except: [:index]
+    resources :educations, except: [:index]
+    resources :experiences, except: [:index]
+      resources :descriptions, except: [:index]
+    resources :projects, except: [:index]
+    resources :skills, except: [:index]
+    resources :volunteerings, except: [:index]
+    resources :taggings, except: [:index, :show]
+    resources :resume_assets, except: [:index, :show]
+    # resources :resume_print
     resources :resumes
 
   end

@@ -23,10 +23,10 @@
               %table.nav-links
                 %tr
                   %td
-                    =link_to 'Dashboard', user_resumes_path(current_user.id)
+                    =link_to 'Dashboard', user_resumes_path(current_user)
                   %td &middot;
                   %td
-                    %a{href: "/users/#{current_user.id}/assets/new"}My Assets
+                    =link_to 'My Assets', user_assets_path(current_user)
                   %td &middot;
                   %td
                     =link_to 'Logout', destroy_user_session_path, method: :delete

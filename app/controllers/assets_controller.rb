@@ -1,5 +1,6 @@
 class AssetsController < ApplicationController
   def index
+    p session[:new_resume_id]
     @objectives = current_user.objectives
     @skills = current_user.skills
     @volunteerings = current_user.volunteerings

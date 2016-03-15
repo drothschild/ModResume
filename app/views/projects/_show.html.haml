@@ -5,7 +5,7 @@
         %strong= asset.title
       .col-md-2.col-sm-2
 
-        -if !current_url.include?("resume")
+        -if !current_url.include?("resume") && session[:new_resume_id] != nil
           %button.btn.btn-default.pull-right.btn-round.asset-resume{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
 
             %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}

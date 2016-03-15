@@ -2,14 +2,6 @@
   %fieldset.form-group
     = f.label :title, "Title"
     = f.text_field :title, class: "form-control"
-    = f.label :details
-  %fieldset.form_group.form-inline
-    = f.fields_for :descriptions do |d|
-      =d.text_field :detail, class: "form-control detail"
-    = text_field_tag "skill[details][][detail]",nil,  class: "form-control detail"
-    = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
-    = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
-  %fieldset.form_group
     = render '/tags/form'
     %p
     = f.submit "Save", class: "btn btn-default"

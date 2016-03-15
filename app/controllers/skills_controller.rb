@@ -21,14 +21,11 @@ class SkillsController < ApplicationController
     detail_attributes = pass_params.delete(:details)
     @skill = current_user.skills.new(pass_params)
     if @skill.save
-      detail_attributes.each do |detail_attrib|
-        description = @skill.descriptions.create(detail_attrib)
-      end
+      render :json => {taggable_type: "Skill", taggable_id: @skill.id}
     else
       flash.now[:danger] = @skill.errors.full_messages
       render :new
     end
-    render :json => {taggable_type: "Skill", taggable_id: @skill.id}
   end
 
   def skill_params

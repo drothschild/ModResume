@@ -5,5 +5,5 @@ $(document).ready(function(){
     }, 3000, "linear", function(){
       //
     })
-  },5000)
+  },2000)
 })

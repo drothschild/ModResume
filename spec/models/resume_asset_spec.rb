@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ResumeAsset do
+describe "ResumeAsset Model", model: true do
   context "Data Validation" do 
     it "has a valid factory"
     it "is invalid without a buildable type"

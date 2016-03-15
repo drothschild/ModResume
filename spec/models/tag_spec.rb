@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Tag do
+describe "Tag Model", model: true do
   before :each do 
     @tag = build(:tag)
     @user1 = create(:user)

@@ -5,27 +5,29 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
 
-  resources :users do
-    resources :websites
+  resources :users, except: [:index, :destroy] do
+    resources :websites, except: [:index]
     resources :tags
-
-    resources :assets
-    resources :objectives
-    resources :educations
-    resources :experiences
-    resources :descriptions
-    resources :projects
-    resources :skills
-    resources :volunteerings
-    resources :taggings
-    resources :resume_assets
+    resources :assets, only: [:index, :new]
+    resources :objectives, except: [:index]
+    resources :educations, except: [:index]
+    resources :experiences, except: [:index]
+      resources :descriptions, except: [:index]
+    resources :projects, except: [:index]
+    resources :skills, except: [:index]
+    resources :volunteerings, except: [:index]
+    resources :taggings, except: [:index]
+    resources :resume_assets, except: [:index]
     resources :resume_print
     resources :resumes
   end
 
 
-
   get':controller(/:action(/:id))'
+
+  get 'users/:id/resumes/:id/fine-tune', to: 'resumes#fine_tune', as: 'user_resume_fine_tune'
+
+  post 'users/:id/resumes/:id/save_document_data', to: 'resumes#save_document_data', as: 'user_resume_save_document_data'
 
   root 'root#index'
 end

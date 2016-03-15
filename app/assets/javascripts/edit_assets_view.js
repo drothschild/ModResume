@@ -79,5 +79,6 @@ var deleteAsset = function(event) {
   event.preventDefault();
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
-  $("#edit-form").dialog.close;
+  var uri = window.location.pathname.replace("/assets", "/" +assetType + "/");
+
 }

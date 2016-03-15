@@ -26,3 +26,4 @@
     = render '/tags/form'
     %p
     = f.submit "Save", class: "btn btn-default"
+    #tags-names{"data-tag-names" => "#{@tags_list}"}

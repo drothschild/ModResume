@@ -37,8 +37,8 @@
                     =link_to 'My Assets', user_assets_path(current_user)
                   %li
                     =link_to 'Logout', destroy_user_session_path, method: :delete
-                  .navbar-text
-                    = "Welcome, #{current_user.first_name} #{current_user.last_name}"
+                  %li
+                    =link_to "Welcome, #{current_user.first_name} #{current_user.last_name}", user_path(current_user)
                 -else
                   = render 'sessions/new'
 

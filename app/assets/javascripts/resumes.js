@@ -1,10 +1,11 @@
 $(document).ready(function() {
-  console.log("Page Ready");
+  // console.log("Page Ready");
   bindListeners();
 });
 
 var bindListeners = function() {
   $('#new-resume-button').on("click", newResume);
+
 }
 
 

@@ -1,0 +1,8 @@
+= form_for [@user, @new_website] do |f|
+  %fieldset.form-group.form-inline
+    = f.label :description, :class => "sr-only"
+    = f.text_field :description, placeholder: "Website"
+    = f.label :url, :class => "sr-only"
+    = f.text_field :url, placeholder: "http://"
+    = f.hidden_field :user_id, value: current_user.id
+    = f.submit "Save", class: "btn btn-default"

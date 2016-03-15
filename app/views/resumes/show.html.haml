@@ -31,10 +31,8 @@
         -@asset_types = asset_types
         -@asset_types.each do |asset_type|
           .asset-portlet
-
             .nested-sort
               .asset-portlet-content
-
               -@assets["#{asset_type}"].each do |asset|
                 - if (asset.div_sort == 2)
                   =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
@@ -42,16 +40,26 @@
 
 
     .row#divSection_3
-      .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
+      .col-md-8.col-s-8.resume-content.resume-middle-split-content.resume-section
         -@asset_types = asset_types
         -@asset_types.each do |asset_type|
           .asset-portlet
             .nested-sort
               .asset-portlet-content
-
               -@assets["#{asset_type}"].each do |asset|
                 - if (asset.div_sort == 3)
                   =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+      #divSection_4
+        .col-md-4.col-s-4.resume-content.resume-middle-split-content.resume-section
+          -@asset_types = asset_types
+          -@asset_types.each do |asset_type|
+            .asset-portlet
+              .nested-sort
+                .asset-portlet-content
+                -@assets["#{asset_type}"].each do |asset|
+                  - if (asset.div_sort == 4)
+                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+
 
   .col-md-6.col-s-6.resume-content.library
     -@asset_types = asset_types

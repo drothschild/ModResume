@@ -83,7 +83,7 @@ class ResumesController < ApplicationController
   end
 
   def destroy
-    @remove.destroy
+    @resume.destroy
     redirect_to user_resumes_path(params[:user_id])
   end
 

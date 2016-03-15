@@ -123,6 +123,23 @@ var pdfer = function (){
 }
 // END PDF MAKE
 
+$(document).ready(function(){
+ $('.asset-portlet').mouseup(function(){
+  var sections = $('.resume-section')
+    // debugger;
+  for (var i =0 ; i < sections.length; i++){
+    var sectionCount = sections[i].children.length;
+    if (sectionCount > 6){
+      sections[i].style.height = '100%'
+      console.log('making heigh 100')
+    } else {
+      sections[i].style.height = ''
+      console.log('making heigh blank')
+    }
+  }
+ })
+})
+
 
 $(function() {
     $( ".resume-template" ).resizable();

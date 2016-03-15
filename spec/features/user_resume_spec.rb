@@ -73,13 +73,36 @@ RSpec.feature "Resumes", type: :feature, js: true do
       expect(page).to have_content('Objective')
     end
 
-    it 'should be able to edit asset page' do
+    it 'should be able view user first name' do
       visit '/'
       fill_in "user_email", :with => @user.email
       fill_in "user_password", :with => 'password'
       click_button "Log in"
       first(:link, @resume.target_job).click
-      visit edit_user_resume_path(@user.id, @resume.id)
-      binding.pry
+      expect(page).to have_content(@user.first_name)
+    end
+    it 'should be able view user last name' do
+      visit '/'
+      fill_in "user_email", :with => @user.email
+      fill_in "user_password", :with => 'password'
+      click_button "Log in"
+      first(:link, @resume.target_job).click
+      expect(page).to have_content(@user.last_name)
+    end
+    it 'should be able view user email name' do
+      visit '/'
+      fill_in "user_email", :with => @user.email
+      fill_in "user_password", :with => 'password'
+      click_button "Log in"
+      first(:link, @resume.target_job).click
+      expect(page).to have_content(@user.email)
+    end
+    it 'should be able view user last name' do
+      visit '/'
+      fill_in "user_email", :with => @user.email
+      fill_in "user_password", :with => 'password'
+      click_button "Log in"
+      first(:link, @resume.target_job).click
+      expect(page).to have_content(@user.phone_number)
     end
 end

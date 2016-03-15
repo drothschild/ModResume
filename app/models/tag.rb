@@ -8,4 +8,6 @@ class Tag < ActiveRecord::Base
   has_many :volunteerings, through: :taggings, source: :taggable, source_type: "Volunteering"
   has_many :projects, through: :taggings, source: :taggable, source_type: "Project"
   has_many :educations, through: :taggings, source: :taggable, source_type: "Education"
+
+  validates :name, { presence: true, uniqueness: { scope: :user_id } }
 end

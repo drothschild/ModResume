@@ -9,4 +9,6 @@ class Resume < ActiveRecord::Base
   has_many :volunteerings, through: :resume_assets, source: :buildable, source_type: "Volunteering"
   has_many :projects, through: :resume_assets, source: :buildable, source_type: "Project"
   has_many :educations, through: :resume_assets, source: :buildable, source_type: "Education"
+
+  validates :target_job, presence: true
 end

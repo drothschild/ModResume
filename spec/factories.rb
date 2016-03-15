@@ -13,6 +13,14 @@ FactoryGirl.define do
     target_job "Astronaut"
   end
 
+  factory :skill do
+    title "Moon Walk"
+  end
+
+  factory :tag do
+    name "Space"
+  end
+
   factory :experience do
     company 'Nasa'
     title 'Astronaut'
@@ -31,9 +39,5 @@ FactoryGirl.define do
 
   end
 
-#   factory :skills do
-#     title "Gives great hugs"
-#     user_id 22
-#   end
 
 end

@@ -1,27 +1,25 @@
 class VolunteeringsController < ApplicationController
+
   def new
-    @user = User.find(params[:user_id])
+    @user = current_user
     @volunteering = Volunteering.new
+    @description  = Description.new
+    @tags_list = []
     render partial: 'form'
   end
 
   def edit
-    @user = User.find(params[:user_id])
+    @user = current_user
     @volunteering = Volunteering.find(params[:id])
+    @tags_list = @volunteering.tags.order("name").map{|t| t.name}.join(", ")
+    render partial: 'form'
   end
 
-  def show
-    @volunteering = Volunteering.find(params[:id])
-    # render :json @volunteering.to_json
-  end
+
 
   def create
     pass_params = volunteering_params
-    p "*" * 80
-    p pass_params
-    descriptions = pass_params.delete(:details)
-    p pass_params
-    p descriptions
+    descriptions = pass_params.delete(:details) || []
     @volunteering = current_user.volunteerings.new(pass_params)
     if @volunteering.save
       addDescriptions(@volunteering, descriptions)
@@ -35,12 +33,22 @@ class VolunteeringsController < ApplicationController
   def update
     @volunteering = Volunteering.find(params[:id])
     pass_params = volunteering_params
-    descriptions = pass_params.delete(:details)
+    detail_attributes = pass_params.delete(:details) || []
     @volunteering.update(pass_params)
-    addDescriptions(@volunteering, descriptions)
-    redirect_to :new_user_asset
+    if @volunteering.save
+        addDescriptions(@volunteering, detail_attributes)
+    else
+      flash.now[:danger] = @volunteering.errors.full_messages
+      render :edit
+    end
+    render partial: 'show', locals: {asset: @volunteering, asset_type: "Volunteerings"}
   end
 
+  def destroy
+    @volunteering = Volunteering.find(params[:id])
+    @volunteering.delete
+    render nothing: true, status: 200, content_type: "text/html"
+  end
 
   private
 

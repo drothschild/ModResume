@@ -47,13 +47,26 @@ var addAsset = function(e) {
   var button = $(this);
   var resumeId = $('#resumeID').attr("resume_id");
   console.log(resumeId);
+  var dataAssetId = $(this).attr("data-asset-id");
+  var dataAssetType = $(this).attr("data-asset-type");
+  var checkboxes = $("." + dataAssetType + "-" + dataAssetId + "-descriptions");
+  var selectedDescriptions = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    if ($(checkboxes[i]).is(':checked')) {
+      // debugger;
+      selectedDescriptions.push(checkboxes[i].value);
+    }
+  }
+  console.log(checkboxes);
+  console.log(selectedDescriptions);
   var data = {
     current_user_id: $(this).attr("current_user_id"),
-    data_asset_id: $(this).attr("data-asset-id"),
-    data_asset_type: $(this).attr("data-asset-type"),
+    data_asset_id: dataAssetId,
+    data_asset_type: dataAssetType,
+    selected_descriptions: selectedDescriptions
   };
   console.log(data);
-  debugger;
+  // debugger;
   $.ajax({
     accepts: "application/json",
     url: "/users/" + data.current_user_id + "/resumes/" + resumeId,

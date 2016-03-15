@@ -9,4 +9,5 @@ class Description < ActiveRecord::Base
   has_many :volunteerings, through: :describings, source: :describable, source_type: "Volunteering"
   has_many :projects, through: :describings, source: :describable, source_type: "Project"
   has_many :educations, through: :describings, source: :describable, source_type: "Education"
+  # has_many :educations, through: :describings, source: :describable, source_type: "Education"
 end

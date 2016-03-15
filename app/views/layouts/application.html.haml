@@ -14,27 +14,29 @@
     = csrf_meta_tags
   %body
     .container
-      .row
-        %nav
-          .col-md-5.col-s-5.nav-left
-            %a{:href => "/"} ModResume
-          .col-md-7.col-s-7.nav-right
-            - if user_signed_in?
-              %table.nav-links
-                %tr
-                  %td
-                    =link_to 'Dashboard', user_resumes_path(current_user)
-                  %td &middot;
-                  %td
-                    =link_to 'My Assets', user_assets_path(current_user)
-                  %td &middot;
-                  %td
-                    =link_to 'Logout', destroy_user_session_path, method: :delete
-                  %td &middot;
-                  %td{user_id: current_user.id}
-                    = "Welcome, #{current_user.first_name} #{current_user.last_name}"
-            - else
-              = render 'sessions/new'
+      %nav.navbar.navbar-default
+        .navbar-inner
+          .container-fluid
+            / Brand and toggle get grouped for better mobile display
+            .navbar-header
+              %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand{:href => "#"} ModResume
+            / Collect the nav links, forms, and other content for toggling
+            .collapse.navbar-collapse
+              %ul.nav.navbar-nav
+                %li
+                  =link_to 'Dashboard', user_resumes_path(current_user)
+                %li
+                  =link_to 'My Assets', user_assets_path(current_user)
+                %li
+                  =link_to 'Logout', destroy_user_session_path, method: :delete
+            / /.navbar-collapse
+          / /.container-fluid
+
       -if notice
         %p.notice
           = notice

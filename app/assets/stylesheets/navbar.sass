@@ -1,18 +1,27 @@
 $bgDefault      : #0f2d80
 $bgHighlight    : #041041
-$colDefault     : #ecf0f1
+$colDefault     : #ffb200
 $colHighlight   : #ffb200
 $dropDown       : false
 .navbar-default
   background-color: $bgDefault
   border-color: $bgHighlight
+  color: $colHighlight
+  .navbar-inner
+    height: 150px
+    background-image: url('http://img06.deviantart.net/ab92/i/2012/045/8/2/texture__blue_paper_by_awesomestock-d4pqzkx.png')
   .navbar-brand
     color: $colDefault
+    font-family: 'Poiret One'
+    font-size: 5em
+    margin-top: 1em
     &:hover, &:focus
       color: $colHighlight
   .navbar-text
     color: $colDefault
   .navbar-nav
+    float: right
+    margin-top: 7em
     > li
       > a
         color: $colDefault

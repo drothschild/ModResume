@@ -31,8 +31,10 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
 
   config.include Rails.application.routes.url_helpers
+
   config.include Devise::TestHelpers, :type => :controller
   # config.include Helpers
+
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
@@ -61,6 +63,8 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.include FactoryGirl::Syntax::Methods
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

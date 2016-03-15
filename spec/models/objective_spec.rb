@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Objective do
+describe "Objective Model", model: true do
   context "Data Validation" do 
     it "has a valid factory"
     it "is invalid without adescription"

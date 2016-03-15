@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ExperiencesController do
+describe ExperiencesController, controller: true do
 
 
   # login_user

@@ -14,7 +14,7 @@
     = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
   %fieldset.form_group
     = render '/tags/form'
-    = f.submit "Save", class: "btn btn-default"
+    = f.submit "Save", class: "btn btn-default form-submit"
   #tags-names{"data-tag-names" => "#{@tags_list}"}
 
 

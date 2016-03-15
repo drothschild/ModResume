@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SkillsController do
+describe SkillsController, controller: true do
   # login_user
   before (:each) do
     @user = FactoryGirl.create(:user)

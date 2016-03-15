@@ -31,6 +31,11 @@
 #edit-form{:title => "Edit Asset"}
   .col-md-8.col-sm-10.col-centered#form-container-edit
 
+#delete-confirm{:title => "Delete this asset?"} 
+  %p
+    %span.ui-icon.ui-icon-alert{:style => "float:left; margin:0 7px 20px 0;"}
+    This asset will be permanently deleted and cannot be recovered. Are you sure?
+
 -if session[:new_resume_id] != nil
   %a.btn-default.onwards-floater.floater-right{href: user_resume_url(current_user, session[:new_resume_id])}
     %i.fa.fa-angle-right.fa-4x

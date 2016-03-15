@@ -1,23 +1,31 @@
 class ExperiencesController < ApplicationController
-  def new
-    @user = User.find(params[:user_id])
-    @experience = Experience.new
-    render partial: 'form'
-  end
 
-  def edit
-    @user = User.find(params[:user_id])
-    @experience = Experience.find(params[:id])
-  end
 
   def show
     @experience = Experience.find(params[:id])
     # render :json @experience.to_json
   end
 
+  def new
+    @user = current_user
+    @experience = Experience.new
+    @description  = Description.new
+    @tags_list = []
+    render partial: 'form'
+  end
+
+  def edit
+    @user = current_user
+    @experience = Experience.find(params[:id])
+    @tags_list = @experience.tags.order("name").map{|t| t.name}.join(", ")
+    render partial: 'form'
+  end
+
+
+
   def create
     pass_params = experience_params
-    descriptions = pass_params.delete(:details)
+    descriptions = pass_params.delete(:details) || []
     @experience = current_user.experiences.new(pass_params)
     if @experience.save
       addDescriptions(@experience, descriptions)
@@ -31,12 +39,23 @@ class ExperiencesController < ApplicationController
   def update
     @experience = Experience.find(params[:id])
     pass_params = experience_params
-    descriptions = pass_params.delete(:details)
+    detail_attributes = pass_params.delete(:details) || []
     @experience.update(pass_params)
-    addDescriptions(@experience, descriptions)
-    redirect_to :new_user_asset
+    if @experience.save
+        addDescriptions(@experience, detail_attributes)
+      end
+    else
+      flash.now[:danger] = @experience.errors.full_messages
+      render :edit
+    end
+    render partial: 'show', locals: {asset: @experience, asset_type: "Experiences"}
   end
 
+  def destroy
+    @experience = Experience.find(params[:id])
+    @experience.delete
+    render nothing: true, status: 200, content_type: "text/html"
+  end
 
   private
 

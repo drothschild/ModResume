@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 describe EducationsController do
+
+
   # login_user
   before (:each) do
     @user = FactoryGirl.create(:user)
     sign_in (@user)
+    @education = FactoryGirl.create :education
+    @attributes=  FactoryGirl.attributes_for :education
   end
 
   it "should have a current_user" do
@@ -14,8 +18,6 @@ describe EducationsController do
 
 
   describe "GET Index" do
-    @education = FactoryGirl.create :education
-     @attributes=  FactoryGirl.attributes_for :education
 
     it "should display an index" do
       get :index
@@ -64,7 +66,37 @@ describe EducationsController do
       expect{post :create, education:{institution_name: "e"}
       }.to change(Education, :count).by(1)
     end
+
+    xit "does not accept invalid parameters" do
+    end
+
+    it "returns JSON" do
+      post :create, education:{institution_name: "e"}
+      expect(response.content_type).to eq("application/json")
+
+    end
+  end
+  describe "PUT #update" do
+    let!(:new_title) {"Blergh."}
+
+    before(:each) do
+      put :update, :id => @education.id, education: {institution_name: new_title}
+      @education.reload
+    end
+    it {expect(@education.institution_name).to eq (new_title)}
+    it {expect(response).to render_template :_show}
   end
 
+  describe "Delete #destroy" do
+    it "decrements products by one" do
+      education_id = @education.id
+      expect{delete :destroy, id: education_id}.to change {Education.count}.by(-1)
+   end
+  it "returns nothing" do
+      education_id = @education.id
+      delete :destroy, id: education_id
+      expect(response.status).to eq(200)
+    end
+  end
 
 end

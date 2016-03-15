@@ -14,6 +14,8 @@ before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/edit
   def edit
+    p 'hold'
+    p '*'*200
     super
   end
 

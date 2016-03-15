@@ -20,7 +20,7 @@
           %th Websites
           - if @user.websites
             - @user.websites.each do |site|
-              %tr{id: "website_#{site.id}"}
+              %tr{id: site.id}
                 %th= site.description
                 %td= site.url
 
@@ -31,12 +31,13 @@
 
 .row
   .col-md-12.col-sm-12.text-center
-    %button.btn.btn-default#edit-information-button{type: "button"} Edit Information
+    %button.btn.btn-default#edit-information-button{type: "button"}= link_to 'Edit Information', edit_user_registration_path(@user)
     %button.btn.btn-default#new-website-button{user_id: @user.id, type: "button"} Add website
 
 %script#individual-template{:type => "text/x-handlebars-template"}
   %tr
     %th {{description}}
     %td {{url}}
+  }
 
 

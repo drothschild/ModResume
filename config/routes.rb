@@ -5,7 +5,7 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
 
-  resources :users do
+  resources :users, except: [:index, :destroy] do
     resources :websites, except: [:index, :show]
     resources :tags
 

@@ -28,12 +28,18 @@
             / Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse
               %ul.nav.navbar-nav
-                %li
-                  =link_to 'Dashboard', user_resumes_path(current_user)
-                %li
-                  =link_to 'My Assets', user_assets_path(current_user)
-                %li
-                  =link_to 'Logout', destroy_user_session_path, method: :delete
+                - if user_signed_in?
+                  %li
+                    =link_to 'Dashboard', user_resumes_path(current_user)
+                  %li
+                    =link_to 'My Assets', user_assets_path(current_user)
+                  %li
+                    =link_to 'Logout', destroy_user_session_path, method: :delete
+                  .navbar-text
+                    = "Welcome, #{current_user.first_name} #{current_user.last_name}"
+                -else
+                  = render 'sessions/new'
+
             / /.navbar-collapse
           / /.container-fluid
 

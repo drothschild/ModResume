@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Resume do
+describe "Resume Model", model: true do
   before :each do 
     @resume = build(:resume)
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Tagging do
+describe "Tagging Model", model: true do
   context "Data Validation" do 
   end
   

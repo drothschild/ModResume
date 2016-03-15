@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Education do
+describe "Education Model", model: true do
   context "Data Validation" do 
     it "has a valid factory"
     it "is invalid without an institution name"

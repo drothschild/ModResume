@@ -94,16 +94,20 @@ function printDiv(){
 }
 
 $(document).ready(function(){
- // $('.resume-section').click(function(e){
- //  var sectionCount = this.children.length
- //  debugger;
- //  if (sectionCount < 6){
- //    this.style.height = ''
- //  } else {
- //    this.style.height = '100%'
- //  }
-
- // })
+ $('.asset-portlet').mouseup(function(){
+  var sections = $('.resume-section')
+    // debugger;
+  for (var i =0 ; i < sections.length; i++){
+    var sectionCount = sections[i].children.length;
+    if (sectionCount > 6){
+      sections[i].style.height = '100%'
+      console.log('making heigh 100')
+    } else {
+      sections[i].style.height = ''
+      console.log('making heigh blank')
+    }
+  }
+ })
 })
 
 

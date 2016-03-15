@@ -59,7 +59,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'binding_of_caller'
   gem 'better_errors'
-  gem "factory_girl_rails", "~> 4.0"
+  # gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'

@@ -1,15 +1,13 @@
-# FactoryGirl.define do
-#   factory :users do
-#     email: "rochej@gmail.com"
-#     password: "hello"
-#     first_name: "roche"
-#     last_name: "janken"
-#     phone_number: "323-240-0224"
-#   end
+FactoryGirl.define do
+    factory :user do
+      first_name "Joe"
+      last_name  "Blow"
+      email { "#{first_name}.#{last_name}@example.com".downcase }
+      password '123456'
+    end
 
-
-#   factory :skills do
-#     title: "Gives great hugs"
-#     user_id: 22
-#   end
-# end
+  factory :skills do
+    title "Makes computer do things"
+    user_id user
+  end
+end

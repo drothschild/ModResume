@@ -1,4 +1,4 @@
-= form_for [@user, @experience] do |f|
+= form_for [@user, @experience], class: "new-asset-form" do |f|
   %fieldset.form-group
     = f.label :company
     = f.text_field :company, class: "form-control"

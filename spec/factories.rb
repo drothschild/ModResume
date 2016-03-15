@@ -1,6 +1,5 @@
 FactoryGirl.define do
 
-
   factory :user do
     sequence(:first_name) {|n| "#{n}dobe"}
     last_name "boo"
@@ -8,6 +7,7 @@ FactoryGirl.define do
     password "password"
     phone_number "323-240-0224"
   end
+
 
   factory :resume do
     target_job "Astronaut"

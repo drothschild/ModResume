@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
   def create
     p project_params
     pass_params = project_params
-    detail_attributes = pass_params.delete(:details)
+    detail_attributes = pass_params.delete(:details) || []
     @project = current_user.projects.new(pass_params)
     if @project.save
       detail_attributes.each do |detail_attrib|
@@ -43,18 +43,14 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    p project_params
     pass_params = project_params
-    detail_attributes = pass_params.delete(:details)
-    p detail_attributes
+    detail_attributes = pass_params.delete(:details) || []
     @project.update(pass_params)
     if @project.save
       @project.descriptions.delete_all
-      if detail_attributes
-        detail_attributes.each do |detail_attrib|
-          if detail_attrib != ""
-            description = @project.descriptions.create(detail_attrib)
-          end
+      detail_attributes.each do |detail_attrib|
+        if detail_attrib != ""
+          description = @project.descriptions.create(detail_attrib)
         end
       end
     else
@@ -62,6 +58,12 @@ class ProjectsController < ApplicationController
       render :edit
     end
     render partial: 'show', locals: {asset: @project, asset_type: "projects"}
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.delete
+    render nothing: true, status: 200, content_type: "text/html"
   end
 
   def project_params

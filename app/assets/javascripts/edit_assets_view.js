@@ -14,18 +14,27 @@ var editPopup = function(event) {
   var assetType = event.currentTarget.dataset.assetType;
   var assetId = event.currentTarget.dataset.assetId;
   var uri = window.location.pathname.replace("/assets", "/" + assetType + "/" + assetId +"/edit");
+    
+      
   dialog = $("#edit-form").dialog({
     autoOpen: false,
-    modal: true,
+    modal:true, 
     width:  700,
     height: 650,
+    dialogClass : "modal-lg",
+    "Close": function() {
+                  $(this).dialog("close");
+                  $('#form-container-edit').html("");
+              },
+
     buttons: {"Update":function (){
       editAsset(assetType, assetId);
     }}
   });
   dialog.dialog("open");
+  tinyMCE.remove();
   $.ajax({url: uri, method: "GET"}).done(function(response){
-    $('#form-container-edit').html(response);
+        $('#form-container-edit').html(response);
     $('.form-submit').remove()
     tagNames = $('#tags-names').attr("data-tag-names").trim()
     $("#tags").val(tagNames)

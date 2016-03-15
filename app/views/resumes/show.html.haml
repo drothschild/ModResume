@@ -1,6 +1,7 @@
 / %a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
 / %a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
 %a.btn.btn-default#print2{href: "javascript:pdfer()"} Print Resume
+%a.btn.btn-default#fine-tune-button{href: user_resume_fine_tune_path(@resume)} Fine Tune
 
 %button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
   Save

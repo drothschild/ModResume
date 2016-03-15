@@ -5,8 +5,8 @@ $(document).ready(function() {
 
 var bindEditListeners = function (){
   $('body').on("click", '.edit-popup', editPopup );
-  $('body').on("click", '.delete-asset', deleteAsset);
-  // $('body').on("submit", "form", editAsset )
+  $('body').on("click", '.delete-popup', deletePopup);
+  $("#delete-confirm").hide()
 }
 
 var editPopup = function(event) {
@@ -17,8 +17,8 @@ var editPopup = function(event) {
   dialog = $("#edit-form").dialog({
     autoOpen: false,
     modal: true,
-    width:  1000,
-    height: 700,
+    width:  700,
+    height: 650,
     buttons: {"Update":function (){
       editAsset(assetType, assetId);
     }}
@@ -26,6 +26,7 @@ var editPopup = function(event) {
   dialog.dialog("open");
   $.ajax({url: uri, method: "GET"}).done(function(response){
     $('#form-container-edit').html(response);
+    $('.form-submit').remove()
     tagNames = $('#tags-names').attr("data-tag-names").trim()
     $("#tags").val(tagNames)
     form = dialog.find("form").on("submit", function(event){
@@ -49,7 +50,6 @@ var editAsset = function(assetType, assetId) {
 
 }
 var editTags = function(assetType, assetId) {
-  console.log("Hey");
   var tagObject = {taggable_type: capitalizeFirstLetter(assetType.slice(0, -1)), taggable_id: assetId};
   tagObject["tag_names"]=$('input#tags')[0].value;
   var data = {tagging: tagObject};
@@ -75,10 +75,37 @@ function capitalizeFirstLetter(string) {
 }
 
 
-var deleteAsset = function(event) {
+var deletePopup = function(event) {
   event.preventDefault();
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
-  var uri = window.location.pathname.replace("/assets", "/" +assetType + "/");
+  var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
+  console.log(uri);
+  deleteDialog = $("#delete-confirm").dialog({
+    resizable:false,
+    height:200,
+    modal:true,
+    buttons:{
+      "Delete": function(){
+        deleteAsset(assetType, assetId)
+        $(this).dialog("close");
+      },
+      Cancel: function() {
+        $(this).dialog("close");
+      }
+    }
+  });
+  deleteDialog.dialog.open;
 
 }
+var deleteAsset = function(assetType, assetId) {
+  var assetToDelete = "#" + assetType + "_" + assetId;
+  var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
+  $.ajax({url: uri, method: "DELETE"}).done(function(response) {
+    $(assetToDelete).remove();
+  }
+    );
+  
+}
+
+

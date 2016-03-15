@@ -13,6 +13,23 @@ FactoryGirl.define do
     target_job "Astronaut"
   end
 
+  factory :experience do
+    company 'Nasa'
+    title 'Astronaut'
+    end_date 'Sat, 26 Sep 2015'
+    begin_date 'Sat, 26 Sep 2015'
+    description 'Space work'
+    location 'space'
+  end
+
+  factory :education do
+    institution_name 'Nasa University'
+    focus 'Space study'
+    description 'Space work'
+    location 'USA'
+    completion 'Sat, 26 Sep 2015'
+
+  end
 
 #   factory :skills do
 #     title "Gives great hugs"

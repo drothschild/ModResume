@@ -1,7 +1,7 @@
 %div#resumeID{ "resume_id" => session[:new_resume_id] }
 .row
   .col-md-2.col-sm-2
-  .col-md-8.col-sm-8#tag-buttons
+  .col-md-8.col-sm-8.text-center#tag-buttons
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
@@ -27,7 +27,7 @@
   .col-md-8.col-sm-10.col-centered#form-container-edit
 
 -if session[:new_resume_id] != nil
-  %a.btn-default.onwards-floater{href: user_resume_url(current_user, session[:new_resume_id])}
+  %a.btn-default.onwards-floater.floater-right{href: user_resume_url(current_user, session[:new_resume_id])}
     %i.fa.fa-angle-right.fa-4x
 
 

@@ -1,3 +1,6 @@
+/ %a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
+/ %a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
+%a.btn.btn-default#print2{href: "javascript:pdfer()"} Print Resume
 
 %button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
   Save
@@ -16,11 +19,11 @@
     .row#divSection_1
       .col-md-12.col-s-12.resume-header
         %h4="#{current_user.first_name} #{current_user.last_name}"
-        %p="#{current_user.email}"
+        %p.email="#{current_user.email}"
         - if current_user.phone_number
-          %p=current_user.phone_number
+          %p.phone=current_user.phone_number
         - if current_user.websites.first
-          %p=current_user.websites.first.url
+          %p.web=current_user.websites.first.url
 
     .row#divSection_2
       .col-md-12.col-s-12.resume-content.resume-top-content.resume-section
@@ -61,9 +64,6 @@
             - if (asset.div_sort == 0)
               =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
 
-%a.btn.btn-default{href: "javascript:resumeFromHTML()"} Save to PDF
-
-%a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
 
 %a.btn-default.onwards-floater.floater-right{href: "#"}
   %i.fa.fa-angle-right.fa-4x

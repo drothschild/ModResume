@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-describe ExperiencesController do
+describe VolunteeringsController do
 
 
   # login_user
   before (:each) do
     @user = FactoryGirl.create(:user)
     sign_in (@user)
-    @experience = FactoryGirl.create :experience
-    @attributes=  FactoryGirl.attributes_for :experience
+    @volunteering = FactoryGirl.create :volunteering
+    @attributes=  FactoryGirl.attributes_for :volunteering
   end
 
   it "should have a current_user" do
@@ -24,19 +24,19 @@ describe ExperiencesController do
   #     expect(response).to be_success
   #   end
   #   it "should have some items on the index" do
-  #     experience = FactoryGirl.create(:experience)
-  #      experience.user = @user
-  #      experience.save
+  #     volunteering = FactoryGirl.create(:volunteering)
+  #      volunteering.user = @user
+  #      volunteering.save
   #      get :index
-  #      expect(assigns (:experiences)).to match_array([experience])
+  #      expect(assigns (:volunteerings)).to match_array([volunteering])
   #   end
 
   # end
 
   describe "get new" do
-    it "assigns a new experience to @experience" do
+    it "assigns a new volunteering to @volunteering" do
       get :new
-      expect(assigns(:experience)).to be_a_new(Experience)
+      expect(assigns(:volunteering)).to be_a_new(Volunteering)
     end
 
     it "renders a form template" do
@@ -47,30 +47,30 @@ describe ExperiencesController do
 
   describe "get edit" do
     it "assigns requested education to @education" do
-      experience = Experience.create(@attributes)
-      get :edit, id: experience
-      expect(assigns(:experience)).to eq experience
+      volunteering = Volunteering.create(@attributes)
+      get :edit, id: volunteering
+      expect(assigns(:volunteering)).to eq volunteering
     end
 
     it "renders a form template" do
-      experience = FactoryGirl.create(:experience)
-      get :edit, id: experience
+      volunteering = FactoryGirl.create(:volunteering)
+      get :edit, id: volunteering
       expect(response).to render_template :_form
     end
   end
 
   describe "Post #create" do
-    it "saves a valid new experience to the database" do
+    it "saves a valid new volunteering to the database" do
 
-      expect{post :create, experience:{title: "e"}
-      }.to change(Experience, :count).by(1)
+      expect{post :create, volunteering:{title: "e"}
+      }.to change(Volunteering, :count).by(1)
     end
 
     xit "does not accept invalid parameters" do
     end
 
     it "returns JSON" do
-      post :create, experience:{title: "e"}
+      post :create, volunteering:{title: "e"}
       expect(response.content_type).to eq("application/json")
 
     end
@@ -79,21 +79,21 @@ describe ExperiencesController do
     let!(:new_title) {"Blergh."}
 
     before(:each) do
-      put :update, :id => @experience.id, experience: {title: new_title}
-      @experience.reload
+      put :update, :id => @volunteering.id, volunteering: {title: new_title}
+      @volunteering.reload
     end
-    it {expect(@experience.title).to eq (new_title)}
+    it {expect(@volunteering.title).to eq (new_title)}
     it {expect(response).to render_template :_show}
   end
 
   describe "Delete #destroy" do
     it "decrements products by one" do
-      experience_id = @experience.id
-      expect{delete :destroy, id: experience_id}.to change {Experience.count}.by(-1)
+      volunteering_id = @volunteering.id
+      expect{delete :destroy, id: volunteering_id}.to change {Volunteering.count}.by(-1)
    end
   it "returns nothing" do
-      experience_id = @experience.id
-      delete :destroy, id: experience_id
+      volunteering_id = @volunteering.id
+      delete :destroy, id: volunteering_id
       expect(response.status).to eq(200)
     end
   end

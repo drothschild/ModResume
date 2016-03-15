@@ -50,48 +50,78 @@ $(document).ready(function() {
 
 // JSPDF JSPDF JSPDF JSPDF
 
-function resumeFromHTML(){
-  var pdf = new jsPDF('p', 'pt', 'letter');
-  source = $('.resume-template')[0];
+// function resumeFromHTML(){
+//   var pdf = new jsPDF('p', 'pt', 'letter');
+//   pdf.setFontSize(35)
+//   source = $('.resume-template')[0];
 
-  specialElementHandlers = {
-    '#skipme': function (element, renderer){
-      return true
-    }
-  };
+//   specialElementHandlers = {
+//     '#skipme': function (element, renderer){
+//       return true
+//     }
+//   };
 
-  margins = {
-    top: 80,
-    bottom: 60,
-    left: 40,
-    width: 522
-  }
+//   margins = {
+//     top: 80,
+//     bottom: 60,
+//     left: 40,
+//     width: 522
+//   }
 
-  pdf.fromHTML(
-    source,
-    margins.left,
-    margins.top, {
-      'width': margins.width,
-      'elementHandlers': specialElementHandlers
-  },
+//   pdf.fromHTML(
+//     source,
+//     margins.left,
+//     margins.top, {
+//       'width': margins.width,
+//       'elementHandlers': specialElementHandlers
+//   },
 
-  function(dispose){
-    pdf.save('Resume.pdf')
-  }, margins );
+//   function(dispose){
+//     pdf.save('Resume.pdf')
+//   }, margins );
 
-}
+// }
 // END JSPDF JSPDF JSPDF JSPDF
+// START NATIVE PRINT
 
-function printDiv(){
-  console.log($('.resume-template').html());
-  var printContents = $('.resume-template').html();
-  var originalContents = document.body.innerHTML;
+// function printDiv(){
+//   console.log($('.resume-template').html());
+//   var printContents = $('.resume-template').html();
+//   var originalContents = document.body.innerHTML;
 
-  document.body.innerHTML = printContents;
-  window.print();
-  document.body.innerHTML = originalContents;
+//   document.body.innerHTML = printContents;
+//   window.print();
+//   document.body.innerHTML = originalContents;
 
+// }
+
+// END NATIVE PRINT
+// START PDF MAKE
+var pdfer = function (){
+  var docDef =  { content: [
+                  {text: $('.resume-header h4').text(), style: 'h1' },
+                  {text: $('.email').text(), style: 'h2' },
+                  {text: $('.phone').text(), style: 'h2' },
+                  {text: $('.web').text(), style: 'h2' },
+                  {text: $('.resume-top-content li').text(), style: 'p' },
+
+                  ],
+
+                  styles: {
+                    h1: {
+                      fontSize: 22
+                    },
+                    h2: {
+                      fontSize: 20
+                    },
+                    p: {
+                      fontSize: 12
+                    }
+                  }
+                };
+  pdfMake.createPdf(docDef).open();
 }
+// END PDF MAKE
 
 $(document).ready(function(){
  $('.asset-portlet').mouseup(function(){

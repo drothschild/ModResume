@@ -1,7 +1,6 @@
-FactoryGirl.define do 
-  factory :objective do 
+FactoryGirl.define do
+  factory :objective do
     association :user
-    # description "some website"
-    # url "www.something.com"
+    description {Faker::Company.bs}
   end
 end

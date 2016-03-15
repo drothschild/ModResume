@@ -92,3 +92,21 @@ function printDiv(){
   document.body.innerHTML = originalContents;
 
 }
+
+$(document).ready(function(){
+ // $('.resume-section').click(function(e){
+ //  var sectionCount = this.children.length
+ //  debugger;
+ //  if (sectionCount < 6){
+ //    this.style.height = ''
+ //  } else {
+ //    this.style.height = '100%'
+ //  }
+
+ // })
+})
+
+
+$(function() {
+    $( ".resume-template" ).resizable();
+});

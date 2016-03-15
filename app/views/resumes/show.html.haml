@@ -23,7 +23,7 @@
           %p=current_user.websites.first.url
 
     .row#divSection_2
-      .col-md-12.col-s-12.resume-content.resume-top-content
+      .col-md-12.col-s-12.resume-content.resume-top-content.resume-section
         -@asset_types = asset_types
         -@asset_types.each do |asset_type|
           .asset-portlet
@@ -38,7 +38,7 @@
 
 
     .row#divSection_3
-      .col-md-12.col-s-12.resume-content.resume-middle-split-content
+      .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
         -@asset_types = asset_types
         -@asset_types.each do |asset_type|
           .asset-portlet
@@ -65,8 +65,10 @@
 
 %a.btn.btn-default#print2{href: "javascript:printDiv()"} Print Resume
 
-%a.btn-default.onwards-floater{href: "#"}
+%a.btn-default.onwards-floater.floater-right{href: "#"}
   %i.fa.fa-angle-right.fa-4x
+%a.btn-default.onwards-floater.floater-left{href: user_assets_url(current_user)}
+  %i.fa.fa-angle-left.fa-4x
 
 
 

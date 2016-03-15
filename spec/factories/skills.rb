@@ -1,7 +1,6 @@
-FactoryGirl.define do 
-  factory :skill do 
+FactoryGirl.define do
+  factory :skill do
     association :user
-    # description "some website"
-    # url "www.something.com"
+    title {Faker::Company.buzzword}
   end
 end

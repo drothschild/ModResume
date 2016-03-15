@@ -1,14 +1,14 @@
 %div#resumeID{ "resume_id" => session[:new_resume_id] }
 .row
-
-  .col-md-1.col-sm-1
-  .col-md-10.col-sm-10.col-centered#tag-buttons
+  .col-md-2.col-sm-2
+  .col-md-8.col-sm-8.text-center#tag-buttons
     .btn-group{role: "group"}
     -@tags = all_tags
     -@tags.each do |tag|
-      - # %button.btn.btn-default.tag-button{"tag_id" => tag.id, "selected" => false}
       %a.btn.btn-default.tag-button.button-selected{"tag_id" => tag.id}
         =tag.name
+  .col-md-2.col-sm-2.text-right
+    %a.btn.btn-default{href: new_user_asset_path(current_user)} New Asset
 
 
 
@@ -26,8 +26,9 @@
 #edit-form{:title => "Edit Asset"}
   .col-md-8.col-sm-10.col-centered#form-container-edit
 
-%a.btn-default.onwards-floater{href: user_resume_url(current_user, session[:new_resume_id])}
-  %i.fa.fa-angle-right.fa-4x
+-if session[:new_resume_id] != nil
+  %a.btn-default.onwards-floater.floater-right{href: user_resume_url(current_user, session[:new_resume_id])}
+    %i.fa.fa-angle-right.fa-4x
 
 
 

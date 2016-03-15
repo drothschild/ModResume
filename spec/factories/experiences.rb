@@ -1,7 +1,11 @@
-FactoryGirl.define do 
-  factory :experience do 
+FactoryGirl.define do
+  factory :experience do
     association :user
-    # description "some website"
-    # url "www.something.com"
+    company  {Faker::Company.name}
+    title {Faker::Company.profession}
+    begin_date {Faker::Date.between(5.years.ago, Date.today)}
+    end_date {Faker::Date.between(5.years.ago, Date.today)}
+    description {Faker::Company.bs}
+    location {Faker::Address.city}
   end
 end

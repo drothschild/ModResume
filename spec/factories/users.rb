@@ -1,10 +1,11 @@
-FactoryGirl.define do 
-  factory :user do 
-    first_name "Han"
-    last_name "Solo"
-    sequence(:email) { |n| "test#{n}@test.com" }
+FactoryGirl.define do
+  factory :user do
+    first_name Faker::Name.first_name
+    last_name Faker::Name.last_name
     phone_number "555-555-5555"
-    password "testing"
-    confirmed_at '2016-03-14'
+    email { Faker::Internet.email }
+    password "password"
+    password_confirmation "password"
+    confirmed_at Date.today
   end
 end

@@ -1,7 +1,7 @@
-FactoryGirl.define do 
-  factory :project do 
+FactoryGirl.define do
+  factory :project do
     association :user
-    # description "some website"
-    # url "www.something.com"
+    title {Faker::Hacker.ingverb}
+    description {Faker::Hacker.say_something_smart}
   end
 end

@@ -25,23 +25,16 @@ class ResumesController < ApplicationController
         @assets["#{asset_type}"] << resume_asset
       end
     end
-    # binding.pry
   end
 
   def new
     @user = current_user
     @tags = current_user.tags
     @new_resume = Resume.new()
-    p "*" * 50
-    p "NEW RESUME FORM"
-    p "*" * 50
     render partial: 'form'
   end
 
   def create
-    p "*" * 50
-    p params
-    p "*" * 50
     pass_params = resume_params
     @new_resume = Resume.new(pass_params)
     if @new_resume.save
@@ -55,6 +48,13 @@ class ResumesController < ApplicationController
     session[:new_resume_id] = Resume.find(params[:id]).id
     redirect_to user_assets_path
     # @resume = Resume.find(params[:id])
+  end
+
+  def fine_tune
+    @resume = Resume.find(params[:id])
+    binding.pry
+    # @resume.document_data =
+    render 'fine_tune'
   end
 
   def update
@@ -83,7 +83,7 @@ class ResumesController < ApplicationController
   end
 
   def destroy
-    @remove.destroy
+    @resume.destroy
     redirect_to user_resumes_path(params[:user_id])
   end
 

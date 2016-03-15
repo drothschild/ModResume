@@ -133,6 +133,7 @@ var editPopup = function(event) {
     "Close": function() {
                   $(this).dialog("close");
                   $('#form-container-edit').html("");
+                  tinyMCE.remove();
               },
 
     buttons: {"Update":function (){
@@ -140,7 +141,6 @@ var editPopup = function(event) {
     }}
   });
   dialog.dialog("open");
-  tinyMCE.remove();
   $.ajax({url: uri, method: "GET"}).done(function(response){
         $('#form-container-edit').html(response);
     $('.form-submit').remove()

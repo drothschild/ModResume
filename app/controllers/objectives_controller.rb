@@ -38,7 +38,7 @@ class ObjectivesController < ApplicationController
     @objective = Objective.find(params[:id])
     @objective.update(objective_params)
     if @objective.save
-      render partial: 'show', locals: {asset: @objective, asset_type: "Objectives"}
+      render partial: 'show', locals: {asset: @objective, asset_type: "objectives"}
     else
       flash.now[:danger] = @objective.errors.full_messages
       render :edit

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Describing do
+describe "Describing Model", model: true do
   context "Data Validation" do 
   end
 

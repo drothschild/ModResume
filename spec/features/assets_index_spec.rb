@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 
-RSpec.feature "Assets", type: :feature, js: true do
+RSpec.feature "Assets", type: :feature, js: true, feature: true do
   before(:all) do
     @user = FactoryGirl.create(:user)
     @resume = FactoryGirl.create(:resume)

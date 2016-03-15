@@ -7,7 +7,7 @@
     -@tags.each do |tag|
       %a.btn.btn-default.tag-button.button-selected{"tag_id" => tag.id}
         =tag.name
-  .col-md-2.col-sm-2
+  .col-md-2.col-sm-2.text-right
     %a.btn.btn-default{href: new_user_asset_path(current_user)} New Asset
 
 

@@ -43,7 +43,6 @@ class ExperiencesController < ApplicationController
     @experience.update(pass_params)
     if @experience.save
         addDescriptions(@experience, detail_attributes)
-      end
     else
       flash.now[:danger] = @experience.errors.full_messages
       render :edit

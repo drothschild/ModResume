@@ -60,6 +60,12 @@ class ProjectsController < ApplicationController
     render partial: 'show', locals: {asset: @project, asset_type: "projects"}
   end
 
+  def destroy
+    @project = Project.find(params[:id])
+    @project.delete
+    render nothing: true, status: 200, content_type: "text/html"
+  end
+
   def project_params
     params.require(:project).permit(:description, :title, :details =>[:detail], :descriptions_attributes => [:detail])
   end

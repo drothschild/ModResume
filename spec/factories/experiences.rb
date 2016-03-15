@@ -1,6 +1,3 @@
-
-
-
 FactoryGirl.define do
   factory :experience do
     company  {Faker::Company.name}

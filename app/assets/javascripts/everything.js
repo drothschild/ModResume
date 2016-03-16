@@ -306,14 +306,17 @@ var bindFineTuneListeners = function(){
 
 var loadFineTuneForm = function(e){
   e.preventDefault();
-  var data = $('.resume-template').html()
-  var uri = $(this).attr("href")
+  tinyMCE.remove();
+  var data = $('.resume-template').html();
+  var uri = $(this).attr("href");
+  
   $.ajax({url: uri, method: "POST", data: {document_data: data}}).done(function(response){
-    $("#resume-show-instructions").hide()
-    $(".resume-fine-tune").show()
-    $('.sortable-wrapper').html(response)
+    $("#resume-show-instructions").hide();
+    $(".resume-fine-tune").show();
+    $('.sortable-wrapper').html(response);
     setTimeout(function(){
-      tinyMCE.activeEditor.setContent(data)
+      tinyMCE.activeEditor.setContent(data);
+      tinyMCE.activeEditor.focus();
     }, 1000)
   })
 }

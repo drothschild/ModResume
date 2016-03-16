@@ -29,5 +29,6 @@ Rails.application.routes.draw do
 
   post 'users/:id/resumes/:id/save_document_data', to: 'resumes#save_document_data', as: 'user_resume_save_document_data'
 
+  
   root 'root#index'
 end

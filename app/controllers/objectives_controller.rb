@@ -36,6 +36,7 @@ class ObjectivesController < ApplicationController
 
   def update
     @objective = Objective.find(params[:id])
+    p objective_params
     @objective.update(objective_params)
     if @objective.save
       render partial: 'show', locals: {asset: @objective, asset_type: "objectives"}
@@ -47,7 +48,7 @@ class ObjectivesController < ApplicationController
 
   def destroy
     @objective = Objective.find(params[:id])
-    @objective.delete
+    @objective.destroy
     render nothing: true, status: 200, content_type: "text/html"
   end
 

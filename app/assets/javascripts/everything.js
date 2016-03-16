@@ -124,18 +124,13 @@ var editPopup = function(event) {
     width:  700,
     height: 650,
     dialogClass : "modal-lg",
-    "Close": function() {
-                  $(this).dialog("close");
-                  $('#form-container-edit').html("");
-              },
-
     buttons: {"Update":function (){
       editAsset(assetType, assetId);
     }}
   });
   dialog.dialog("open");
-  tinyMCE.remove();
   $.ajax({url: uri, method: "GET"}).done(function(response){
+        tinyMCE.remove();
         $('#form-container-edit').html(response);
     $('.form-submit').remove()
     tagNames = $('#tags-names').attr("data-tag-names").trim()
@@ -150,12 +145,16 @@ var editPopup = function(event) {
 
 var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;
+  if (assetType === "objectives") {
+    tinyMCE.triggerSave();
+    
+  }
   var uri = $('form').attr('action');
   var data = $('form').serialize();
   $.ajax({url: uri, method: "Put", data: data}).done(function(response) {
-    dialog.dialog("close");
     $(assetToUpdate).html(response);
-     editTags(assetType,assetId);
+     dialog.dialog("close");
+      editTags(assetType,assetId);
   }
     );
 
@@ -351,6 +350,8 @@ var bindNewAssetListeners = function(){
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW
 var bindResumeShowListeners = function (){
   addSortable();
+
+  $(document).on('click', '#print-resume-button', printResume);
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
   $(document).on('sortover', '#trashcan', deleteResumeAsset)

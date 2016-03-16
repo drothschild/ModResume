@@ -24,7 +24,7 @@ var openingAnimation =   function(){
 // ASSET INDEX ASSET INDEX ASSET INDEX ASSET INDEX ASSET INDEX ASSET INDEX
 var bindAssetListeners = function() {
   $(document).on("click", '.tag-button', toggleTag );
-  $('.asset-resume').on("click", addAsset );
+  $(document).on("click", '.asset-resume', addAsset );
 }
 
 var toggleTag = function(e) {
@@ -36,7 +36,6 @@ var toggleTag = function(e) {
 }
 
 var toggleAssets = function(tagID, visible) {
-  console.log(tagID);
   var assetDivs = $(".asset-container");
   for (var i = 0; i < assetDivs.length; i++) {
     if ($(assetDivs[i]).attr("tags").includes("|" + tagID + "|") == true) {
@@ -52,18 +51,13 @@ var toggleAssets = function(tagID, visible) {
 
 var addAsset = function(e) {
   e.preventDefault();
-  console.log("Add Asset Button Clicked");
-  console.log(this);
   var button = $(this);
   var resumeId = $('#resumeID').attr("resume_id");
-  console.log(resumeId);
   var data = {
     current_user_id: $(this).attr("current_user_id"),
     data_asset_id: $(this).attr("data-asset-id"),
     data_asset_type: $(this).attr("data-asset-type"),
   };
-  console.log(data);
-  debugger;
   $.ajax({
     accepts: "application/json",
     url: "/users/" + data.current_user_id + "/resumes/" + resumeId,
@@ -71,8 +65,6 @@ var addAsset = function(e) {
     data: data
   })
   .done(function(response) {
-    console.log("Successful Patch");
-    console.log(response);
     if (response["update_status"] === "added") {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
@@ -93,9 +85,8 @@ var addAsset = function(e) {
 // DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS
 
 var bindDetailEvents = function (){
-  $('body').on("click", '#add_detail', AddDetailInput);
-  $('body').on("click", '#remove_detail', RemoveDetailInput);
-
+  $(document).on("click", '#add_detail', AddDetailInput);
+  $(document).on("click", '#remove_detail', RemoveDetailInput);
 }
 
 var AddDetailInput = function(e) {
@@ -113,8 +104,8 @@ var RemoveDetailInput = function(e) {
 // ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT
 
 var bindEditListeners = function (){
-  $('body').on("click", '.edit-popup', editPopup );
-  $('body').on("click", '.delete-popup', deletePopup);
+  $(document).on("click", '.edit-popup', editPopup );
+  $(document).on("click", '.delete-popup', deletePopup);
   $("#delete-confirm").hide()
 }
 
@@ -198,7 +189,6 @@ var deletePopup = function(event) {
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
   var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
-  console.log(uri);
   deleteDialog = $("#delete-confirm").dialog({
     resizable:false,
     height:200,
@@ -229,7 +219,7 @@ var deleteAsset = function(assetType, assetId) {
 // FINE TUNE FINE TUNE FINE TUNE FINE TUNE FINE TUNE FINE TUNE
 
 var bindFineTuneListeners = function(){
-  $("body").on("click", ".fine-tune-button", loadFineTuneForm);
+  $(document).on("click", ".fine-tune-button", loadFineTuneForm);
 }
 
 var loadFineTuneForm = function(e){
@@ -352,15 +342,15 @@ newAssetsView.prototype.addTags = function(){
 var newAssets = new newAssetsView();
 
 var bindNewAssetListeners = function(){
-  $('.asset-type-button').on("click", newAssets.toggleActiveAsset);
+  $(document).on("click", '.asset-type-button', newAssets.toggleActiveAsset);
   $('#form-container').on("submit", 'form', newAssets.saveForm);
 }
 // END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW
 var bindResumeShowListeners = function (){
   addSortable();
-  $('#save-resume-button').on('click', saveSortedResume);
-  $('.asset-portlet').on('mouseup', changeResumeSize)
+  $(document).on('click', '#save-resume-button', saveSortedResume);
+  $(document).on('mouseup', '.asset-portlet', changeResumeSize)
 
 }
 
@@ -383,6 +373,7 @@ var addSortable = function(){
 
 var saveSortedResume = function(e){
     e.preventDefault();
+
     var assetNodes = $('.panel.panel-default')
     for(var i = 0; i < assetNodes.length; i++){
 
@@ -405,7 +396,6 @@ var saveSortedResume = function(e){
   }
 var changeResumeSize = function(){
   var sections = $('.resume-section')
-    // debugger;
   for (var i =0 ; i < sections.length; i++){
     var sectionCount = sections[i].children.length;
     if (sectionCount > 6){
@@ -421,7 +411,7 @@ var changeResumeSize = function(){
 // END RESUME SHOW END RESUME SHOW END RESUME SHOW END RESUME SHOW
 // RESUME INDEX RESUME INDEX RESUME INDEX RESUME INDEX RESUME INDEX
 var bindResumeIndexListeners = function() {
-  $('#new-resume-button').on("click", newResume);
+  $(document).on("click", '#new-resume-button', newResume);
 }
 
 var newResume = function(e) {
@@ -447,8 +437,8 @@ var newResume = function(e) {
 // END RESUME INDEX END RESUME INDEX END RESUME INDEX END RESUME INDEX
 // USER SHOW PAGE USER SHOW PAGE USER SHOW PAGE USER SHOW PAGE USER SHOW PAGE
 var bindWebsiteListeners = function() {
-  $('#new-website-button').on("click", newWebsite);
-  $('#new-website-form').on('submit', 'form', submitWebsite)
+  $(document).on("click", '#new-website-button', newWebsite);
+  $(document).on('submit', '#new-website-form', submitWebsite)
 }
 
 var newWebsite = function(e) {
@@ -470,7 +460,8 @@ var submitWebsite = function(e) {
   e.preventDefault();
   var userId = $('#new-website-button')[0].attributes.user_id.value;
 
-  var data = $(this).serialize();
+  var data = $("#new-website-form").serialize();
+  debugger;
   $.ajax({
     url: "/users/" + userId + "/websites",
     method: "POST",

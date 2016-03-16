@@ -1,5 +1,5 @@
 = form_for [@user, @new_website] do |f|
-  %fieldset.form-group.form-inline
+  %fieldset.form-group.form-inline#new-website-form
     = f.label :description, :class => "sr-only"
     = f.text_field :description, placeholder: "Website"
     = f.label :url, :class => "sr-only"

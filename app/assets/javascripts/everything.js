@@ -132,11 +132,12 @@ var bindEditListeners = function (){
 
 var editPopup = function(event) {
   event.preventDefault();
-
   var assetType = event.currentTarget.dataset.assetType;
   var assetId = event.currentTarget.dataset.assetId;
   var uri = window.location.pathname.replace("/assets", "/" + assetType + "/" + assetId +"/edit");
-
+  if (assetType === ("objectives")){
+    tinyMCE.remove();
+          };
   $.ajax({url: uri, method: "GET"}).done(function(response){
         $('#form-container-edit').html(response);
         editTagsAutoComplete();

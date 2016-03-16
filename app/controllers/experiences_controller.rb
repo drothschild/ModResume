@@ -52,7 +52,7 @@ class ExperiencesController < ApplicationController
 
   def destroy
     @experience = Experience.find(params[:id])
-    @experience.delete
+    @experience.destroy
     render nothing: true, status: 200, content_type: "text/html"
   end
 

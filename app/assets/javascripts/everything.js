@@ -52,13 +52,25 @@ var toggleAssets = function(tagID, visible) {
 
 var addAsset = function(e) {
   e.preventDefault();
+  console.log("Add Asset Button Clicked");
+  console.log(this);
   var button = $(this);
   $(this).blur();
   var resumeId = $('#resumeID').attr("resume_id");
+  var dataAssetId = $(this).attr("data-asset-id");
+  var dataAssetType = $(this).attr("data-asset-type");
+  var checkboxes = $("." + dataAssetType + "-" + dataAssetId + "-descriptions");
+  var selectedDescriptions = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    if ($(checkboxes[i]).is(':checked')) {
+      selectedDescriptions.push(checkboxes[i].value);
+    }
+  }
   var data = {
     current_user_id: $(this).attr("current_user_id"),
-    data_asset_id: $(this).attr("data-asset-id"),
-    data_asset_type: $(this).attr("data-asset-type"),
+    data_asset_id: dataAssetId,
+    data_asset_type: dataAssetType,
+    selected_descriptions: selectedDescriptions
   };
   $.ajax({
     accepts: "application/json",
@@ -67,6 +79,7 @@ var addAsset = function(e) {
     data: data
   })
   .done(function(response) {
+    console.log("Successful Patch");
     if (response["update_status"] === "added") {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
@@ -83,6 +96,7 @@ var addAsset = function(e) {
     console.log(response);
   })
 }
+
 // END ASSET INDEX END ASSET INDEX END ASSET INDEX END ASSET INDEX
 // DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS
 
@@ -124,18 +138,13 @@ var editPopup = function(event) {
     width:  700,
     height: 650,
     dialogClass : "modal-lg",
-    "Close": function() {
-                  $(this).dialog("close");
-                  $('#form-container-edit').html("");
-              },
-
     buttons: {"Update":function (){
       editAsset(assetType, assetId);
     }}
   });
   dialog.dialog("open");
-  tinyMCE.remove();
   $.ajax({url: uri, method: "GET"}).done(function(response){
+        tinyMCE.remove();
         $('#form-container-edit').html(response);
     $('.form-submit').remove()
     tagNames = $('#tags-names').attr("data-tag-names").trim()
@@ -150,12 +159,16 @@ var editPopup = function(event) {
 
 var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;
+  if (assetType === "objectives") {
+    tinyMCE.triggerSave();
+    
+  }
   var uri = $('form').attr('action');
   var data = $('form').serialize();
   $.ajax({url: uri, method: "Put", data: data}).done(function(response) {
-    dialog.dialog("close");
     $(assetToUpdate).html(response);
-     editTags(assetType,assetId);
+     dialog.dialog("close");
+      editTags(assetType,assetId);
   }
     );
 
@@ -351,6 +364,8 @@ var bindNewAssetListeners = function(){
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW
 var bindResumeShowListeners = function (){
   addSortable();
+
+  $(document).on('click', '#print-resume-button', printResume);
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
   $(document).on('sortupdate', '#trashcan', deleteResumeAsset)

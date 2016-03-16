@@ -47,7 +47,7 @@ class SkillsController < ApplicationController
 
  def destroy
     @skill = Skill.find(params[:id])
-    @skill.delete
+    @skill.destroy
     render nothing: true, status: 200, content_type: "text/html"
 end
 

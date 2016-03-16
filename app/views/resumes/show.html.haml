@@ -80,7 +80,7 @@
       -@asset_types = asset_types
       -@asset_types.each do |asset_type|
         .asset-portlet
-          .asset-portlet-header=asset_type.capitalize
+          .asset-portlet-header=asset_type_grammar(asset_type)
           .nested-sort
             .asset-portlet-content
 

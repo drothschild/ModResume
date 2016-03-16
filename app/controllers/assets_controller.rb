@@ -16,5 +16,9 @@ class AssetsController < ApplicationController
     @asset_types = asset_types
   end
 
+  def reset
+    session[:new_resume_id] = nil
+    redirect_to user_assets_url(current_user)
+  end
 
 end

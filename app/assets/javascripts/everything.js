@@ -380,8 +380,7 @@ var deleteResumeAsset = function(e){
 
 var saveSortedResume = function(e){
     e.preventDefault();
-    // save to database as template
-    var resumeTemplate = $('.resume-template')[0].innerHTML
+
     var assetNodes = $('.panel.panel-default')
     for(var i = 0; i < assetNodes.length; i++){
 

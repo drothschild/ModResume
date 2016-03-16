@@ -55,8 +55,11 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_user == nil
-      flash[:error] = "You must be logged in to access this section"
+      flash[:notice] = "You must be logged in to access this section"
       redirect_to :new_user_session
+    elsif params[:user_id] != nil && params[:user_id].to_i != current_user.id
+      flash[:notice] = "You must be logged in to access this section"
+      redirect_to :root
     end
 
   end

@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def all_tags
-    @tags = Tag.where("user_id = ?", current_user.id)
+    @tags = Tag.where("user_id = ?", current_user.id).order("name")
   end
 
   def all_tag_names

@@ -7,7 +7,7 @@ class ResumeAssetsController < ApplicationController
     p "params..."
     p params
     p "*" * 50
-    
+
     respond_to do |format|
       format.html{}
       format.json{render json: @resume_asset}
@@ -24,7 +24,6 @@ class ResumeAssetsController < ApplicationController
     end
     render json: resumeAsset
   end
-
 
 private
 

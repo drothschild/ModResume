@@ -368,7 +368,7 @@ var bindResumeShowListeners = function (){
   $(document).on('click', '#print-resume-button', printResume);
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
-  $(document).on('sortover', '#trashcan', deleteResumeAsset)
+  $(document).on('sortupdate', '#trashcan', deleteResumeAsset)
 }
 
 var addSortable = function(){
@@ -389,8 +389,15 @@ var addSortable = function(){
 }
 
 var deleteResumeAsset = function(e){
-  console.log(e.toElement)
-  $(e.toElement).parent().children().last().children().last().attr("id")
+  var selectedElement = $(e.toElement).parent()
+  var selectedAsset = $(e.toElement).parent().find('.panel').attr("id").split("_")
+  var data = {data_asset_type: selectedAsset[0], data_asset_id: selectedAsset[1]}
+  var uri = window.location.href
+  debugger;
+  $.ajax({url: uri, method: "PATCH", data}).done(function(response){
+    console.log(response)
+    $(selectedElement).remove();
+  })
 }
 
 var saveSortedResume = function(e){

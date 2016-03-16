@@ -17,6 +17,7 @@ class ResumesController < ApplicationController
     @resume = Resume.find(params[:id])
     @assets = {}
     @asset_types = asset_types
+    session[:new_resume_id] = @resume.id
 
     @asset_types.each do |asset_type|
       @assets["#{asset_type}"] = []

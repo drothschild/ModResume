@@ -12,7 +12,7 @@
     .btn-group{role: "group"}
       -@asset_types.each do |asset_type|
         %a.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
-          =asset_type.capitalize
+          =asset_type.singularize.capitalize
 .row
   .col-md-6.col-sm-6.col-centered#form-container
   .saved

@@ -74,12 +74,6 @@ class ResumesController < ApplicationController
       update_status = "added"
     end
 
-    p "*" * 50
-    p params
-    p asset_type
-    p resume
-    # p set_assets(resume_id: resume.id)
-    p "*" * 50
     respond_to do |format|
       format.json { render json: {resume: resume, update_status: update_status}}
       format.html { p "RETURNING HTML" }

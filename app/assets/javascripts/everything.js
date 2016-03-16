@@ -62,7 +62,6 @@ var addAsset = function(e) {
     data_asset_type: $(this).attr("data-asset-type"),
   };
   console.log(data);
-  debugger;
   $.ajax({
     accepts: "application/json",
     url: "/users/" + data.current_user_id + "/resumes/" + resumeId,
@@ -130,7 +129,6 @@ var editPopup = function(event) {
     width:  700,
     height: 650,
     dialogClass : "modal-lg",
-
     buttons: {"Update":function (){
       editAsset(assetType, assetId);
     }}
@@ -154,7 +152,7 @@ var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;
   if (assetType === "objectives") {
     tinyMCE.triggerSave();
-    console.log("Objective Changed")
+    
   }
   var uri = $('form').attr('action');
   var data = $('form').serialize();

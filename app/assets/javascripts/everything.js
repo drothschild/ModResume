@@ -52,13 +52,25 @@ var toggleAssets = function(tagID, visible) {
 
 var addAsset = function(e) {
   e.preventDefault();
+  console.log("Add Asset Button Clicked");
+  console.log(this);
   var button = $(this);
   $(this).blur();
   var resumeId = $('#resumeID').attr("resume_id");
+  var dataAssetId = $(this).attr("data-asset-id");
+  var dataAssetType = $(this).attr("data-asset-type");
+  var checkboxes = $("." + dataAssetType + "-" + dataAssetId + "-descriptions");
+  var selectedDescriptions = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    if ($(checkboxes[i]).is(':checked')) {
+      selectedDescriptions.push(checkboxes[i].value);
+    }
+  }
   var data = {
     current_user_id: $(this).attr("current_user_id"),
-    data_asset_id: $(this).attr("data-asset-id"),
-    data_asset_type: $(this).attr("data-asset-type"),
+    data_asset_id: dataAssetId,
+    data_asset_type: dataAssetType,
+    selected_descriptions: selectedDescriptions
   };
   $.ajax({
     accepts: "application/json",
@@ -67,6 +79,7 @@ var addAsset = function(e) {
     data: data
   })
   .done(function(response) {
+    console.log("Successful Patch");
     if (response["update_status"] === "added") {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
@@ -83,6 +96,7 @@ var addAsset = function(e) {
     console.log(response);
   })
 }
+
 // END ASSET INDEX END ASSET INDEX END ASSET INDEX END ASSET INDEX
 // DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS
 

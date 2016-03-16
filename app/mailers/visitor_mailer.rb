@@ -3,8 +3,8 @@ class VisitorMailer < ApplicationMailer
     @name = name
     @email = email
     @message = message
-    mail(from: ENV['GMAIL_EMAIL'],
-         to: 'gary_wong_89@yahoo.com',
+    mail(from: ENV['SENDGRID_USERNAME'],
+         to: '@email',
          subject: 'New User\'s Email')
   end
 end

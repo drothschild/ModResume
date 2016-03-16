@@ -1,9 +1,18 @@
 .page-header.text-center
-  %h4
-    Choose what experience is relevant--all tags are selected by default.  &nbsp;
-    %small
-      You can also
-      %a.btn.btn-default{href: new_user_asset_path(current_user)} Add New Asset
+  - if request.referrer == user_assets_url(current_user)
+    %h4
+      View and edit your assets.
+      &nbsp;
+      %small
+        You can also
+        %a.btn.btn-default{href: new_user_asset_path(current_user)} Add New Asset
+  - else
+    %h4
+      Choose what experience is relevant--all tags are selected by default.
+      &nbsp;
+      %small
+        You can also
+        %a.btn.btn-default{href: new_user_asset_path(current_user)} Add New Asset
 
 %div#resumeID{ "resume_id" => session[:new_resume_id] }
 .row

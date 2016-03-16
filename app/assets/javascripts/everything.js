@@ -348,15 +348,10 @@ var bindNewAssetListeners = function(){
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW
 var bindResumeShowListeners = function (){
   addSortable();
-<<<<<<< HEAD
-  $('#save-resume-button').on('click', saveSortedResume);
-  $('.asset-portlet').on('mouseup', changeResumeSize)
-  $('#print-resume-button').on('click', printResume)
-=======
+
+  $(document).on('click', '#print-resume-button', printResume);
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
->>>>>>> 86ca69117be92601b3f654206a4c776bb619aba3
-
 }
 
 var addSortable = function(){

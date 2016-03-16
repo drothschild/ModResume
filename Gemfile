@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+#pdf parsing
+gem 'pdf-reader'
+
 gem 'rake', '< 11.0'
 
 # User authentication

@@ -125,9 +125,10 @@ var RemoveDetailInput = function(e) {
 // ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT
 
 var bindEditListeners = function (){
+  $("#delete-confirm").hide();
   $(document).on("click", '.edit-popup', editPopup );
   $(document).on("click", '.delete-popup', deletePopup);
-  $("#delete-confirm").hide()
+
 }
 
 var editPopup = function(event) {

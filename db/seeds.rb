@@ -38,7 +38,7 @@ Education.destroy_all
     first_name: first_name,
     last_name: last_name,
     phone_number: Faker::PhoneNumber.phone_number,
-    password: "hello")
+    password: "password")
 
   Website.create(description: "LinkedIn", url: Faker::Internet.url('linkedin.com', "/#{username}"), user_id: new_user.id)
   Website.create(description: "GitHub", url: Faker::Internet.url('github.com', "/#{username}"), user_id: new_user.id)

@@ -71,7 +71,7 @@ class ResumesController < ApplicationController
       update_status = "added"
       resume_asset = resume.resume_assets.find_by(buildable_type: asset_type, buildable_id: params[:data_asset_id])
       selected_descriptions.each do |desc|
-        resume_asset.descriptions << Description.find(desc.to_i)
+        resume_asset.descriptions << Description.find(desc)
       end
       resume_asset.save
     end

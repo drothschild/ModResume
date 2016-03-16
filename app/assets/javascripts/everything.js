@@ -1,10 +1,15 @@
 $(document).on('page:change', function(event){
+  bindResumeShowListeners();
+})
+
+
+
+$(document).ready(function(event){
   console.log("hello!");
   bindAssetListeners();
   bindDetailEvents();
   bindEditListeners();
   bindFineTuneListeners();
-  bindResumeShowListeners();
   bindResumeIndexListeners();
   openingAnimation();
   bindWebsiteListeners();
@@ -52,13 +57,25 @@ var toggleAssets = function(tagID, visible) {
 
 var addAsset = function(e) {
   e.preventDefault();
+  console.log("Add Asset Button Clicked");
+  console.log(this);
   var button = $(this);
   $(this).blur();
   var resumeId = $('#resumeID').attr("resume_id");
+  var dataAssetId = $(this).attr("data-asset-id");
+  var dataAssetType = $(this).attr("data-asset-type");
+  var checkboxes = $("." + dataAssetType + "-" + dataAssetId + "-descriptions");
+  var selectedDescriptions = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    if ($(checkboxes[i]).is(':checked')) {
+      selectedDescriptions.push(checkboxes[i].value);
+    }
+  }
   var data = {
     current_user_id: $(this).attr("current_user_id"),
-    data_asset_id: $(this).attr("data-asset-id"),
-    data_asset_type: $(this).attr("data-asset-type"),
+    data_asset_id: dataAssetId,
+    data_asset_type: dataAssetType,
+    selected_descriptions: selectedDescriptions
   };
   $.ajax({
     accepts: "application/json",
@@ -67,6 +84,7 @@ var addAsset = function(e) {
     data: data
   })
   .done(function(response) {
+    console.log("Successful Patch");
     if (response["update_status"] === "added") {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
@@ -83,6 +101,7 @@ var addAsset = function(e) {
     console.log(response);
   })
 }
+
 // END ASSET INDEX END ASSET INDEX END ASSET INDEX END ASSET INDEX
 // DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS
 
@@ -354,7 +373,7 @@ var bindResumeShowListeners = function (){
   $(document).on('click', '#print-resume-button', printResume);
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
-  $(document).on('sortover', '#trashcan', deleteResumeAsset)
+  $(document).on('sortupdate', '#trashcan', deleteResumeAsset)
 }
 
 var addSortable = function(){
@@ -375,8 +394,15 @@ var addSortable = function(){
 }
 
 var deleteResumeAsset = function(e){
-  console.log(e.toElement)
-  $(e.toElement).parent().children().last().children().last().attr("id")
+  var selectedElement = $(e.toElement).parent()
+  var selectedAsset = $(e.toElement).parent().find('.panel').attr("id").split("_")
+  var data = {data_asset_type: selectedAsset[0], data_asset_id: selectedAsset[1]}
+  var uri = window.location.href
+  debugger;
+  $.ajax({url: uri, method: "PATCH", data}).done(function(response){
+    console.log(response)
+    $(selectedElement).remove();
+  })
 }
 
 var saveSortedResume = function(e){
@@ -465,9 +491,8 @@ var newWebsite = function(e) {
 var submitWebsite = function(e) {
   e.preventDefault();
   var userId = $('#new-website-button')[0].attributes.user_id.value;
-
-  var data = $("#new-website-form").serialize();
-  debugger;
+  var data = $("#new_website").serialize();
+  console.log(data);
   $.ajax({
     url: "/users/" + userId + "/websites",
     method: "POST",

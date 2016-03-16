@@ -66,20 +66,21 @@ class ResumesController < ApplicationController
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
     asset_resumes = asset_type.constantize.find(params[:data_asset_id]).resumes
+    selected_descriptions = []
+    selected_descriptions.push params[:selected_descriptions] if params[:selected_descriptions]
     if asset_resumes.include? resume
       asset_resumes.delete resume
       update_status = "removed"
     else
       asset_resumes << resume
       update_status = "added"
+      resume_asset = resume.resume_assets.find_by(buildable_type: asset_type, buildable_id: params[:data_asset_id])
+      selected_descriptions.each do |desc|
+        resume_asset.descriptions << Description.find(desc)
+      end
+      resume_asset.save
     end
 
-    p "*" * 50
-    p params
-    p asset_type
-    p resume
-    # p set_assets(resume_id: resume.id)
-    p "*" * 50
     respond_to do |format|
       format.json { render json: {resume: resume, update_status: update_status}}
       format.html { p "RETURNING HTML" }

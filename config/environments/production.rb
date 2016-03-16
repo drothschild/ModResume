@@ -20,6 +20,22 @@ Rails.application.configure do
   #per Devise
   config.action_mailer.default_url_options = { host: 'floating-waters-91148.herokuapp.com' }
 
+
+  # config mailer to be smtp
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.perform_deliveries = true
+
+  # mailer configt setting
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :user_name => ENV['GMAIL_EMAIL'],
+    :password => ENV['GMAIL_PASSWORD'],
+    :authentication => "plain",
+    :enable_starttls_auto => true
+  }
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like
@@ -31,7 +47,7 @@ Rails.application.configure do
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.

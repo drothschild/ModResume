@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :resumes
   end
 
-
+  post 'visitors/contact', to: 'visitors#contact'
   get':controller(/:action(/:id))'
 
   get 'users/:id/resumes/:id/fine-tune', to: 'resumes#fine_tune', as: 'user_resume_fine_tune'

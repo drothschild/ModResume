@@ -125,7 +125,6 @@ var RemoveDetailInput = function(e) {
 // ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT
 
 var bindEditListeners = function (){
-  $("#delete-confirm").hide();
   $(document).on("click", '.edit-popup', editPopup );
   $(document).on("click", '.delete-popup', deletePopup);
 
@@ -133,10 +132,29 @@ var bindEditListeners = function (){
 
 var editPopup = function(event) {
   event.preventDefault();
+
   var assetType = event.currentTarget.dataset.assetType;
   var assetId = event.currentTarget.dataset.assetId;
   var uri = window.location.pathname.replace("/assets", "/" + assetType + "/" + assetId +"/edit");
+  if (assetType === ("objectives")){
+    console.log("hey");
+    tinyMCE.remove();
+  };
 
+  $.ajax({url: uri, method: "GET"}).done(function(response){
+        $('#form-container-edit').html(response);
+        editTagsAutoComplete();
+        dialog.dialog("open");
+    $('.form-submit').remove();
+    tagNames = $('#tags-names').attr("data-tag-names").trim();
+    $("#tags").val(tagNames);
+
+    form = dialog.find("form").on("submit", function(event){
+      event.preventDefault();
+      editAsset(assetType,assetId);
+          })
+
+  });
 
   dialog = $("#edit-form").dialog({
     autoOpen: false,
@@ -148,19 +166,8 @@ var editPopup = function(event) {
       editAsset(assetType, assetId);
     }}
   });
-  dialog.dialog("open");
-  $.ajax({url: uri, method: "GET"}).done(function(response){
-        tinyMCE.remove();
-        $('#form-container-edit').html(response);
-    $('.form-submit').remove()
-    tagNames = $('#tags-names').attr("data-tag-names").trim()
-    $("#tags").val(tagNames)
-    form = dialog.find("form").on("submit", function(event){
-      event.preventDefault();
-      editAsset(assetType,assetId);
-          })
+  
 
-  });
    };
 
 var editAsset = function(assetType, assetId) {
@@ -178,6 +185,48 @@ var editAsset = function(assetType, assetId) {
   }
     );
 
+}
+
+var editTagsAutoComplete = function(){
+  var availableTags = JSON.parse($("#all-tags-names").attr("data-tag-names")) || []
+  function split( val ) {
+      return val.split( /,\s*/ );
+  }
+  function extractLast( term ) {
+      return split( term ).pop();
+  }
+  $("#tags")
+  // don't navigate away from the field on tab when selecting an item
+  .bind( "keydown" ,function( event ) {
+    console.log("typed")
+    if ( event.keyCode === $.ui.keyCode.TAB &&
+        $( this ).autocomplete( "instance" ).menu.active ) {
+                event.preventDefault();
+    }
+  })
+  .autocomplete({
+    minLength: 0,
+    source: function( request, response ) {
+      // delegate back to autocomplete, but extract the last term
+      response( $.ui.autocomplete.filter(
+        availableTags, extractLast( request.term ) ) );
+    },
+    focus: function() {
+      // prevent value inserted on focus
+      return false;
+    },
+    select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+    }
+  });
 }
 var editTags = function(assetType, assetId) {
   var tagObject = {taggable_type: capitalizeFirstLetter(assetType.slice(0, -1)), taggable_id: assetId};
@@ -207,9 +256,11 @@ function capitalizeFirstLetter(string) {
 
 var deletePopup = function(event) {
   event.preventDefault();
+  $("#delete-confirm").show();
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
   var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
+  
   deleteDialog = $("#delete-confirm").dialog({
     resizable:false,
     height:200,
@@ -225,6 +276,7 @@ var deletePopup = function(event) {
     }
   });
   deleteDialog.dialog.open;
+
 
 }
 var deleteAsset = function(assetType, assetId) {

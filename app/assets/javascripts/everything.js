@@ -132,14 +132,12 @@ var bindEditListeners = function (){
 
 var editPopup = function(event) {
   event.preventDefault();
-
   var assetType = event.currentTarget.dataset.assetType;
   var assetId = event.currentTarget.dataset.assetId;
   var uri = window.location.pathname.replace("/assets", "/" + assetType + "/" + assetId +"/edit");
   if (assetType === ("objectives")){
     tinyMCE.remove();
-  };
-
+          };
   $.ajax({url: uri, method: "GET"}).done(function(response){
         $('#form-container-edit').html(response);
         editTagsAutoComplete();
@@ -171,12 +169,15 @@ var editPopup = function(event) {
     },
     Cancel: function(){
       dialog.dialog("close");
-    }
-    }
-  });
-  
-
-   };
+      }
+    },
+    close: function(){
+        if (assetType === ("objectives")){
+    tinyMCE.remove();
+          };  
+        } 
+    });
+};
 
 var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;
@@ -305,14 +306,17 @@ var bindFineTuneListeners = function(){
 
 var loadFineTuneForm = function(e){
   e.preventDefault();
-  var data = $('.resume-template').html()
-  var uri = $(this).attr("href")
+  tinyMCE.remove();
+  var data = $('.resume-template').html();
+  var uri = $(this).attr("href");
+  
   $.ajax({url: uri, method: "POST", data: {document_data: data}}).done(function(response){
-    $("#resume-show-instructions").hide()
-    $(".resume-fine-tune").show()
-    $('.sortable-wrapper').html(response)
+    $("#resume-show-instructions").hide();
+    $(".resume-fine-tune").show();
+    $('.sortable-wrapper').html(response);
     setTimeout(function(){
-      tinyMCE.activeEditor.setContent(data)
+      tinyMCE.activeEditor.setContent(data);
+      tinyMCE.activeEditor.focus();
     }, 1000)
   })
 }

@@ -1,10 +1,15 @@
 $(document).on('page:change', function(event){
+  bindResumeShowListeners();
+})
+
+
+
+$(document).ready(function(event){
   console.log("hello!");
   bindAssetListeners();
   bindDetailEvents();
   bindEditListeners();
   bindFineTuneListeners();
-  bindResumeShowListeners();
   bindResumeIndexListeners();
   openingAnimation();
   bindWebsiteListeners();
@@ -486,9 +491,8 @@ var newWebsite = function(e) {
 var submitWebsite = function(e) {
   e.preventDefault();
   var userId = $('#new-website-button')[0].attributes.user_id.value;
-
-  var data = $("#new-website-form").serialize();
-  debugger;
+  var data = $("#new_website").serialize();
+  console.log(data);
   $.ajax({
     url: "/users/" + userId + "/websites",
     method: "POST",

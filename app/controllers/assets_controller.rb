@@ -1,6 +1,7 @@
 class AssetsController < ApplicationController
   def index
-    p session[:new_resume_id]
+    session[:new_resume_id]
+    session[:edit_asset] = true
     @objectives = current_user.objectives
     @skills = current_user.skills
     @volunteerings = current_user.volunteerings
@@ -18,6 +19,7 @@ class AssetsController < ApplicationController
 
   def reset
     session[:new_resume_id] = nil
+    session[:edit_asset] = true
     redirect_to user_assets_url(current_user)
   end
 

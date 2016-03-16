@@ -136,9 +136,6 @@ var editPopup = function(event) {
   var assetType = event.currentTarget.dataset.assetType;
   var assetId = event.currentTarget.dataset.assetId;
   var uri = window.location.pathname.replace("/assets", "/" + assetType + "/" + assetId +"/edit");
-  if (assetType === ("objectives")){
-    tinyMCE.remove();
-  };
 
   $.ajax({url: uri, method: "GET"}).done(function(response){
         $('#form-container-edit').html(response);
@@ -171,12 +168,15 @@ var editPopup = function(event) {
     },
     Cancel: function(){
       dialog.dialog("close");
-    }
-    }
-  });
-  
-
-   };
+      }
+    },
+    close: function(){
+        if (assetType === ("objectives")){
+    tinyMCE.remove();
+          };  
+        } 
+    });
+};
 
 var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;

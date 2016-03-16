@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ObjectivesController do
+describe ObjectivesController, controller: true do
   # login_user
   before (:each) do
     @user = FactoryGirl.create(:user)

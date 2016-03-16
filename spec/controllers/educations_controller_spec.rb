@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe EducationsController do
+describe EducationsController, controller: true do
 
 
   # login_user

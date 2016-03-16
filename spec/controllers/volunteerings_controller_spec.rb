@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe VolunteeringsController do
+describe VolunteeringsController, controller: true do
 
 
   # login_user

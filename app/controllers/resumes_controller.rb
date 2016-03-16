@@ -50,11 +50,16 @@ class ResumesController < ApplicationController
     # @resume = Resume.find(params[:id])
   end
 
+  def save_document_data
+    @resume = Resume.find(params[:id])
+    @resume.document_data = params[:data]
+    @resume.save
+    redirect_to user_resume_fine_tune_path
+  end
+
   def fine_tune
     @resume = Resume.find(params[:id])
-    binding.pry
-    # @resume.document_data =
-    render 'fine_tune'
+    render partial: 'fine_tune', resume: @resume
   end
 
   def update
@@ -100,7 +105,7 @@ private
   end
 
   def resume_params
-    params.require(:resume).permit(:user_id, :target_job)
+    params.require(:resume).permit(:user_id, :target_job, :document_data)
   end
 
 end

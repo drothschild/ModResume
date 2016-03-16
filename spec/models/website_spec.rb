@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Website do
+describe "Website Model", model: true do
   before :each do 
     @user1 = create(:user)
     @user2 = create(:user)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Skill do
+describe "Skill Model", model: true do
   context "Data Validation" do 
     it "has a valid factory"
     it "is invalid without a title"

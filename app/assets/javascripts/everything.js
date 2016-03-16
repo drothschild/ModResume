@@ -137,7 +137,6 @@ var editPopup = function(event) {
   var assetId = event.currentTarget.dataset.assetId;
   var uri = window.location.pathname.replace("/assets", "/" + assetType + "/" + assetId +"/edit");
   if (assetType === ("objectives")){
-    console.log("hey");
     tinyMCE.remove();
   };
 
@@ -152,9 +151,14 @@ var editPopup = function(event) {
     form = dialog.find("form").on("submit", function(event){
       event.preventDefault();
       editAsset(assetType,assetId);
-          })
+          });
+      if (assetType === ("objectives")) {
+    setTimeout(function(){
+        tinyMCE.activeEditor.focus()
+      }, 250)
+  };
+    })
 
-  });
 
   dialog = $("#edit-form").dialog({
     autoOpen: false,
@@ -164,7 +168,11 @@ var editPopup = function(event) {
     dialogClass : "modal-lg",
     buttons: {"Update":function (){
       editAsset(assetType, assetId);
-    }}
+    },
+    Cancel: function(){
+      dialog.dialog("close");
+    }
+    }
   });
   
 

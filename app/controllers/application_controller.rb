@@ -57,6 +57,9 @@ class ApplicationController < ActionController::Base
     if current_user == nil
       flash[:error] = "You must be logged in to access this section"
       redirect_to :new_user_session
+    elsif params[:user_id] != nil && params[:user_id] != current_user
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to :new_user_session
     end
 
   end

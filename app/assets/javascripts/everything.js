@@ -1,14 +1,17 @@
-$(document).ready(function(){
+$(document).on('page:change', function(event){
   console.log("hello!");
   bindAssetListeners();
   bindDetailEvents();
   bindEditListeners();
   bindFineTuneListeners();
-  bindNewAssetListeners();
   bindResumeShowListeners();
   bindResumeIndexListeners();
   openingAnimation();
   bindWebsiteListeners();
+})
+
+$(document).on('page:partial-load', function(){
+  bindNewAssetListeners();
 })
 
 var openingAnimation =   function(){
@@ -52,6 +55,7 @@ var toggleAssets = function(tagID, visible) {
 var addAsset = function(e) {
   e.preventDefault();
   var button = $(this);
+  $(this).blur();
   var resumeId = $('#resumeID').attr("resume_id");
   var data = {
     current_user_id: $(this).attr("current_user_id"),
@@ -351,7 +355,6 @@ var bindResumeShowListeners = function (){
   addSortable();
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
-
 }
 
 var addSortable = function(){

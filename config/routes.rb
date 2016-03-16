@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :destroy] do
     resources :websites, except: [:index]
     resources :tags
-
     resources :assets, only: [:index, :new]
     resources :objectives, except: [:index]
     resources :educations, except: [:index]
@@ -21,7 +20,6 @@ Rails.application.routes.draw do
     resources :resume_assets, except: [:index]
     resources :resume_print
     resources :resumes
-
   end
 
 

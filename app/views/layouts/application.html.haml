@@ -12,6 +12,8 @@
     %script{:crossorigin => "anonymous", :integrity => "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"}
+
   %body
     .container
       %nav.navbar.navbar-default
@@ -35,8 +37,8 @@
                     =link_to 'My Assets', user_assets_path(current_user)
                   %li
                     =link_to 'Logout', destroy_user_session_path, method: :delete
-                  .navbar-text
-                    = "Welcome, #{current_user.first_name} #{current_user.last_name}"
+                  %li
+                    =link_to "Welcome, #{current_user.first_name} #{current_user.last_name}", user_path(current_user)
                 -else
                   = render 'sessions/new'
 

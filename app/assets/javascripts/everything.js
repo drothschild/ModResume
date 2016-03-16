@@ -4,10 +4,11 @@ $(document).ready(function(){
   bindDetailEvents();
   bindEditListeners();
   bindFineTuneListeners();
-  // bindNewAssetListeners();
+  bindNewAssetListeners();
   bindResumeShowListeners();
   bindResumeIndexListeners();
   openingAnimation();
+  bindWebsiteListeners();
 })
 
 var openingAnimation =   function(){
@@ -23,7 +24,7 @@ var openingAnimation =   function(){
 // ASSET INDEX ASSET INDEX ASSET INDEX ASSET INDEX ASSET INDEX ASSET INDEX
 var bindAssetListeners = function() {
   $(document).on("click", '.tag-button', toggleTag );
-  $('.asset-resume').on("click", addAsset );
+  $(document).on("click", '.asset-resume', addAsset );
 }
 
 var toggleTag = function(e) {
@@ -35,7 +36,6 @@ var toggleTag = function(e) {
 }
 
 var toggleAssets = function(tagID, visible) {
-  console.log(tagID);
   var assetDivs = $(".asset-container");
   for (var i = 0; i < assetDivs.length; i++) {
     if ($(assetDivs[i]).attr("tags").includes("|" + tagID + "|") == true) {
@@ -51,17 +51,13 @@ var toggleAssets = function(tagID, visible) {
 
 var addAsset = function(e) {
   e.preventDefault();
-  console.log("Add Asset Button Clicked");
-  console.log(this);
   var button = $(this);
   var resumeId = $('#resumeID').attr("resume_id");
-  console.log(resumeId);
   var data = {
     current_user_id: $(this).attr("current_user_id"),
     data_asset_id: $(this).attr("data-asset-id"),
     data_asset_type: $(this).attr("data-asset-type"),
   };
-  console.log(data);
   $.ajax({
     accepts: "application/json",
     url: "/users/" + data.current_user_id + "/resumes/" + resumeId,
@@ -69,8 +65,6 @@ var addAsset = function(e) {
     data: data
   })
   .done(function(response) {
-    console.log("Successful Patch");
-    console.log(response);
     if (response["update_status"] === "added") {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
@@ -91,9 +85,8 @@ var addAsset = function(e) {
 // DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS DETAIL EVENTS
 
 var bindDetailEvents = function (){
-  $('body').on("click", '#add_detail', AddDetailInput);
-  $('body').on("click", '#remove_detail', RemoveDetailInput);
-
+  $(document).on("click", '#add_detail', AddDetailInput);
+  $(document).on("click", '#remove_detail', RemoveDetailInput);
 }
 
 var AddDetailInput = function(e) {
@@ -111,8 +104,8 @@ var RemoveDetailInput = function(e) {
 // ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT ASSET EDIT
 
 var bindEditListeners = function (){
-  $('body').on("click", '.edit-popup', editPopup );
-  $('body').on("click", '.delete-popup', deletePopup);
+  $(document).on("click", '.edit-popup', editPopup );
+  $(document).on("click", '.delete-popup', deletePopup);
   $("#delete-confirm").hide()
 }
 
@@ -195,7 +188,6 @@ var deletePopup = function(event) {
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
   var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
-  console.log(uri);
   deleteDialog = $("#delete-confirm").dialog({
     resizable:false,
     height:200,
@@ -226,7 +218,7 @@ var deleteAsset = function(assetType, assetId) {
 // FINE TUNE FINE TUNE FINE TUNE FINE TUNE FINE TUNE FINE TUNE
 
 var bindFineTuneListeners = function(){
-  $("body").on("click", ".fine-tune-button", loadFineTuneForm);
+  $(document).on("click", ".fine-tune-button", loadFineTuneForm);
 }
 
 var loadFineTuneForm = function(e){
@@ -244,124 +236,126 @@ var loadFineTuneForm = function(e){
 }
 // END FINE TUNE END FINE TUNE END FINE TUNE END FINE TUNE
 // NEW ASSET NEW ASSET NEW ASSET NEW ASSET NEW ASSET NEW ASSET
-// var newAssetsView = function(){}
-// var newAssets = new newAssetsView();
-
-// var bindNewAssetListeners = function(){
-//   $('.asset-type-button').on("click", toggleAssetTypes);
-//   $('#form-container').on("submit", 'form', newAssets.saveForm);
-//   newAssets.addTags();
-//   debugger;
-// }
-
-
-// newAssetsView.prototype.addTags = function(){
-//   var availableTags = JSON.parse($("#tag-names").attr("data-tag-names")) || []
-//   function split( val ) {
-//       return val.split( /,\s*/ );
-//   }
-//   function extractLast( term ) {
-//       return split( term ).pop();
-//   }
-//   $("#tags")
-//   // don't navigate away from the field on tab when selecting an item
-//   .bind( "keydown" ,function( event ) {
-//     console.log("typed")
-//     if ( event.keyCode === $.ui.keyCode.TAB &&
-//         $( this ).autocomplete( "instance" ).menu.active ) {
-//                 event.preventDefault();
-//     }
-//   })
-//   .autocomplete({
-//     minLength: 0,
-//     source: function( request, response ) {
-//       // delegate back to autocomplete, but extract the last term
-//       response( $.ui.autocomplete.filter(
-//         availableTags, extractLast( request.term ) ) );
-//     },
-//     focus: function() {
-//       // prevent value inserted on focus
-//       return false;
-//     },
-//     select: function( event, ui ) {
-//       var terms = split( this.value );
-//       // remove the current input
-//       terms.pop();
-//       // add the selected item
-//       terms.push( ui.item.value );
-//       // add placeholder to get the comma-and-space at the end
-//       terms.push( "" );
-//       this.value = terms.join( ", " );
-//       return false;
-//     }
-//   });
-// }
-
-// newAssetsView.prototype.loadForm = function(event){
-//   tinyMCE.remove();
-//   var uri = $(event.currentTarget).attr("href");
-//   $.ajax({url: uri, method: "GET", context: this}).done(function(response){
-//     setTimeout(function(){
-//       $('#form-container').html(response);
-//       $('#form-container').fadeIn(250, function(){
-//         //animation here
-//       })
-//     },250)
-//     this.addTags();
-//   })
-// }
-
-// newAssetsView.prototype.saveForm = function(event){
-//   event.preventDefault();
-//   if  (event.currentTarget.className.search("edit")<0){
-//     var data = $('form').serialize()
-//     var tags = $('input#tags')[0].value
-//     var uri = event.target.action
-//     $.ajax({url: uri, method: "POST", data: data}).done(function(response){
-//       console.log(response)
-//       var response = response
-//       response["tag_names"]=tags
-//       var data = {tagging: response}
-//       console.log(response)
-//       var uri = window.location.pathname.replace("/assets/new", "")
-//       var uri = uri.replace("/assets", "")
-//       var uri = uri + "/taggings"
-//       $.ajax({url: uri, method: "POST", data: data}).done(function(response){
-//         console.log(response)
-//         $("#form-container").fadeOut(250, function(){
-//           $('#form-container').html("");
-//         })
-//         setTimeout(function(){
-//           $('.saved').fadeIn(250, function(){
-//             //animation complete
-//           })
-//         }, 300)
-//       })
-//     })
-//   }
-// }
+var newAssetsView = function(){}
 
 
 
-// var toggleAssetTypes = function(e){
-//     e.preventDefault();
-//     $(e.target.parentNode.children).removeClass("button-selected");
-//     $(e.target).addClass("button-selected");
-//     $(e.target).blur();
-//     $('.saved').fadeOut(250, function(){
-//             //animation complete
-//     })
-//     newAssets.loadForm(e);
-// }
+newAssetsView.prototype.loadForm = function(event){
+  tinyMCE.remove();
+  var uri = $(event.currentTarget).attr("href");
+  $.ajax({url: uri, method: "GET", context: this}).done(function(response){
+      $('#form-container').html(response);
+    setTimeout(function(){
+      $('#form-container').fadeIn(250, function(){
+        newAssets.addTags();
+        //animation here
+      })
+    },250)
+  })
+}
+
+newAssetsView.prototype.saveForm = function(event){
+  event.preventDefault();
+  if  (event.currentTarget.className.search("edit")<0){
+    var data = $('form').serialize()
+    var tags = $('input#tags')[0].value
+    var uri = event.target.action
+    $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+      console.log(response)
+      var response = response
+      response["tag_names"]=tags
+      var data = {tagging: response}
+      console.log(response)
+      var uri = window.location.pathname.replace("/assets/new", "")
+      var uri = uri.replace("/assets", "")
+      var uri = uri + "/taggings"
+      $.ajax({url: uri, method: "POST", data: data}).done(function(response){
+        console.log(response)
+        $("#form-container").fadeOut(250, function(){
+          $('#form-container').html("");
+        })
+        setTimeout(function(){
+          $('.saved').fadeIn(250, function(){
+            //animation complete
+          })
+        }, 300)
+      })
+    })
+  }
+}
 
 
+newAssetsView.prototype.toggleActiveAsset = function(e){
+    e.preventDefault();
+    $(e.target.parentNode.children).removeClass("button-selected");
+    $(e.target).addClass("button-selected");
+    $(e.target).blur();
+    $('.saved').fadeOut(250, function(){
+            //animation complete
+    })
+    newAssets.loadForm(e);
+}
+
+newAssetsView.prototype.addTags = function(){
+  var availableTags = JSON.parse($("#tag-names").attr("data-tag-names")) || []
+  function split( val ) {
+      return val.split( /,\s*/ );
+  }
+  function extractLast( term ) {
+      return split( term ).pop();
+  }
+  $("#tags")
+  // don't navigate away from the field on tab when selecting an item
+  .bind( "keydown" ,function( event ) {
+    console.log("typed")
+    if ( event.keyCode === $.ui.keyCode.TAB &&
+        $( this ).autocomplete( "instance" ).menu.active ) {
+                event.preventDefault();
+    }
+  })
+  .autocomplete({
+    minLength: 0,
+    source: function( request, response ) {
+      // delegate back to autocomplete, but extract the last term
+      response( $.ui.autocomplete.filter(
+        availableTags, extractLast( request.term ) ) );
+    },
+    focus: function() {
+      // prevent value inserted on focus
+      return false;
+    },
+    select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+    }
+  });
+}
+
+var newAssets = new newAssetsView();
+
+var bindNewAssetListeners = function(){
+  $(document).on("click", '.asset-type-button', newAssets.toggleActiveAsset);
+  $('#form-container').on("submit", 'form', newAssets.saveForm);
+}
 // END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW
 var bindResumeShowListeners = function (){
   addSortable();
+<<<<<<< HEAD
   $('#save-resume-button').on('click', saveSortedResume);
   $('.asset-portlet').on('mouseup', changeResumeSize)
   $('#print-resume-button').on('click', printResume)
+=======
+  $(document).on('click', '#save-resume-button', saveSortedResume);
+  $(document).on('mouseup', '.asset-portlet', changeResumeSize)
+>>>>>>> 86ca69117be92601b3f654206a4c776bb619aba3
 
 }
 
@@ -384,10 +378,7 @@ var addSortable = function(){
 
 var saveSortedResume = function(e){
     e.preventDefault();
-    console.log('Save resume button')
-    // save to database as template
-    var resumeTemplate = $('.resume-template')[0].innerHTML
-    // debugger;
+
     var assetNodes = $('.panel.panel-default')
     for(var i = 0; i < assetNodes.length; i++){
 
@@ -410,15 +401,14 @@ var saveSortedResume = function(e){
   }
 var changeResumeSize = function(){
   var sections = $('.resume-section')
-    // debugger;
   for (var i =0 ; i < sections.length; i++){
     var sectionCount = sections[i].children.length;
     if (sectionCount > 6){
       sections[i].style.height = '100%'
-      console.log('making heigh 100')
+      // console.log('making heigh 100')
     } else {
       sections[i].style.height = ''
-      console.log('making heigh blank')
+      // console.log('making heigh blank')
     }
   }
  }
@@ -426,7 +416,7 @@ var changeResumeSize = function(){
 // END RESUME SHOW END RESUME SHOW END RESUME SHOW END RESUME SHOW
 // RESUME INDEX RESUME INDEX RESUME INDEX RESUME INDEX RESUME INDEX
 var bindResumeIndexListeners = function() {
-  $('#new-resume-button').on("click", newResume);
+  $(document).on("click", '#new-resume-button', newResume);
 }
 
 var newResume = function(e) {
@@ -450,4 +440,48 @@ var newResume = function(e) {
 }
 
 // END RESUME INDEX END RESUME INDEX END RESUME INDEX END RESUME INDEX
+// USER SHOW PAGE USER SHOW PAGE USER SHOW PAGE USER SHOW PAGE USER SHOW PAGE
+var bindWebsiteListeners = function() {
+  $(document).on("click", '#new-website-button', newWebsite);
+  $(document).on('submit', '#new-website-form', submitWebsite)
+}
 
+var newWebsite = function(e) {
+  e.preventDefault();
+  var userId = this.attributes.user_id.value;
+  $.ajax({
+    url: "/users/" + userId + "/websites/new",
+    method: "GET"
+  })
+  .done(function(response) {
+    $('#new-website-form').append(response);
+    $('#new-website-button').prop("disabled",true);
+  }).fail(function(response) {
+    console.log("Failed GET");
+  })
+}
+
+var submitWebsite = function(e) {
+  e.preventDefault();
+  var userId = $('#new-website-button')[0].attributes.user_id.value;
+
+  var data = $("#new-website-form").serialize();
+  debugger;
+  $.ajax({
+    url: "/users/" + userId + "/websites",
+    method: "POST",
+    data: data
+  }).done(function(response) {
+    var data = response
+    var template = $('#individual-template')[0].innerHTML
+    var compileTemplate = Handlebars.compile(template);
+    var compiler = compileTemplate(data);
+    $('#user-information tbody').append(compiler);
+    $('#new-website-form form').remove();
+    $('#new-website-button').prop("disabled",false);
+
+  }).fail(function(response) {
+    console.log("Failed GET");
+  })
+}
+// END USER SHOW PAGE END USER SHOW PAGE END USER SHOW PAGE END USER SHOW PAGE

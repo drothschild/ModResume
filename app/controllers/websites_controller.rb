@@ -10,6 +10,12 @@ class WebsitesController < ApplicationController
     render :json => @website
   end
 
+  def destroy
+    @website = Website.find(params[:id])
+    @website.destroy
+    render nothing: true, status: 200, content_type: "text/html"
+  end
+
   private
 
   def website_params

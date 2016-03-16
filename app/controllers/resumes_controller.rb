@@ -13,6 +13,7 @@ class ResumesController < ApplicationController
   end
 
   def show
+    session[:edit_asset] = false
     @tags = Tag.all
     @resume = Resume.find(params[:id])
     @assets = {}

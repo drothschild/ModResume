@@ -20,6 +20,5 @@
           %td= link_to resume.target_job, user_resume_path(user_id: current_user.id, id: resume.id)
           %td= resume.updated_at.to_datetime.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%Y  %l:%M %p")
           %td=link_to 'Edit Asset', edit_user_resume_path(current_user.id, resume.id)
-          %td Edit Text
+          -# %td=link_to 'Edit Text', user_resume_fine_tune_path(resume)
           %td= link_to 'Delete', user_resume_path(user_id: current_user.id, id: resume.id), method: :delete
-

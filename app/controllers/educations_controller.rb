@@ -61,7 +61,7 @@ class EducationsController < ApplicationController
 
   def destroy
     @education = Education.find(params[:id])
-    @education.delete
+    @education.destroy
     render nothing: true, status: 200, content_type: "text/html"
   end
 

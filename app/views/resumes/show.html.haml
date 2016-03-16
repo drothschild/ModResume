@@ -1,12 +1,17 @@
 .page-header.text-center
   %h4#resume-show-instructions
     Drag your assets to your resume, then
+    %button.btn.btn-default#print-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+      Print?
+
     %button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
       Save
     &
     %a.btn.btn-default.fine-tune-button{href: user_resume_save_document_data_path(@resume)} Fine Tune
   %h4.resume-fine-tune
     Edit your text here, then print!
+    %button.btn.btn-default#print-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}Print?
+
 
 .sortable-wrapper
 
@@ -68,6 +73,7 @@
 
 
     .col-md-6.col-s-6.resume-content.library
+      #trashcan.resume-content
       -@asset_types = asset_types
       -@asset_types.each do |asset_type|
         .asset-portlet

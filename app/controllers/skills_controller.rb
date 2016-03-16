@@ -38,7 +38,7 @@ class SkillsController < ApplicationController
     @skill.update(pass_params)
     if @skill.save
         addDescriptions(@skill, detail_attributes)
-        render partial: 'show', locals: {asset: @skill, asset_type: "Skills"}
+        render partial: 'show', locals: {asset: @skill, asset_type: "skills"}
     else
       flash.now[:danger] = @skill.errors.full_messages
       render :edit
@@ -47,7 +47,7 @@ class SkillsController < ApplicationController
 
  def destroy
     @skill = Skill.find(params[:id])
-    @skill.delete
+    @skill.destroy
     render nothing: true, status: 200, content_type: "text/html"
 end
 

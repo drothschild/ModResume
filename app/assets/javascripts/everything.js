@@ -383,10 +383,6 @@ var addSortable = function(){
 
 var saveSortedResume = function(e){
     e.preventDefault();
-    console.log('Save resume button')
-    // save to database as template
-    var resumeTemplate = $('.resume-template')[0].innerHTML
-    // debugger;
     var assetNodes = $('.panel.panel-default')
     for(var i = 0; i < assetNodes.length; i++){
 
@@ -414,10 +410,10 @@ var changeResumeSize = function(){
     var sectionCount = sections[i].children.length;
     if (sectionCount > 6){
       sections[i].style.height = '100%'
-      console.log('making heigh 100')
+      // console.log('making heigh 100')
     } else {
       sections[i].style.height = ''
-      console.log('making heigh blank')
+      // console.log('making heigh blank')
     }
   }
  }

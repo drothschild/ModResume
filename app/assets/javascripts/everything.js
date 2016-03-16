@@ -1,15 +1,16 @@
-$(document).ready(function(){
+$(document).on('page:change', function(event){
   console.log("hello!");
   bindAssetListeners();
   bindDetailEvents();
   bindEditListeners();
   bindFineTuneListeners();
-  bindNewAssetListeners();
   bindResumeShowListeners();
   bindResumeIndexListeners();
   openingAnimation();
   bindWebsiteListeners();
+  bindNewAssetListeners();
 })
+
 
 var openingAnimation =   function(){
   setTimeout(function(){
@@ -52,6 +53,7 @@ var toggleAssets = function(tagID, visible) {
 var addAsset = function(e) {
   e.preventDefault();
   var button = $(this);
+  $(this).blur();
   var resumeId = $('#resumeID').attr("resume_id");
   var data = {
     current_user_id: $(this).attr("current_user_id"),
@@ -352,6 +354,7 @@ var bindResumeShowListeners = function (){
   $(document).on('click', '#print-resume-button', printResume);
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
+  $(document).on('sortover', '#trashcan', deleteResumeAsset)
 }
 
 var addSortable = function(){
@@ -369,6 +372,11 @@ var addSortable = function(){
     tolerance: "pointer"
   })
   $( ".resume-template" ).resizable();
+}
+
+var deleteResumeAsset = function(e){
+  console.log(e.toElement)
+  $(e.toElement).parent().children().last().children().last().attr("id")
 }
 
 var saveSortedResume = function(e){
@@ -400,10 +408,8 @@ var changeResumeSize = function(){
     var sectionCount = sections[i].children.length;
     if (sectionCount > 6){
       sections[i].style.height = '100%'
-      // console.log('making heigh 100')
     } else {
       sections[i].style.height = ''
-      // console.log('making heigh blank')
     }
   }
  }

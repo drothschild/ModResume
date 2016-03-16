@@ -55,4 +55,14 @@ module ApplicationHelper
     @asset_types = ["objectives", "experiences", "projects", "educations", "skills", "volunteerings"]
   end
 
+  def asset_type_grammar(asset_type)
+    grammar_hash =  { "objectives" =>"Objective",
+                      "experiences" =>"Experience",
+                      "projects"=>"Projects",
+                      "educations"=>"Education",
+                      "skills"=>"Skills",
+                      "volunteerings"=>"Volunteer"
+                    }
+    grammar_hash[asset_type]
+  end
 end

@@ -182,7 +182,7 @@ var editAsset = function(assetType, assetId) {
   var assetToUpdate = "#" + assetType + "_" + assetId;
   if (assetType === "objectives") {
     tinyMCE.triggerSave();
-    
+
   }
   var uri = $('form').attr('action');
   var data = $('form').serialize();
@@ -532,6 +532,7 @@ var newResume = function(e) {
 var bindWebsiteListeners = function() {
   $(document).on("click", '#new-website-button', newWebsite);
   $(document).on('submit', '#new-website-form', submitWebsite)
+  $(document).on('click', '.delete-website', deleteWebsite)
 }
 
 var newWebsite = function(e) {
@@ -570,5 +571,20 @@ var submitWebsite = function(e) {
   }).fail(function(response) {
     console.log("Failed GET");
   })
+}
+
+var deleteWebsite = function(e) {
+  e.preventDefault();
+  var websiteID = this.attributes.website_id.value;
+  var userId = $('#new-website-button')[0].attributes.user_id.value;
+  $.ajax({
+    url: '/users/'+ userId + '/websites/'+ websiteID,
+    method: 'Delete'
+  }).done(function(response){
+    $("#website_"+websiteID).remove();
+  }).fail(function(response){
+    console.log(response);
+  })
+
 }
 // END USER SHOW PAGE END USER SHOW PAGE END USER SHOW PAGE END USER SHOW PAGE

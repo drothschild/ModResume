@@ -197,8 +197,8 @@ var editPopup = function(event) {
     close: function(){
         if (assetType === ("objectives")){
     tinyMCE.remove();
-          };  
-        } 
+          };
+        }
     });
 };
 
@@ -292,7 +292,7 @@ var deletePopup = function(event) {
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
   var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
-  
+
   deleteDialog = $("#delete-confirm").dialog({
     resizable:false,
     height:200,
@@ -332,7 +332,7 @@ var loadFineTuneForm = function(e){
   tinyMCE.remove();
   var data = $('.resume-template').html();
   var uri = $(this).attr("href");
-  
+
   $.ajax({url: uri, method: "POST", data: {document_data: data}}).done(function(response){
     $("#resume-show-instructions").hide();
     $(".resume-fine-tune").show();
@@ -447,11 +447,21 @@ newAssetsView.prototype.addTags = function(){
   });
 }
 
+newAssetsView.prototype.loadLinkedIn = function (){
+  console.log("click")
+  $("#new-assets-header").fadeOut(250, function(){
+    $('.linked-in').fadeIn(250, function(){
+      //animation complete
+    })
+  })
+}
+
 var newAssets = new newAssetsView();
 
 var bindNewAssetListeners = function(){
   $(document).on("click", '.asset-type-button', newAssets.toggleActiveAsset);
   $('#form-container').on("submit", 'form', newAssets.saveForm);
+  $(document).on("click", "#import-assets-button", newAssets.loadLinkedIn)
 }
 // END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW

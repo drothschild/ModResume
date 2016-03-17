@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def upload
-    binding.pry
+
     uploaded_file = params[:user][:linked_in]
     reader = PDF::Reader.new(params[:user][:linked_in].tempfile.path)
     PdfHelper.parse_pdf(reader, current_user)

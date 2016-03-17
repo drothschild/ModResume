@@ -495,7 +495,6 @@ var deleteResumeAsset = function(e){
   var selectedAsset = $(e.toElement).parent().find('.panel').attr("id").split("_")
   var data = {data_asset_type: selectedAsset[0], data_asset_id: selectedAsset[1]}
   var uri = window.location.href
-  debugger;
   $.ajax({url: uri, method: "PATCH", data}).done(function(response){
     console.log(response)
     $(selectedElement).remove();

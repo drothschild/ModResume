@@ -446,11 +446,21 @@ newAssetsView.prototype.addTags = function(){
   });
 }
 
+newAssetsView.prototype.loadLinkedIn = function (){
+  console.log("click")
+  $("#new-assets-header").fadeOut(250, function(){
+    $('.linked-in').fadeIn(250, function(){
+      //animation complete
+    })
+  })
+}
+
 var newAssets = new newAssetsView();
 
 var bindNewAssetListeners = function(){
   $(document).on("click", '.asset-type-button', newAssets.toggleActiveAsset);
   $('#form-container').on("submit", 'form', newAssets.saveForm);
+  $(document).on("click", "#import-assets-button", newAssets.loadLinkedIn)
 }
 // END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET END NEW ASSET
 // RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW RESUME SHOW

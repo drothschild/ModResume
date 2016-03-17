@@ -1,7 +1,15 @@
 .page-header.text-center
-  %h4
-    Click an asset type to add a new asset.
+  %h4#new-assets-header
+    Click an asset type to add a new asset or &nbsp;
+    %button.btn.btn-default#import-assets-button{type: "button"} Import from LinkedIn PDF
     %p
+  .linked-in
+    / = form_tag( {action: :upload}, :controller => :users, multipart: true) do
+    /   = file_field_tag "linked_in", class: "btn btn-default pull-center"
+    /   = submit_tag 'Import', class: "btn btn-default"
+    = form_for :user, :url => {:controller => 'users', :action => 'upload'} do |f|
+      =f.file_field "linked_in", class: "btn btn-default pull-center"
+      =f.submit 'Import', class: "btn btn-default"
 
 
 -tag_names = all_tag_names

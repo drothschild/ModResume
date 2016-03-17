@@ -30,11 +30,14 @@ class EducationsController < ApplicationController
     @education = current_user.educations.new(pass_params)
     if @education.save
       addDescriptions(@education, detail_attributes)
+      respond_to do |format|
+        format.json{render :json => {taggable_type: "Education", taggable_id: @education.id}}
+        format.html{redirect_to new_user_asset_path}
+      end
     else
       flash.now[:danger] = @education.errors.full_messages
       render :new
     end
-    render :json => {taggable_type: "Education", taggable_id: @education.id}
   end
 
   def update

@@ -1,8 +1,4 @@
 class SkillsController < ApplicationController
-
-
-
-
   def new
     @user = current_user
     @skill = Skill.new
@@ -20,11 +16,10 @@ class SkillsController < ApplicationController
 
   def create
     @skill = current_user.skills.new(skill_params)
-    if @skill.save
-      render :json => {taggable_type: "Skill", taggable_id: @skill.id}
-    else
-      flash.now[:danger] = @skill.errors.full_messages
-      render :new
+    @skill.save
+    respond_to do |format|
+      format.json{render :json => {taggable_type: "Skill", taggable_id: @skill.id}}
+      format.html{redirect_to new_user_asset_path}
     end
   end
 

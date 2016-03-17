@@ -62,7 +62,7 @@ class ExperiencesController < ApplicationController
 private
 
     def experience_params
-      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :tags_string, :descriptions_attributes => [:detail])
+      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
     end
 
 end

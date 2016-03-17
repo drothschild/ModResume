@@ -33,7 +33,6 @@ var editPopup = function(event) {
     };
   })
 
-
   dialog = $("#edit-form").dialog({
     autoOpen: false,
     modal:true,

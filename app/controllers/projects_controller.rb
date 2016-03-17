@@ -26,7 +26,6 @@ class ProjectsController < ApplicationController
 
 
   def create
-    p project_params
     pass_params = project_params
     detail_attributes = pass_params.delete(:details) || []
     @project = current_user.projects.new(pass_params)

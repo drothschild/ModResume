@@ -59,7 +59,7 @@ class EducationsController < ApplicationController
   private
 
   def education_params
-    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :tags_string, :details =>[:detail], :descriptions_attributes => [:detail])
+    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus,:details =>[:detail], :descriptions_attributes => [:detail])
   end
 
 end

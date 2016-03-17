@@ -7,7 +7,7 @@ module PdfHelper
     reader.pages.each do |page|
       page_array = page.text.split("\n")
       page_array.each do |line|
-        all_lines << line if line != ""
+        all_lines << line.gsub("Page", "") if line != ""
       end
     end
 
@@ -69,9 +69,9 @@ module PdfHelper
     education_sections = array.each_slice(2).to_a
     education_sections.each do |subarray|
       study_dates = subarray.split(",")
-      completion = "January " + study_dates[3].split("").last(4).join
+      # completion = "January " + study_dates[3].split("").last(4).join
 
-      user.educations << Education.create(institution_name: subarray[0], focus: study_dates[0], completion: Date.parse(completion))
+      user.educations << Education.create(institution_name: subarray[0], focus: study_dates[0], completion: Date.today)
     end
 
   end

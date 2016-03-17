@@ -63,14 +63,12 @@ a.tag-button
 
 // END ASSET INDEX PAGE
 // NEW ASSET PAGE
+
 .saved
   display: none
 
 #form-container
   margin-top: 1em
-  // border: 1px solid white
-  // border-radius: 1%
-  // padding: 5px
   display: none
 
 #form-container-edit
@@ -93,6 +91,10 @@ a.tag-button
 #input-full-width
   width: 85%
   margin-bottom: 10px
+
+@media (min-width: 768px)
+.form-inline .form-control
+  @extend #input-full-width
 
 #experience_details__detail
   @extend #input-full-width

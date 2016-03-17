@@ -183,15 +183,22 @@ var editPopup = function(event) {
   dialog = $("#edit-form").dialog({
     autoOpen: false,
     modal:true,
-    width:  700,
+    width:  725,
     height: 650,
     dialogClass : "modal-lg",
-    buttons: {"Update":function (){
-      editAsset(assetType, assetId);
-    },
-    Cancel: function(){
-      dialog.dialog("close");
-      }
+    buttons: {
+      "Update": { text: "Update",
+                  class: "btn btn-default",
+                  click: function(){
+                    editAsset(assetType, assetId);
+                  },
+        },
+        Cancel: { text: "Cancel",
+                  class: "btn btn-default",
+                  click: function(){
+                    dialog.dialog("close");
+                  },
+        },
     },
     close: function(){
         if (assetType === ("objectives")){

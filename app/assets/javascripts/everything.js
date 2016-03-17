@@ -3,7 +3,6 @@ $(document).on('page:change', function(event){
 })
 
 
-
 $(document).ready(function(event){
   console.log("hello!");
   bindAssetListeners();
@@ -545,7 +544,11 @@ var bindResumeIndexListeners = function() {
 }
 
 var newResume = function(e) {
-  var userId = $('.navbar-text').attr("user_id");
+
+  e.preventDefault();
+  var userlink = $('#user_info a')[0].href;
+  var userId = userlink.match(/\d*$/);
+
   $.ajax({
     url: "/users/" + userId + "/resumes/new",
     method: "GET"

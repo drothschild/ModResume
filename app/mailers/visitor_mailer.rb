@@ -4,7 +4,7 @@ class VisitorMailer < ApplicationMailer
     @email = email
     @message = message
     mail(from: ENV['SENDGRID_USERNAME'],
-         to: '@email',
-         subject: 'New User\'s Email')
+         to: @email,
+         subject: 'Resume')
   end
 end

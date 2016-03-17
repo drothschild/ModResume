@@ -37,7 +37,7 @@
                     =link_to 'My Assets', user_assets_reset_path(current_user)
                   %li
                     =link_to 'Logout', destroy_user_session_path, method: :delete
-                  %li
+                  %li#user_info
                     =link_to "Welcome, #{current_user.first_name} #{current_user.last_name}", user_path(current_user)
                 -else
                   = render 'sessions/new'

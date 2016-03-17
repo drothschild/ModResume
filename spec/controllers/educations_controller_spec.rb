@@ -17,26 +17,26 @@ describe EducationsController, controller: true do
   end
 
 
-  describe "GET Index" do
+  # describe "GET Index" do
 
-    it "should display an index" do
-      get :index
-      expect(response).to be_success
-    end
-    it "should have some items on the index" do
-      education = FactoryGirl.create(:education)
-       education.user = @user
-       education.save
-       p education
-       get :index
-       expect(assigns (:educations)).to match_array([education])
-    end
+  #   it "should display an index" do
+  #     get :index
+  #     expect(response).to be_success
+  #   end
+  #   it "should have some items on the index" do
+  #     education = FactoryGirl.create(:education)
+  #      education.user = @user
+  #      education.save
+  #      p education
+  #      get :index
+  #      expect(assigns (:educations)).to match_array([education])
+  #   end
 
-  end
+  # end
 
   describe "get new" do
     it "assigns a new education to @education" do
-      get :new
+      get :new, :user_id => @user.id
       expect(assigns(:education)).to be_a_new(Education)
     end
 

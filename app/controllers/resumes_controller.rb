@@ -13,10 +13,12 @@ class ResumesController < ApplicationController
   end
 
   def show
+    session[:edit_asset] = false
     @tags = Tag.all
     @resume = Resume.find(params[:id])
     @assets = {}
     @asset_types = asset_types
+    session[:new_resume_id] = @resume.id
 
     @asset_types.each do |asset_type|
       @assets["#{asset_type}"] = []
@@ -62,7 +64,7 @@ class ResumesController < ApplicationController
     render partial: 'fine_tune', resume: @resume
   end
 
-  def update
+  def update    
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
     asset_resumes = asset_type.constantize.find(params[:data_asset_id]).resumes

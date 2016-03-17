@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :require_login
 
   def asset_types
     @asset_types = ["objectives", "experiences", "projects", "educations", "skills", "volunteerings"]
@@ -35,11 +36,33 @@ class ApplicationController < ActionController::Base
     user_resumes_path(resource)
   end
 
+  def require_login
+
+    
+
+  end
+
   protected
+
+
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone_number) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password, :first_name, :last_name, :phone_number) }
   end
+
+  private
+
+  def require_login
+    if current_user == nil
+      flash[:notice] = "You must be logged in to access this section"
+      redirect_to :new_user_session
+    elsif params[:user_id] != nil && params[:user_id].to_i != current_user.id
+      flash[:notice] = "You must be logged in to access this section"
+      redirect_to :root
+    end
+
+  end
+
 
 end

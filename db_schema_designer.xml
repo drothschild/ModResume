@@ -284,6 +284,9 @@
 <row name="user_sort" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>0</default></row>
+<row name="div_sort" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -311,6 +314,7 @@
 <relation table="skills" row="id" />
 <relation table="volunteerings" row="id" />
 <relation table="educations" row="id" />
+<relation table="resume_assets" row="id" />
 </row>
 <row name="description_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>

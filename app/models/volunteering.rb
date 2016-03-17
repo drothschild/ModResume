@@ -7,4 +7,8 @@ class Volunteering < ActiveRecord::Base
   has_many :descriptions, through: :describings, dependent: :destroy
   has_many :describings, as: :describable
   accepts_nested_attributes_for :descriptions, :allow_destroy => true
+
+  validates :organization, presence: true
+  validates :title, presence: true
+  validates :user_id, presence: true
 end

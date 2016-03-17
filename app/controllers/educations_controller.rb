@@ -1,7 +1,7 @@
 class EducationsController < ApplicationController
   def index
 
-    @user = User.find(current_user.id)
+    @user = current_user
     @educations = @user.educations
   end
 
@@ -10,7 +10,7 @@ class EducationsController < ApplicationController
   end
 
   def new
-    @user = User.find(current_user.id)
+    @user = current_user
     @education = Education.new
     @description  = Description.new
     @tags_list = []
@@ -19,7 +19,7 @@ class EducationsController < ApplicationController
 
   def edit
     @education = Education.find(params[:id])
-    @user = User.find(current_user.id)
+    @user = current_user
     @tags_list = @education.tags.order("name").map{|t| t.name}.join(", ")
     render partial: 'form'
   end
@@ -31,8 +31,8 @@ class EducationsController < ApplicationController
     if @education.save
       addDescriptions(@education, detail_attributes)
     else
-      flash.now[:danger] = @education.errors.full_messages
-      render :new
+      flash.now[:notice] = @education.errors.full_messages
+
     end
     render :json => {taggable_type: "Education", taggable_id: @education.id}
   end
@@ -46,7 +46,7 @@ class EducationsController < ApplicationController
     if @education.save
       addDescriptions(@education, detail_attributes)
     else
-      flash.now[:danger] = @education.errors.full_messages
+      flash.now[:notice] = @education.errors.full_messages
       render :edit
     end
     render partial: 'show', locals: {asset: @education, asset_type: "educations", asset_descriptions: @education.descriptions}

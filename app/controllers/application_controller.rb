@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
 
   def set_assets
-    @user = User.find(current_user.id)
+    @user = current_user
     @asset_types.each do |asset_type|
       @assets["#{asset_type}"] = []
       resume_assets = ResumeAsset.where("resume_id=? AND buildable_type=?", params[:id], asset_type.capitalize.singularize)
@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
   end
+
   def parse_tags_names(words)
     word_list = words.split(',')
     tags = []

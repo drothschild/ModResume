@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include PdfHelper
   skip_before_action :require_login
   def show
-    @user = User.find(current_user.id)
+    @user = current_user
     @new_website = Website.new(user_id: current_user.id)
   end
 

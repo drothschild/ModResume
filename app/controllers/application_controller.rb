@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
   end
+  
   def parse_tags_names(words)
     word_list = words.split(',')
     tags = []

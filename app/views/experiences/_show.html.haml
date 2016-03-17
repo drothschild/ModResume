@@ -14,7 +14,7 @@
       %ul
         - asset_descriptions.each do |description|
           %li
-            -if current_url.include?("asset")
+            -if session[:edit_asset] == true
               = check_box_tag "description_#{description.id}", description.id, check_description(session[:new_resume_id], asset.id, description.id), class: "asset-check-box #{asset_type}-#{asset.id}-descriptions", parent_class: "Experience_#{asset.id}"
             = description.detail
         %em= asset.location

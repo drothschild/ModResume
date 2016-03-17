@@ -13,6 +13,7 @@ class ResumesController < ApplicationController
   end
 
   def show
+    session[:edit_asset] = false
     @tags = Tag.all
     @resume = Resume.find(params[:id])
     @assets = {}
@@ -63,7 +64,7 @@ class ResumesController < ApplicationController
     render partial: 'fine_tune', resume: @resume
   end
 
-  def update
+  def update    
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
     asset_resumes = asset_type.constantize.find(params[:data_asset_id]).resumes

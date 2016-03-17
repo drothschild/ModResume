@@ -2,14 +2,14 @@
   %h4#resume-show-instructions
     Drag your assets to your resume, then
     %button.btn.btn-default#print-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
-      Print?
+      Print
+    or
 
     %button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
       Save
 
   %h4.resume-fine-tune
-    Edit your text here, then print!
-    %button.btn.btn-default#print-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}Print?
+    Edit your text here, then print from the file menu below!
 
 
 .sortable-wrapper

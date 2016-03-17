@@ -25,14 +25,11 @@ class EducationsController < ApplicationController
   end
 
   def create
-
     pass_params = education_params
     detail_attributes = pass_params.delete(:details) || []
     @education = current_user.educations.new(pass_params)
     if @education.save
-      detail_attributes.each do |detail_attrib|
-        description = @education.descriptions.create(detail_attrib)
-      end
+      addDescriptions(@education, detail_attributes)
     else
       flash.now[:danger] = @education.errors.full_messages
       render :new
@@ -42,16 +39,12 @@ class EducationsController < ApplicationController
 
   def update
     @education = Education.find(params[:id])
+    @education.descriptions.delete_all
     pass_params = education_params
     detail_attributes = pass_params.delete(:details) || []
     @education.update(pass_params)
     if @education.save
-      @education.descriptions.delete_all
-      detail_attributes.each do |detail_attrib|
-        if detail_attrib != ""
-          description = @education.descriptions.create(detail_attrib)
-        end
-      end
+      addDescriptions(@education, detail_attributes)
     else
       flash.now[:danger] = @education.errors.full_messages
       render :edit
@@ -68,7 +61,7 @@ class EducationsController < ApplicationController
   private
 
   def education_params
-    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :details =>[:detail])
+    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus, :details =>[:detail], :descriptions_attributes => [:detail])
   end
 
 end

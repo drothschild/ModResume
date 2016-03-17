@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
 
-    
+
 
   end
 
@@ -63,6 +63,14 @@ class ApplicationController < ActionController::Base
     end
 
   end
+
+    def addDescriptions(asset, descriptions)
+      descriptions.each do |description|
+        if description[:detail] != ""
+          asset.descriptions.create(description)
+        end
+      end
+    end
 
 
 end

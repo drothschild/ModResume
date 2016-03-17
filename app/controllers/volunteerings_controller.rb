@@ -25,13 +25,13 @@ class VolunteeringsController < ApplicationController
       addDescriptions(@volunteering, descriptions)
     else
       flash.now[:danger] = @volunteering.errors.full_messages
-      render :new
     end
     render :json => {taggable_type: "Volunteering", taggable_id: @volunteering.id}
   end
 
   def update
     @volunteering = Volunteering.find(params[:id])
+    @volunteering.descriptions.delete_all
     pass_params = volunteering_params
     detail_attributes = pass_params.delete(:details) || []
     @volunteering.update(pass_params)
@@ -39,7 +39,6 @@ class VolunteeringsController < ApplicationController
         addDescriptions(@volunteering, detail_attributes)
     else
       flash.now[:danger] = @volunteering.errors.full_messages
-      render :edit
     end
     render partial: 'show', locals: {asset: @volunteering, asset_type: "volunteerings", asset_descriptions: @volunteering.descriptions}
   end
@@ -53,13 +52,7 @@ class VolunteeringsController < ApplicationController
   private
 
     def volunteering_params
-      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :details =>[:detail])
+      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
     end
-    def addDescriptions(volunteering, descriptions)
-      descriptions.each do |description|
-        if description[:detail] != ""
-          volunteering.descriptions.create(description)
-        end
-      end
-    end
+
 end

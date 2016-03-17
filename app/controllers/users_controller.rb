@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     uploaded_file = params[:linked_in]
     reader = PDF::Reader.new(params[:linked_in].tempfile.path)
     PdfHelper.parse_pdf(reader, current_user)
-    redirect_to '/'
+    redirect_to user_assets_url(current_user)
   end
 
 end

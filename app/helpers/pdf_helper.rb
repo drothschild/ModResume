@@ -62,11 +62,27 @@ module PdfHelper
     make_objective(summary, user)
     make_skills(skills, user)
     make_experiences(experience, user)
-    make_
+    make_education(education, user)
+  end
 
-    p experience
+  def self.make_education(array, user)
+    education_sections = array.each_slice(2).to_a
+    education_sections.each do |subarray|
+      study_dates = subarray.split(",")
+      completion = "January " + study_dates[3].split("").last(4).join
 
-    # binding.pry
+      user.educations << Education.create(institution_name: subarray[0], focus: study_dates[0], completion: Date.parse(completion))
+    end
+
+  end
+
+  def self.make_dates(string)
+    return Date.today if string == nil
+    begin
+      Date.parse(string)
+    rescue ArgumentError
+      Date.today
+    end
   end
 
   def self.make_objective(array, user)
@@ -100,16 +116,8 @@ module PdfHelper
       end_date = dates[1].split("(")[0] if dates[1] != nil
       @experience.end_date = make_dates(end_date)
       @experience.descriptions << Description.create(detail: value[1..-1].join("").gsub("  ", ""))
+      @experience.user = user
       @experience.save
-    end
-  end
-
-  def self.make_dates(string)
-    return Date.today if string == nil
-    begin
-      Date.parse(string)
-    rescue ArgumentError
-      Date.today
     end
   end
 

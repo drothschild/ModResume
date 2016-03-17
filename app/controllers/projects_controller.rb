@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
       flash.now[:danger] = @project.errors.full_messages
       render :edit
     end
-    render partial: 'show', locals: {asset: @project, asset_type: "projects"}
+    render partial: 'show', locals: {asset: @project, asset_type: "projects", asset_descriptions: @project.descriptions}
   end
 
   def destroy

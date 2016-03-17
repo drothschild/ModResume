@@ -3,7 +3,6 @@ $(document).on('page:change', function(event){
 })
 
 
-
 $(document).ready(function(event){
   console.log("hello!");
   bindAssetListeners();
@@ -197,8 +196,8 @@ var editPopup = function(event) {
     close: function(){
         if (assetType === ("objectives")){
     tinyMCE.remove();
-          };  
-        } 
+          };
+        }
     });
 };
 
@@ -292,7 +291,7 @@ var deletePopup = function(event) {
   var assetId = event.currentTarget.dataset.assetId;
   var assetType = event.currentTarget.dataset.assetType;
   var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
-  
+
   deleteDialog = $("#delete-confirm").dialog({
     resizable:false,
     height:200,
@@ -332,7 +331,7 @@ var loadFineTuneForm = function(e){
   tinyMCE.remove();
   var data = $('.resume-template').html();
   var uri = $(this).attr("href");
-  
+
   $.ajax({url: uri, method: "POST", data: {document_data: data}}).done(function(response){
     $("#resume-show-instructions").hide();
     $(".resume-fine-tune").show();
@@ -536,7 +535,11 @@ var bindResumeIndexListeners = function() {
 }
 
 var newResume = function(e) {
-  var userId = $('.navbar-text').attr("user_id");
+
+  e.preventDefault();
+  var userlink = $('#user_info a')[0].href;
+  var userId = userlink.match(/\d*$/);
+
   $.ajax({
     url: "/users/" + userId + "/resumes/new",
     method: "GET"

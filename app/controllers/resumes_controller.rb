@@ -3,7 +3,7 @@ class ResumesController < ApplicationController
 
   def index
     if current_user
-      @resumes = Resume.where(user_id: current_user.id)
+      @resumes = Resume.where(user_id: current_user.id).order(:updated_at)
       @user = current_user
       @new_resume = Resume.new
     else
@@ -64,7 +64,7 @@ class ResumesController < ApplicationController
     render partial: 'fine_tune', resume: @resume
   end
 
-  def update    
+  def update
     asset_type = params[:data_asset_type].singularize.capitalize
     resume = Resume.find(params[:id])
     asset_resumes = asset_type.constantize.find(params[:data_asset_id]).resumes

@@ -14,11 +14,6 @@
 
 .sortable-wrapper
 
-  / %button.btn.btn-default#add-asset-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
-  /   =link_to 'Add asset', edit_user_resume_path
-
-
-
   .row
     .col-md-6.col-s-6
       %h2 Your Resume
@@ -42,50 +37,19 @@
 
       .row#divSection_2
         .col-md-12.col-s-12.resume-content.resume-top-content.resume-section
-          -@asset_types = asset_types
-          -@asset_types.each do |asset_type|
-            .asset-portlet
-              .nested-sort
-                .asset-portlet-content
-                -@assets["#{asset_type}"].each do |asset|
-                  - if (asset.div_sort == 2)
-                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
-
-
+          = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 2, asset_header: false
 
       .row#divSection_3
         .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
-          -@asset_types = asset_types
-          -@asset_types.each do |asset_type|
-            .asset-portlet
-              .nested-sort
-                .asset-portlet-content
-                -@assets["#{asset_type}"].each do |asset|
-                  - if (asset.div_sort == 3)
-                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
+          = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 3, asset_header: false
+
         #divSection_4
           .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
-            -@asset_types = asset_types
-            -@asset_types.each do |asset_type|
-              .asset-portlet
-                .nested-sort
-                  .asset-portlet-content
-                  -@assets["#{asset_type}"].each do |asset|
-                    - if (asset.div_sort == 4)
-                      =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
+            = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 4, asset_header: false
 
 
     .col-md-6.col-s-6.resume-content.library
-      -@asset_types = asset_types
-      -@asset_types.each do |asset_type|
-        .asset-portlet
-          .asset-portlet-header=asset_type_grammar(asset_type)
-          .nested-sort
-            .asset-portlet-content
-
-            -@assets["#{asset_type}"].each do |asset|
-              - if (asset.div_sort == 0)
-                =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
+      = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 0, asset_header: true
 
   %a.btn.btn-default.onwards-floater.floater-right.fine-tune-button{href: user_resume_save_document_data_path(@resume)}
     %i.fa.fa-angle-right.fa-4x

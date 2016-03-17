@@ -9,7 +9,7 @@
   %fieldset.form_group.form-inline
     = f.fields_for :descriptions do |d|
       =d.text_field :detail, class: "form-control details"
-    = text_field_tag "project[details][][detail]",nil,  class: "form-control details"
+    = text_field_tag "project[details][][detail]",nil,  class: "form-control detail"
     = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
     = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
   %fieldset.form_group

@@ -32,6 +32,7 @@ class VolunteeringsController < ApplicationController
 
   def update
     @volunteering = Volunteering.find(params[:id])
+    @volunteering.descriptions.delete_all
     pass_params = volunteering_params
     detail_attributes = pass_params.delete(:details) || []
     @volunteering.update(pass_params)
@@ -41,7 +42,7 @@ class VolunteeringsController < ApplicationController
       flash.now[:danger] = @volunteering.errors.full_messages
       render :edit
     end
-    render partial: 'show', locals: {asset: @volunteering, asset_type: "Volunteerings"}
+    render partial: 'show', locals: {asset: @volunteering, asset_type: "volunteerings"}
   end
 
   def destroy
@@ -53,13 +54,7 @@ class VolunteeringsController < ApplicationController
   private
 
     def volunteering_params
-      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :details =>[:detail])
+      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
     end
-    def addDescriptions(volunteering, descriptions)
-      descriptions.each do |description|
-        if description[:detail] != ""
-          volunteering.descriptions.create(description)
-        end
-      end
-    end
+
 end

@@ -31,31 +31,24 @@ class ProjectsController < ApplicationController
     detail_attributes = pass_params.delete(:details) || []
     @project = current_user.projects.new(pass_params)
     if @project.save
-      detail_attributes.each do |detail_attrib|
-        description = @project.descriptions.create(detail_attrib)
-      end
+      addDescriptions(@project, detail_attributes)
     else
       flash.now[:danger] = @project.errors.full_messages
-      render :new
     end
     render :json => {taggable_type: "projects", taggable_id: @project.id}
   end
 
   def update
     @project = Project.find(params[:id])
+    @project.descriptions.delete_all
     pass_params = project_params
     detail_attributes = pass_params.delete(:details) || []
+    p pass_params
     @project.update(pass_params)
     if @project.save
-      @project.descriptions.delete_all
-      detail_attributes.each do |detail_attrib|
-        if detail_attrib != ""
-          description = @project.descriptions.create(detail_attrib)
-        end
-      end
+      addDescriptions(@project, detail_attributes)
     else
       flash.now[:danger] = @project.errors.full_messages
-      render :edit
     end
     render partial: 'show', locals: {asset: @project, asset_type: "projects"}
   end
@@ -65,6 +58,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     render nothing: true, status: 200, content_type: "text/html"
   end
+  private
 
   def project_params
     params.require(:project).permit(:description, :title, :details =>[:detail], :descriptions_attributes => [:detail])

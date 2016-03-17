@@ -513,7 +513,6 @@ var bindResumeIndexListeners = function() {
 }
 
 var newResume = function(e) {
-  e.preventDefault();
   var userId = $('.navbar-text').attr("user_id");
   $.ajax({
     url: "/users/" + userId + "/resumes/new",

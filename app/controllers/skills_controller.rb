@@ -47,7 +47,7 @@ class SkillsController < ApplicationController
 
 
 
-  private
+private
 
   def skill_params
     params.require(:skill).permit(:title, :details =>[:detail])

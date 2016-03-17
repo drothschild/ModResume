@@ -24,7 +24,7 @@ RSpec.feature "Resumes", type: :feature, js: true, feature: true do
     fill_in "user_password", :with => 'password'
     click_button "Log in"
     first(:link, @resume.target_job).click
-    expect(page).to have_content('#{@user.first_name}')
+    expect(page).to have_content("#{@user.first_name}")
   end
 
   it 'includes option to create new resume' do

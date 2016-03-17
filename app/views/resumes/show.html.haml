@@ -49,7 +49,7 @@
                 .asset-portlet-content
                 -@assets["#{asset_type}"].each do |asset|
                   - if (asset.div_sort == 2)
-                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
 
 
 
@@ -62,7 +62,7 @@
                 .asset-portlet-content
                 -@assets["#{asset_type}"].each do |asset|
                   - if (asset.div_sort == 3)
-                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+                    =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
         #divSection_4
           .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
             -@asset_types = asset_types
@@ -72,7 +72,7 @@
                   .asset-portlet-content
                   -@assets["#{asset_type}"].each do |asset|
                     - if (asset.div_sort == 4)
-                      =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+                      =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
 
 
     .col-md-6.col-s-6.resume-content.library
@@ -85,7 +85,7 @@
 
             -@assets["#{asset_type}"].each do |asset|
               - if (asset.div_sort == 0)
-                =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable
+                =render "#{asset_type}/show", asset_type: "#{asset_type}", asset: asset.buildable, asset_descriptions: asset.descriptions
 
   %a.btn.btn-default.onwards-floater.floater-right.fine-tune-button{href: user_resume_save_document_data_path(@resume)}
     %i.fa.fa-angle-right.fa-4x

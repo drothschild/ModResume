@@ -1,19 +1,19 @@
 $(document).on('page:change', function(event){
   bindResumeShowListeners();
-  bindNewAssetListeners();
 })
-
 
 
 $(document).ready(function(event){
   console.log("hello!");
   bindAssetListeners();
+  bindAssetDescriptionListeners();
   bindDetailEvents();
   bindEditListeners();
   bindFineTuneListeners();
   bindResumeIndexListeners();
   openingAnimation();
   bindWebsiteListeners();
+  bindNewAssetListeners();
 })
 
 
@@ -31,6 +31,10 @@ var openingAnimation =   function(){
 var bindAssetListeners = function() {
   $(document).on("click", '.tag-button', toggleTag );
   $(document).on("click", '.asset-resume', addAsset );
+}
+
+var bindAssetDescriptionListeners = function() {
+  $(document).on("click", '.asset-check-box', assetDescriptionCheckbox);
 }
 
 var toggleTag = function(e) {
@@ -55,15 +59,21 @@ var toggleAssets = function(tagID, visible) {
   }
 }
 
-var addAsset = function(e) {
-  e.preventDefault();
+var addAsset = function(e, buttonPassed) {
   console.log("Add Asset Button Clicked");
-  console.log(this);
-  var button = $(this);
-  $(this).blur();
+  var button
+  if (buttonPassed) {
+    button = buttonPassed;
+  }
+  else
+  {
+    e.preventDefault();
+    button = $(this);
+  }
+  button.blur();
   var resumeId = $('#resumeID').attr("resume_id");
-  var dataAssetId = $(this).attr("data-asset-id");
-  var dataAssetType = $(this).attr("data-asset-type");
+  var dataAssetId = button.attr("data-asset-id");
+  var dataAssetType = button.attr("data-asset-type");
   var checkboxes = $("." + dataAssetType + "-" + dataAssetId + "-descriptions");
   var selectedDescriptions = [];
   for (var i = 0; i < checkboxes.length; i++) {
@@ -72,7 +82,7 @@ var addAsset = function(e) {
     }
   }
   var data = {
-    current_user_id: $(this).attr("current_user_id"),
+    current_user_id: button.attr("current_user_id"),
     data_asset_id: dataAssetId,
     data_asset_type: dataAssetType,
     selected_descriptions: selectedDescriptions
@@ -89,17 +99,28 @@ var addAsset = function(e) {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
       button.prop("title","Remove from Resume");
+      button.css("background-color", "#FFB200");
     }
     else {
       button.children('span').removeClass("glyphicon-minus");
       button.children('span').addClass("glyphicon-plus");
       button.prop("title","Add to Resume");
+      button.css("background-color", "");
     }
   })
   .fail(function(response) {
     console.log("Failed Patch");
     console.log(response);
   })
+}
+
+var assetDescriptionCheckbox = function(e) {
+  console.log("Asset Description Clicked");
+  var parentDiv = $(this).parents("div#" + $(this).attr("parent_class"));
+  var button = $("#" + parentDiv.attr("id") + " button.asset-resume");
+  if ($("#" + parentDiv.attr("id") + " button.asset-resume span").hasClass("glyphicon-minus")) {
+    addAsset(e, button);
+  }
 }
 
 // END ASSET INDEX END ASSET INDEX END ASSET INDEX END ASSET INDEX
@@ -111,7 +132,8 @@ var bindDetailEvents = function (){
 }
 
 var AddDetailInput = function(e) {
-  e.preventDefault();
+    e.preventDefault();
+    console.log ("detail add");
     var row = $('.detail').last().clone().val('');
     $('#add_detail').before(row);
 };
@@ -463,6 +485,7 @@ var deleteResumeAsset = function(e){
   var selectedAsset = $(e.toElement).parent().find('.panel').attr("id").split("_")
   var data = {data_asset_type: selectedAsset[0], data_asset_id: selectedAsset[1]}
   var uri = window.location.href
+  debugger;
   $.ajax({url: uri, method: "PATCH", data}).done(function(response){
     console.log(response)
     $(selectedElement).remove();
@@ -511,10 +534,11 @@ var bindResumeIndexListeners = function() {
 }
 
 var newResume = function(e) {
+
   e.preventDefault();
   var userlink = $('#user_info a')[0].href;
   var userId = userlink.match(/\d*$/);
-  // debugger;
+
   $.ajax({
     url: "/users/" + userId + "/resumes/new",
     method: "GET"

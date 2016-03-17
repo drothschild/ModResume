@@ -64,5 +64,13 @@ class ApplicationController < ActionController::Base
 
   end
 
+    def addDescriptions(asset, descriptions)
+      descriptions.each do |description|
+        if description[:detail] != ""
+          asset.descriptions.create(description)
+        end
+      end
+    end
+
 
 end

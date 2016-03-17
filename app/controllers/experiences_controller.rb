@@ -38,6 +38,7 @@ class ExperiencesController < ApplicationController
 
   def update
     @experience = Experience.find(params[:id])
+    @experience.descriptions.delete_all
     pass_params = experience_params
     detail_attributes = pass_params.delete(:details) || []
     @experience.update(pass_params)
@@ -47,7 +48,7 @@ class ExperiencesController < ApplicationController
       flash.now[:danger] = @experience.errors.full_messages
       render :edit
     end
-    render partial: 'show', locals: {asset: @experience, asset_type: "Experiences"}
+    render partial: 'show', locals: {asset: @experience, asset_type: "experiences"}
   end
 
   def destroy
@@ -56,16 +57,10 @@ class ExperiencesController < ApplicationController
     render nothing: true, status: 200, content_type: "text/html"
   end
 
-  private
+private
 
     def experience_params
-      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail])
+      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
     end
-    def addDescriptions(experience, descriptions)
-      descriptions.each do |description|
-        if description[:detail] != ""
-          experience.descriptions.create(description)
-        end
-      end
-    end
+   
 end

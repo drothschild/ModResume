@@ -458,7 +458,7 @@ var bindNewAssetListeners = function(){
 var bindResumeShowListeners = function (){
   addSortable();
 
-  $(document).on('click', '#print-resume-button', printResume);
+
   $(document).on('click', '#save-resume-button', saveSortedResume);
   $(document).on('mouseup', '.asset-portlet', changeResumeSize)
   $(document).on('sortupdate', '#trashcan', deleteResumeAsset)
@@ -532,6 +532,7 @@ var changeResumeSize = function(){
 // RESUME INDEX RESUME INDEX RESUME INDEX RESUME INDEX RESUME INDEX
 var bindResumeIndexListeners = function() {
   $(document).on("click", '#new-resume-button', newResume);
+  $(document).on('click', '#print-resume-button', printResume);
 }
 
 var newResume = function(e) {

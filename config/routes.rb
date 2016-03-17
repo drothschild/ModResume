@@ -5,6 +5,9 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
 
+  get 'users/:id/pdf', to: 'users#pdf', as: 'user_pdf'
+  post 'users/upload', to: 'users#pdf_parse', as: 'user_pdf_parse'
+
   resources :users, except: [:index, :destroy] do
     resources :websites, except: [:index]
     resources :tags
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
 
   post 'visitors/contact', to: 'visitors#contact'
   get':controller(/:action(/:id))'
+
 
   get 'users/:id/resumes/:id/fine-tune', to: 'resumes#fine_tune', as: 'user_resume_fine_tune'
   get 'users/:id/assets/reset', to: 'assets#reset', as: 'user_assets_reset'

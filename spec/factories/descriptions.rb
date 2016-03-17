@@ -1,7 +1,8 @@
 FactoryGirl.define do 
   factory :description do 
-    association :user
-    # description "some website"
-    # url "www.something.com"
+    detail Faker::Company.bs
+    # association :user
+    # association :resume_asset
+    # association :describing, factory: :experience
   end
 end

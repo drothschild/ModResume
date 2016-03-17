@@ -1,7 +1,7 @@
-FactoryGirl.define do 
-  factory :resume_asset do 
-    association :user
-    # description "some website"
-    # url "www.something.com"
+FactoryGirl.define do
+  factory :resume_asset, class: "ResumeAsset" do
+    association :resume
+    association :buildable, :factory => :project
   end
+   
 end

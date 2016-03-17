@@ -39,7 +39,7 @@ describe "User Model", model: true do
     it "is invalid with a short password" do 
       user = build(:user, password: "a")
       user.valid?
-      expect(user.errors[:password]).to include("is too short (minimum is 5 characters)")
+      expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
     end
 
     it "is invalid with a duplicate email address" do

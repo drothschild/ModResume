@@ -5,8 +5,17 @@ describe "Tagging Model", model: true do
   end
   
   context "Associations" do 
-    it "belongs to a tag"
-    it "has many taggables"
+    before :each do 
+      @tagging = build(:tagging)
+    end
+
+    it "belongs to a tag" do 
+      expect(@tagging).to respond_to :tag
+    end
+
+    it "has a taggable" do 
+      expect(@tagging).to respond_to :taggable
+    end
   end
   
 end

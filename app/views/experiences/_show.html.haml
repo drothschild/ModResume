@@ -12,9 +12,9 @@
   .row
     .panel-body
       %ul
-        - asset.descriptions.each do |description|
+        - asset_descriptions.each do |description|
           %li
             -if current_url.include?("asset")
-              = check_box_tag "description_#{description.id}", description.id, true, class: "asset-check-box #{asset_type}-#{asset.id}-descriptions"
+              = check_box_tag "description_#{description.id}", description.id, check_description(session[:new_resume_id], asset.id, description.id), class: "asset-check-box #{asset_type}-#{asset.id}-descriptions", parent_class: "Experience_#{asset.id}"
             = description.detail
         %em= asset.location

@@ -26,33 +26,37 @@ var deleteResumeAsset = function(e){
   var selectedAsset = $(e.toElement).parent().find('.panel').attr("id").split("_")
   var data = {data_asset_type: selectedAsset[0], data_asset_id: selectedAsset[1]}
   var uri = window.location.href
-  $.ajax({url: uri, method: "PATCH", data})
-    .done(function(response){
-      $(selectedElement).remove();
-    })
+  $(selectedElement).remove();
+  $.ajax({
+    url: uri,
+    method: "PATCH",
+    data
+  })
+  .done(function(response){
+  })
 }
 
 var saveSortedResume = function(e){
-    e.preventDefault();
-    var assetNodes = $('.panel.panel-default')
-    for(var i = 0; i < assetNodes.length; i++){
-      var assetTypeId = assetNodes[i].id.split('_');
-      var parentLocationId = assetNodes[i].parentNode.parentNode.parentNode.parentNode.id.split('_');
-      var resumeId = $(this).attr("resume_id")
-      var data = { asset_type: assetTypeId[0], asset_id: assetTypeId[1], div_sort: parentLocationId[1], resume_id: resumeId};
-      $.ajax({
-        url: "/users/" + $(this).attr("current_user_id") + "/resume_assets/" + data.asset_id,
-        method: "PATCH",
-        data: data,
-        dataType: 'json'
-      })
-      .done(function(response){
-        console.log('success');
-      })
-      .fail(function(response){
-        console.log('fail');
-      });
-    }
+  e.preventDefault();
+  var assetNodes = $('.panel.panel-default')
+  for(var i = 0; i < assetNodes.length; i++){
+    var assetTypeId = assetNodes[i].id.split('_');
+    var parentLocationId = assetNodes[i].parentNode.parentNode.parentNode.parentNode.id.split('_');
+    var resumeId = $(this).attr("resume_id")
+    var data = { asset_type: assetTypeId[0], asset_id: assetTypeId[1], div_sort: parentLocationId[1], resume_id: resumeId};
+    $.ajax({
+      url: "/users/" + $(this).attr("current_user_id") + "/resume_assets/" + data.asset_id,
+      method: "PATCH",
+      data: data,
+      dataType: 'json'
+    })
+    .done(function(response){
+      console.log('success');
+    })
+    .fail(function(response){
+      console.log('fail');
+    });
+  }
 }
 var changeResumeSize = function(){
   var sections = $('.resume-section')

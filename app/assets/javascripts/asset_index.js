@@ -30,7 +30,6 @@ var toggleAssets = function(tagID, visible) {
 }
 
 var addAsset = function(e, buttonPassed) {
-  console.log("Add Asset Button Clicked");
   var button
   if (buttonPassed) {
     button = buttonPassed;

@@ -11,24 +11,27 @@ var editPopup = function(event) {
   if (assetType === ("objectives")){
     tinyMCE.remove();
   };
-  $.ajax({url: uri, method: "GET"})
-    .done(function(response){
-      $('#form-container-edit').html(response);
-      editTagsAutoComplete();
-      dialog.dialog("open");
-      $('.form-submit').remove();
-      tagNames = $('#tags-names').attr("data-tag-names").trim();
-      $("#tags").val(tagNames);
-      form = dialog.find("form").on("submit", function(event){
-        event.preventDefault();
-        editAsset(assetType,assetId);
-      });
-      if (assetType === ("objectives")) {
-        setTimeout(function(){
-          tinyMCE.activeEditor.focus()
-        }, 250)
-      };
-    })
+  $.ajax({
+    url: uri,
+    method: "GET"
+  })
+  .done(function(response){
+    $('#form-container-edit').html(response);
+    editTagsAutoComplete();
+    dialog.dialog("open");
+    $('.form-submit').remove();
+    tagNames = $('#tags-names').attr("data-tag-names").trim();
+    $("#tags").val(tagNames);
+    form = dialog.find("form").on("submit", function(event){
+      event.preventDefault();
+      editAsset(assetType,assetId);
+    });
+    if (assetType === ("objectives")) {
+      setTimeout(function(){
+        tinyMCE.activeEditor.focus()
+      }, 250)
+    };
+  })
 
 
   dialog = $("#edit-form").dialog({
@@ -66,13 +69,16 @@ var editAsset = function(assetType, assetId) {
   }
   var uri = $('form').attr('action');
   var data = $('form').serialize();
-  $.ajax({url: uri, method: "Put", data: data})
-    .done(function(response) {
-      $(assetToUpdate).html(response);
-      dialog.dialog("close");
-      editTags(assetType,assetId);
-    }
-  );
+  $.ajax({
+    url: uri,
+    method: "Put",
+    data: data
+  })
+  .done(function(response) {
+    $(assetToUpdate).html(response);
+    dialog.dialog("close");
+    editTags(assetType,assetId);
+  });
 }
 
 var editTagsAutoComplete = function(){
@@ -119,20 +125,26 @@ var editTags = function(assetType, assetId) {
   var data = {tagging: tagObject};
   var uri = window.location.pathname.replace("/assets", "");
   var uri = uri + "/taggings";
-  console.log(uri);
-  $.ajax({url: uri, method: "POST", data: data})
-    .done(function(response){
-      getUserTags();
-    });
+  $.ajax({
+    url: uri,
+    method: "POST",
+    data: data
+  })
+  .done(function(response){
+    getUserTags();
+  });
 };
 
 var getUserTags = function() {
   var uri = window.location.pathname.replace("/assets", "/tags");
-  $.ajax({url: uri, method:"GET"}).done(function(response){
+  $.ajax({
+    url: uri,
+    method:"GET"
+  })
+  .done(function(response){
     $("#tag-buttons").html(response);
   })
 }
-
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -165,9 +177,11 @@ var deletePopup = function(event) {
 var deleteAsset = function(assetType, assetId) {
   var assetToDelete = "#" + assetType + "_" + assetId;
   var uri = window.location.pathname.replace("/assets", "/" +assetType + "/" + assetId );
-  $.ajax({url: uri, method: "DELETE"})
-    .done(function(response) {
-      $(assetToDelete).remove();
-    }
-  );
+  $.ajax({
+    url: uri,
+    method: "DELETE"
+  })
+  .done(function(response) {
+    $(assetToDelete).remove();
+  });
 }

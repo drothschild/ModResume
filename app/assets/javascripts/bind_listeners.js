@@ -2,7 +2,6 @@ $(document).on('page:change', function(event){
   bindResumeShowListeners();
 })
 
-
 $(document).ready(function(event){
   console.log("hello!");
   bindAssetListeners();
@@ -15,7 +14,6 @@ $(document).ready(function(event){
   bindWebsiteListeners();
   bindNewAssetListeners();
 })
-
 
 var openingAnimation =   function(){
   setTimeout(function(){

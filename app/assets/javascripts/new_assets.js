@@ -2,15 +2,19 @@ var newAssetsView = function(){}
 
 newAssetsView.prototype.loadForm = function(event){
   var uri = $(event.currentTarget).attr("href");
-  $.ajax({url: uri, method: "GET", context: this})
-    .done(function(response){
-      setTimeout(function(){
-        tinyMCE.remove();
-        $('#form-container').html(response);
-        $('#form-container').fadeIn(250, function(){
-          newAssets.addTags();
-        })
-      }, 250)
+  $.ajax({
+    url: uri,
+    method: "GET",
+    context: this
+  })
+  .done(function(response){
+    setTimeout(function(){
+      tinyMCE.remove();
+      $('#form-container').html(response);
+      $('#form-container').fadeIn(250, function(){
+        newAssets.addTags();
+      })
+    }, 250)
   })
 }
 
@@ -20,24 +24,32 @@ newAssetsView.prototype.saveForm = function(event){
     var data = $('form').serialize()
     var tags = $('input#tags')[0].value
     var uri = event.target.action
-    $.ajax({url: uri, method: "POST", data: data})
-      .done(function(response){
-        var response = response
-        response["tag_names"] = tags
-        var data = {tagging: response}
-        var uri = window.location.pathname.replace("/assets/new", "")
-        var uri = uri.replace("/assets", "")
-        var uri = uri + "/taggings"
-        $.ajax({url: uri, method: "POST", data: data})
-          .done(function(response){
-            $("#form-container").fadeOut(250, function(){
-              $('#form-container').html("");
-            })
-            setTimeout(function(){
-              $('.saved').fadeIn(250, function(){});
-            }, 300)
-          })
+    $.ajax({
+      url: uri,
+      method: "POST",
+      data: data
+    })
+    .done(function(response){
+      var response = response
+      response["tag_names"] = tags
+      var data = {tagging: response}
+      var uri = window.location.pathname.replace("/assets/new", "")
+      var uri = uri.replace("/assets", "")
+      var uri = uri + "/taggings"
+      $.ajax({
+        url: uri,
+        method: "POST",
+        data: data
       })
+      .done(function(response){
+        $("#form-container").fadeOut(250, function(){
+          $('#form-container').html("");
+        })
+        setTimeout(function(){
+          $('.saved').fadeIn(250, function(){});
+        }, 300)
+      })
+    })
   }
 }
 

@@ -4,13 +4,14 @@ var bindDetailEvents = function (){
 }
 
 var AddDetailInput = function(e) {
-    e.preventDefault();
-    var row = $('.detail').last().clone().val('');
-    $('#add_detail').before(row);
+  e.preventDefault();
+  var row = $('.detail').last().clone().val('');
+  $('#add_detail').before(row);
 };
+
 var RemoveDetailInput = function(e) {
-    e.preventDefault();
-    if ($( ".detail" ).length > 1) {
-      var row = $('.detail').last().remove();
-    }
+  e.preventDefault();
+  if ($( ".detail" ).length > 1) {
+    var row = $('.detail').last().remove();
+  }
 };

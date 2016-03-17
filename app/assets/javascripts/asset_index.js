@@ -64,12 +64,16 @@ var addAsset = function(e, buttonPassed) {
   })
   .done(function(response) {
     if (response["update_status"] === "added") {
+      button.removeClass("button-plus");
+      button.addClass("button-minus");
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
       button.prop("title","Remove from Resume");
       button.css("background-color", "#FFB200");
     }
     else {
+      button.removeClass("button-minus");
+      button.addClass("button-plus");
       button.children('span').removeClass("glyphicon-minus");
       button.children('span').addClass("glyphicon-plus");
       button.prop("title","Add to Resume");

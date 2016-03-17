@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Resumes", type: :feature, js: true, controller: true do
+RSpec.feature "Resumes", type: :feature, js: true, feature: true do
   before(:all) do
     @user = FactoryGirl.create(:user)
     @resume = FactoryGirl.create(:resume)

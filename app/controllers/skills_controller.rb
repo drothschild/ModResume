@@ -19,10 +19,7 @@ class SkillsController < ApplicationController
   end
 
   def create
-    p skill_params
-    pass_params = skill_params
-    detail_attributes = pass_params.delete(:details) || []
-    @skill = current_user.skills.new(pass_params)
+    @skill = current_user.skills.new(skill_params)
     if @skill.save
       render :json => {taggable_type: "Skill", taggable_id: @skill.id}
     else
@@ -33,9 +30,7 @@ class SkillsController < ApplicationController
 
   def update
     @skill = Skill.find(params[:id])
-    pass_params = skill_params
-    detail_attributes = pass_params.delete(:details) || []
-    @skill.update(pass_params)
+    @skill.update(skill_params)
     if @skill.save
         render partial: 'show', locals: {asset: @skill, asset_type: "skills"}
     else
@@ -44,11 +39,11 @@ class SkillsController < ApplicationController
     end
   end
 
- def destroy
+  def destroy
     @skill = Skill.find(params[:id])
     @skill.destroy
     render nothing: true, status: 200, content_type: "text/html"
-end
+  end
 
 
 
@@ -56,13 +51,6 @@ end
 
   def skill_params
     params.require(:skill).permit(:title, :details =>[:detail])
-  end
-  def addDescriptions(skill, descriptions)
-    descriptions.each do |description|
-      if description[:detail] != ""
-        experience.descriptions.create(description)
-      end
-    end
   end
 
 

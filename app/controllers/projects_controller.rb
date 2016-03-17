@@ -43,7 +43,6 @@ class ProjectsController < ApplicationController
     @project.descriptions.delete_all
     pass_params = project_params
     detail_attributes = pass_params.delete(:details) || []
-    p pass_params
     @project.update(pass_params)
     if @project.save
       addDescriptions(@project, detail_attributes)

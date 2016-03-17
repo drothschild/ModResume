@@ -25,7 +25,6 @@ class VolunteeringsController < ApplicationController
       addDescriptions(@volunteering, descriptions)
     else
       flash.now[:danger] = @volunteering.errors.full_messages
-      render :new
     end
     render :json => {taggable_type: "Volunteering", taggable_id: @volunteering.id}
   end
@@ -40,7 +39,6 @@ class VolunteeringsController < ApplicationController
         addDescriptions(@volunteering, detail_attributes)
     else
       flash.now[:danger] = @volunteering.errors.full_messages
-      render :edit
     end
     render partial: 'show', locals: {asset: @volunteering, asset_type: "volunteerings"}
   end

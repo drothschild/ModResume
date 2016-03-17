@@ -1,6 +1,5 @@
 $(document).on('page:change', function(event){
   bindResumeShowListeners();
-  bindNewAssetListeners();
 })
 
 
@@ -15,6 +14,7 @@ $(document).ready(function(event){
   bindResumeIndexListeners();
   openingAnimation();
   bindWebsiteListeners();
+  bindNewAssetListeners();
 })
 
 
@@ -133,7 +133,8 @@ var bindDetailEvents = function (){
 }
 
 var AddDetailInput = function(e) {
-  e.preventDefault();
+    e.preventDefault();
+    console.log ("detail add");
     var row = $('.detail').last().clone().val('');
     $('#add_detail').before(row);
 };
@@ -485,6 +486,7 @@ var deleteResumeAsset = function(e){
   var selectedAsset = $(e.toElement).parent().find('.panel').attr("id").split("_")
   var data = {data_asset_type: selectedAsset[0], data_asset_id: selectedAsset[1]}
   var uri = window.location.href
+  debugger;
   $.ajax({url: uri, method: "PATCH", data}).done(function(response){
     console.log(response)
     $(selectedElement).remove();
@@ -533,7 +535,6 @@ var bindResumeIndexListeners = function() {
 }
 
 var newResume = function(e) {
-  e.preventDefault();
   var userId = $('.navbar-text').attr("user_id");
   $.ajax({
     url: "/users/" + userId + "/resumes/new",

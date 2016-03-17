@@ -40,7 +40,7 @@ class VolunteeringsController < ApplicationController
     else
       flash.now[:danger] = @volunteering.errors.full_messages
     end
-    render partial: 'show', locals: {asset: @volunteering, asset_type: "volunteerings"}
+    render partial: 'show', locals: {asset: @volunteering, asset_type: "volunteerings", asset_descriptions: @volunteering.descriptions}
   end
 
   def destroy

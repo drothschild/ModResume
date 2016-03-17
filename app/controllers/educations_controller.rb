@@ -49,7 +49,7 @@ class EducationsController < ApplicationController
       flash.now[:danger] = @education.errors.full_messages
       render :edit
     end
-    render partial: 'show', locals: {asset: @education, asset_type: "educations"}
+    render partial: 'show', locals: {asset: @education, asset_type: "educations", asset_descriptions: @education.descriptions}
   end
 
   def destroy

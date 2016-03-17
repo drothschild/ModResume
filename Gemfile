@@ -61,6 +61,7 @@ group :development, :test do
   gem 'byebug'
   gem 'hirb'
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'dotenv-rails'
   gem 'binding_of_caller'
   gem 'better_errors'

@@ -48,7 +48,7 @@ class ExperiencesController < ApplicationController
       flash.now[:danger] = @experience.errors.full_messages
       render :edit
     end
-    render partial: 'show', locals: {asset: @experience, asset_type: "experiences"}
+    render partial: 'show', locals: {asset: @experience, asset_type: "experiences", asset_descriptions: @experience.descriptions}
   end
 
   def destroy

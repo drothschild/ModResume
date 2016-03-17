@@ -29,11 +29,14 @@ class ExperiencesController < ApplicationController
     @experience = current_user.experiences.new(pass_params)
     if @experience.save
       addDescriptions(@experience, descriptions)
+      respond_to do |format|
+        format.json{render :json => {taggable_type: "Experience", taggable_id: @experience.id}}
+        format.html{redirect_to new_user_asset_path}
+      end
     else
       flash.now[:danger] = @experience.errors.full_messages
       render :new
     end
-    render :json => {taggable_type: "Experience", taggable_id: @experience.id}
   end
 
   def update
@@ -62,5 +65,5 @@ private
     def experience_params
       params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
     end
-   
+
 end

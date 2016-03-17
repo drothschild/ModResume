@@ -2,14 +2,9 @@ class ResumesController < ApplicationController
   before_action :set_resume, only: [:edit, :show, :update, :destroy]
 
   def index
-    if current_user
       @resumes = Resume.where(user_id: current_user.id).order(:updated_at)
       @user = current_user
       @new_resume = Resume.new
-    else
-      # flash error please login
-      redirect_to '/'
-    end
   end
 
   def show

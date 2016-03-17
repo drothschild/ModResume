@@ -34,8 +34,7 @@ class ExperiencesController < ApplicationController
         format.html{redirect_to new_user_asset_path}
       end
     else
-      flash.now[:danger] = @experience.errors.full_messages
-      render :new
+      flash.now[:notice] = @experience.errors.full_messages
     end
   end
 
@@ -63,7 +62,7 @@ class ExperiencesController < ApplicationController
 private
 
     def experience_params
-      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
+      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :tags_string, :descriptions_attributes => [:detail])
     end
 
 end

@@ -12,12 +12,6 @@ describe "Volunteering Model", model: true do
       expect(volunteering.errors[:organization]).to include("can't be blank")
     end
 
-    it "is invalid without a title" do 
-      volunteering = build(:volunteering, title: nil)
-      volunteering.valid?
-      expect(volunteering.errors[:title]).to include("can't be blank")
-    end
-
     it "is invalid without a user_id" do 
       volunteering = build(:volunteering, user_id: nil)
       volunteering.valid?

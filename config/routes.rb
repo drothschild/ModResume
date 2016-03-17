@@ -5,8 +5,8 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
 
-  get 'users/:id/pdf', to: 'users#pdf', as: 'user_pdf'
-  post 'users/upload', to: 'users#pdf_parse', as: 'user_pdf_parse'
+  # get 'users/:id/pdf', to: 'users#pdf', as: 'user_pdf'
+  post 'users/upload', to: 'users#upload', as: 'user_upload'
 
   resources :users, except: [:index, :destroy] do
     resources :websites, except: [:index]
@@ -34,6 +34,6 @@ Rails.application.routes.draw do
 
   post 'users/:id/resumes/:id/save_document_data', to: 'resumes#save_document_data', as: 'user_resume_save_document_data'
 
-  
+
   root 'root#index'
 end

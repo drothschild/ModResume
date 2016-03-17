@@ -9,12 +9,5 @@
         = asset.end_date.strftime('%b %Y')
       .col-md-2.col-sm-2
         = render "/assets/button_row", asset: asset, asset_type: asset_type
-  .row
-    .panel-body
-      %ul
-        - asset_descriptions.each do |description|
-          %li
-            -if current_url.include?("asset")
-              = check_box_tag "description_#{description.id}", description.id, check_description(session[:new_resume_id], asset.id, description.id), class: "asset-check-box #{asset_type}-#{asset.id}-descriptions", parent_class: "Experience_#{asset.id}"
-            = description.detail
-        %em= asset.location
+  = render 'descriptions/show', asset_descriptions: asset_descriptions, asset: asset, asset_type: asset_type
+

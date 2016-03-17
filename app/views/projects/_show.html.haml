@@ -5,12 +5,4 @@
         %strong= asset.title
       .col-md-2.col-sm-2
         = render "/assets/button_row", asset_type: asset_type, asset: asset
-  .row
-    .panel-body.col-md-12.col-sm-12
-      %p= asset.description
-      %ul
-        - asset_descriptions.each do |description|
-          %li
-            -if current_url.include?("asset")
-              = check_box_tag "description_#{description.id}", description.id, check_description(session[:new_resume_id], asset.id, description.id), class: "asset-check-box #{asset_type}-#{asset.id}-descriptions", parent_class: "Project_#{asset.id}"
-            = description.detail
+  = render 'descriptions/show', asset_descriptions: asset_descriptions, asset: asset, asset_type: asset_type

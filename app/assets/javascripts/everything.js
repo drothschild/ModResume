@@ -349,11 +349,11 @@ var newAssetsView = function(){}
 
 
 newAssetsView.prototype.loadForm = function(event){
-  tinyMCE.remove();
   var uri = $(event.currentTarget).attr("href");
   $.ajax({url: uri, method: "GET", context: this}).done(function(response){
-      $('#form-container').html(response);
     setTimeout(function(){
+      tinyMCE.remove();
+      $('#form-container').html(response);
       $('#form-container').fadeIn(250, function(){
         newAssets.addTags();
         //animation here
@@ -398,8 +398,11 @@ newAssetsView.prototype.toggleActiveAsset = function(e){
     $(e.target.parentNode.children).removeClass("button-selected");
     $(e.target).addClass("button-selected");
     $(e.target).blur();
+    $('#form-container').fadeOut(250, function(){
+      //animation complete
+    })
     $('.saved').fadeOut(250, function(){
-            //animation complete
+      //animation complete
     })
     newAssets.loadForm(e);
 }

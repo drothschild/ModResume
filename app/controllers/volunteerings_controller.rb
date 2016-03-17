@@ -26,7 +26,11 @@ class VolunteeringsController < ApplicationController
     else
       flash.now[:danger] = @volunteering.errors.full_messages
     end
-    render :json => {taggable_type: "Volunteering", taggable_id: @volunteering.id}
+    respond_to do |format|
+      format.json{render :json => {taggable_type: "Volunteering", taggable_id: @volunteering.id}}
+      format.html {redirect_to new_user_asset_path}
+    end
+
   end
 
   def update

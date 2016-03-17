@@ -27,7 +27,10 @@ class ObjectivesController < ApplicationController
     @user = current_user
     @objective = @user.objectives.new(objective_params)
     if @objective.save
-      render :json => {taggable_type: "objective", taggable_id: @objective.id}
+      respond_to do |format|
+        format.json{render :json => {taggable_type: "objective", taggable_id: @objective.id}}
+        format.html{redirect_to new_user_asset_path}
+      end
     else
       flash.now[:danger] = @objective.errors.full_messages
       render :new

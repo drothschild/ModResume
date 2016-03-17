@@ -1,6 +1,6 @@
 class WebsitesController < ApplicationController
   def new
-    @user = User.find(params[:user_id])
+    @user = current_user
     @new_website = Website.new(user_id: params[:user_id])
     render partial: 'form'
   end

@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def index
-    @user = User.find(current_user.id)
+    @user = current_user
     @tags = @user.tags.order("name")
     render partial: 'buttons', locals: {tags: @tags}
   end

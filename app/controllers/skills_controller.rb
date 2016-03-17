@@ -6,7 +6,6 @@ class SkillsController < ApplicationController
     render partial: 'form'
   end
 
-
   def edit
     @user = current_user
     @skill = Skill.find(params[:id])

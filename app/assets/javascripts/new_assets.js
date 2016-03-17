@@ -27,6 +27,7 @@ newAssetsView.prototype.saveForm = function(event){
     $.ajax({
       url: uri,
       method: "POST",
+      dataType: "json",
       data: data
     })
     .done(function(response){

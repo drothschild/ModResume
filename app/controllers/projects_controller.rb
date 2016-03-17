@@ -32,10 +32,13 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.new(pass_params)
     if @project.save
       addDescriptions(@project, detail_attributes)
+      respond_to do |format|
+        format.json{render :json => {taggable_type: "projects", taggable_id: @project.id}}
+        format.html{redirect_to new_user_asset_path}
+      end
     else
       flash.now[:danger] = @project.errors.full_messages
     end
-    render :json => {taggable_type: "projects", taggable_id: @project.id}
   end
 
   def update

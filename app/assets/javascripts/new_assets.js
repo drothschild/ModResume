@@ -12,7 +12,7 @@ newAssetsView.prototype.loadForm = function(event){
       tinyMCE.remove();
       $('#form-container').html(response);
       $('#form-container').fadeIn(250, function(){
-        newAssets.addTags();
+        addTags();
       })
     }, 250)
   })
@@ -64,8 +64,8 @@ newAssetsView.prototype.toggleActiveAsset = function(e){
     newAssets.loadForm(e);
 }
 
-newAssetsView.prototype.addTags = function(){
-  var availableTags = JSON.parse($("#tag-names").attr("data-tag-names")) || []
+var addTags = function(){
+  var availableTags = JSON.parse($("#all-tags-names").attr("data-tag-names")) || []
   function split( val ) {
       return val.split( /,\s*/ );
   }
@@ -75,7 +75,6 @@ newAssetsView.prototype.addTags = function(){
   $("#tags")
   // don't navigate away from the field on tab when selecting an item
   .bind( "keydown" ,function( event ) {
-    console.log("typed")
     if ( event.keyCode === $.ui.keyCode.TAB &&
         $( this ).autocomplete( "instance" ).menu.active ) {
                 event.preventDefault();

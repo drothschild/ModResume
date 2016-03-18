@@ -25,6 +25,7 @@ class EducationsController < ApplicationController
     detail_attributes = pass_params.delete(:details) || []
     @education = current_user.educations.new(pass_params)
     if @education.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @education.tags
       addDescriptions(@education, detail_attributes)
       respond_to do |format|

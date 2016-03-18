@@ -29,6 +29,7 @@ class ExperiencesController < ApplicationController
     descriptions = pass_params.delete(:details) || []
     @experience = current_user.experiences.new(pass_params)
     if @experience.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @experience.tags
       addDescriptions(@experience, descriptions)
       respond_to do |format|

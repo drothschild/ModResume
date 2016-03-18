@@ -21,6 +21,7 @@ class VolunteeringsController < ApplicationController
     descriptions = pass_params.delete(:details) || []
     @volunteering = current_user.volunteerings.new(pass_params)
     if @volunteering.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @volunteering.tags
       addDescriptions(@volunteering, descriptions)
     else

@@ -25,6 +25,7 @@ class ObjectivesController < ApplicationController
     @user = current_user
     @objective = @user.objectives.new(objective_params)
     if @objective.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @objective.tags
       respond_to do |format|
         format.json{render :json => {taggable_type: "objective", taggable_id: @objective.id}}

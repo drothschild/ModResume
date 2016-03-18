@@ -18,7 +18,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   #per Devise
-  config.action_mailer.default_url_options = { host: 'floating-waters-91148.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'modresume.herokuapp.com' }
 
 
   # config mailer to be smtp

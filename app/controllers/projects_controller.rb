@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
     detail_attributes = pass_params.delete(:details) || []
     @project = current_user.projects.new(pass_params)
     if @project.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @project.tags
       addDescriptions(@project, detail_attributes)
       respond_to do |format|

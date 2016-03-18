@@ -69,7 +69,7 @@ var addAsset = function(e, buttonPassed) {
       button.children('span').removeClass("glyphicon-plus");
       button.children('span').addClass("glyphicon-minus");
       button.prop("title","Remove from Resume");
-      button.css("background-color", "#FFB200");
+      button.css("background-color", "#6E85A1");
     }
     else {
       button.removeClass("button-minus");

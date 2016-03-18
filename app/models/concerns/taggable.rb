@@ -16,9 +16,11 @@ module Taggable
     tag_names = tags_string.split(',')
     tag_names.each do |word|
       word = word.strip
-      tag = Tag.find_or_create_by(name: word, user: user)
-      self.tags << tag
-      tag.save
+      if word != ""
+        tag = Tag.find_or_create_by(name: word, user: user)
+        self.tags << tag
+        tag.save
+      end
     end
   end
 end

@@ -24,10 +24,12 @@ class ExperiencesController < ApplicationController
 
 
   def create
+    @user = current_user
     pass_params = experience_params
     descriptions = pass_params.delete(:details) || []
     @experience = current_user.experiences.new(pass_params)
     if @experience.save
+      @user.tags << @experience.tags
       addDescriptions(@experience, descriptions)
       respond_to do |format|
         format.json{render :json => {taggable_type: "Experience", taggable_id: @experience.id}}
@@ -62,7 +64,7 @@ class ExperiencesController < ApplicationController
 private
 
     def experience_params
-      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :tags_string, :descriptions_attributes => [:detail])
+      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :tags_string, :details =>[:detail], :descriptions_attributes => [:detail])
     end
 
 end

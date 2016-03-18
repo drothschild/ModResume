@@ -18,9 +18,13 @@ $(document).ready(function(event){
 var openingAnimation =   function(){
   setTimeout(function(){
     $("#long-paper").animate({
-      height: 1000
+      height: 240
     }, 3000, "linear", function(){
       //
     })
   },2000)
+  setTimeout(function(){
+    $(".fa-frown-o").switchClass("fa-frown-o" ,"fa-smile-o");
+    $('#animation-header').text('Into this!')
+  }, 4000)
 }

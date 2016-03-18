@@ -46,7 +46,6 @@ class ExperiencesController < ApplicationController
     pass_params = experience_params
     detail_attributes = pass_params.delete(:details) || []
     @experience.update(pass_params)
-    binding.pry
     if @experience.save
         addDescriptions(@experience, detail_attributes)
     else

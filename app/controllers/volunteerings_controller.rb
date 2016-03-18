@@ -21,15 +21,19 @@ class VolunteeringsController < ApplicationController
     descriptions = pass_params.delete(:details) || []
     @volunteering = current_user.volunteerings.new(pass_params)
     if @volunteering.save
-      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @volunteering.tags
+      flash[:asset_saved] = "Asset Saved. Add another?"
       addDescriptions(@volunteering, descriptions)
+      respond_to do |format|
+        format.json do
+          render :json => {taggable_type: "Volunteering", taggable_id: @volunteering.id}
+        end
+        format.html do
+          redirect_to new_user_asset_path
+        end
+      end
     else
       flash.now[:danger] = @volunteering.errors.full_messages
-    end
-    respond_to do |format|
-      format.json{render :json => {taggable_type: "Volunteering", taggable_id: @volunteering.id}}
-      format.html {redirect_to new_user_asset_path}
     end
 
   end

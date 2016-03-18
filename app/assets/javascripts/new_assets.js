@@ -29,20 +29,7 @@ newAssetsView.prototype.saveForm = function(event){
       method: "POST",
       dataType: "json",
       data: data
-    })
-    .done(function(response){
-      var response = response
-      response["tag_names"] = tags
-      var data = {tagging: response}
-      var uri = window.location.pathname.replace("/assets/new", "")
-      var uri = uri.replace("/assets", "")
-      var uri = uri + "/taggings"
-      $.ajax({
-        url: uri,
-        method: "POST",
-        data: data
-      })
-      .done(function(response){
+    }).done(function(response){
         $("#form-container").fadeOut(250, function(){
           $('#form-container').html("");
         })
@@ -50,9 +37,9 @@ newAssetsView.prototype.saveForm = function(event){
           $('.saved').fadeIn(250, function(){});
         }, 300)
       })
-    })
-  }
+    }
 }
+
 
 
 newAssetsView.prototype.toggleActiveAsset = function(e){

@@ -76,7 +76,8 @@ var editAsset = function(assetType, assetId) {
   .done(function(response) {
     $(assetToUpdate).html(response);
     dialog.dialog("close");
-    editTags(assetType,assetId);
+    // editTags(assetType,assetId);
+    getUserTags();
   });
 }
 

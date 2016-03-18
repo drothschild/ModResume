@@ -22,8 +22,9 @@
     = text_field_tag "education[details][][detail]",nil,  class: "form-control detail"
     = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
     = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
-  %fieldset.form_group
-    = render '/tags/form'
+  %fieldset.form-group
+    = f.label :tags_string, "Tags"
+    = f.text_field :tags_string, class: "form-control", id: "tags"
     %p
     = f.submit "Save", class: "btn btn-default form-submit"
     #tags-names{"data-tag-names" => "#{@tags_list}"}

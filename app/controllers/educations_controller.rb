@@ -20,10 +20,12 @@ class EducationsController < ApplicationController
   end
 
   def create
+    @user = current_user
     pass_params = education_params
     detail_attributes = pass_params.delete(:details) || []
     @education = current_user.educations.new(pass_params)
     if @education.save
+      @user.tags << @education.tags
       addDescriptions(@education, detail_attributes)
       respond_to do |format|
         format.json{render :json => {taggable_type: "Education", taggable_id: @education.id}}
@@ -59,7 +61,7 @@ class EducationsController < ApplicationController
   private
 
   def education_params
-    params.require(:education).permit(:description, :institution_name, :location, :completion, :focus,:details =>[:detail], :descriptions_attributes => [:detail])
+    params.require(:education).permit(:description, :institution_name, :location, :completion, :tags_string, :focus, :details =>[:detail], :descriptions_attributes => [:detail])
   end
 
 end

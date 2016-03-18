@@ -4,24 +4,24 @@ class VolunteeringsController < ApplicationController
     @user = current_user
     @volunteering = Volunteering.new
     @description  = Description.new
-    @tags_list = []
     render partial: 'form'
   end
 
   def edit
     @user = current_user
     @volunteering = Volunteering.find(params[:id])
-    @tags_list = @volunteering.tags.order("name").map{|t| t.name}.join(", ")
     render partial: 'form'
   end
 
 
 
   def create
+    @user = current_user
     pass_params = volunteering_params
     descriptions = pass_params.delete(:details) || []
     @volunteering = current_user.volunteerings.new(pass_params)
     if @volunteering.save
+      @user.tags << @volunteering.tags
       addDescriptions(@volunteering, descriptions)
     else
       flash.now[:danger] = @volunteering.errors.full_messages
@@ -56,7 +56,7 @@ class VolunteeringsController < ApplicationController
   private
 
     def volunteering_params
-      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
+      params.require(:volunteering).permit(:organization, :title, :begin_date, :end_date, :location, :tags_string, :details =>[:detail], :descriptions_attributes => [:detail])
     end
 
 end

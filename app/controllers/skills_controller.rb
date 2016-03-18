@@ -15,7 +15,7 @@ class SkillsController < ApplicationController
   def create
     @user = current_user
     @skill = current_user.skills.new(skill_params)
-    @skill.save
+    flash[:asset_saved] = "Asset Saved. Add another?" if @skill.save
     @user.tags << @skill.tags
     respond_to do |format|
       format.json{render :json => {taggable_type: "Skill", taggable_id: @skill.id}}

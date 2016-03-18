@@ -20,8 +20,6 @@ var editPopup = function(event) {
     addTags();
     dialog.dialog("open");
     $('.form-submit').remove();
-    tagNames = $('#tags-names').attr("data-tag-names").trim();
-    $("#tags").val(tagNames);
     form = dialog.find("form").on("submit", function(event){
       event.preventDefault();
       editAsset(assetType,assetId);

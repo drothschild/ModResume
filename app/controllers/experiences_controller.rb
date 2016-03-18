@@ -24,18 +24,20 @@ class ExperiencesController < ApplicationController
 
 
   def create
+    @user = current_user
     pass_params = experience_params
     descriptions = pass_params.delete(:details) || []
     @experience = current_user.experiences.new(pass_params)
     if @experience.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
+      @user.tags << @experience.tags
       addDescriptions(@experience, descriptions)
       respond_to do |format|
         format.json{render :json => {taggable_type: "Experience", taggable_id: @experience.id}}
         format.html{redirect_to new_user_asset_path}
       end
     else
-      flash.now[:danger] = @experience.errors.full_messages
-      render :new
+      flash.now[:notice] = @experience.errors.full_messages
     end
   end
 
@@ -63,7 +65,7 @@ class ExperiencesController < ApplicationController
 private
 
     def experience_params
-      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :details =>[:detail], :descriptions_attributes => [:detail])
+      params.require(:experience).permit(:company, :title, :begin_date, :end_date, :location, :tags_string, :details =>[:detail], :descriptions_attributes => [:detail])
     end
 
 end

@@ -6,17 +6,17 @@ class SkillsController < ApplicationController
     render partial: 'form'
   end
 
-
   def edit
     @user = current_user
     @skill = Skill.find(params[:id])
-    @tags_list = @skill.tags.order("name").map{|t| t.name}.join(", ")
     render partial: 'form'
   end
 
   def create
+    @user = current_user
     @skill = current_user.skills.new(skill_params)
-    @skill.save
+    flash[:asset_saved] = "Asset Saved. Add another?" if @skill.save
+    @user.tags << @skill.tags
     respond_to do |format|
       format.json{render :json => {taggable_type: "Skill", taggable_id: @skill.id}}
       format.html{redirect_to new_user_asset_path}
@@ -45,7 +45,7 @@ class SkillsController < ApplicationController
 private
 
   def skill_params
-    params.require(:skill).permit(:title, :details =>[:detail])
+    params.require(:skill).permit(:title, :tags_string,  :details =>[:detail])
   end
 
 

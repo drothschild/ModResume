@@ -26,11 +26,13 @@ class ProjectsController < ApplicationController
 
 
   def create
-    p project_params
+    @user = current_user
     pass_params = project_params
     detail_attributes = pass_params.delete(:details) || []
     @project = current_user.projects.new(pass_params)
     if @project.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
+      @user.tags << @project.tags
       addDescriptions(@project, detail_attributes)
       respond_to do |format|
         format.json{render :json => {taggable_type: "projects", taggable_id: @project.id}}
@@ -63,6 +65,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:description, :title, :details =>[:detail], :descriptions_attributes => [:detail])
+    params.require(:project).permit(:description, :title, :tags_string, :details =>[:detail], :descriptions_attributes => [:detail])
   end
 end

@@ -12,14 +12,12 @@ class ObjectivesController < ApplicationController
   def new
     @user = current_user
     @objective = Objective.new
-    @tags_list = []
     render partial: 'form'
   end
 
   def edit
     @user = current_user
     @objective = Objective.find(params[:id])
-    @tags_list = @objective.tags.order("name").map{|t| t.name}.join(", ")
     render partial: 'form'
   end
 
@@ -27,13 +25,14 @@ class ObjectivesController < ApplicationController
     @user = current_user
     @objective = @user.objectives.new(objective_params)
     if @objective.save
+      flash[:asset_saved] = "Asset Saved. Add another?"
+      @user.tags << @objective.tags
       respond_to do |format|
         format.json{render :json => {taggable_type: "objective", taggable_id: @objective.id}}
         format.html{redirect_to new_user_asset_path}
       end
     else
       flash.now[:danger] = @objective.errors.full_messages
-      render :new
     end
   end
 
@@ -57,6 +56,6 @@ class ObjectivesController < ApplicationController
   private
 
   def objective_params
-    params.require(:objective).permit(:description)
+    params.require(:objective).permit(:description, :tags_string)
   end
 end

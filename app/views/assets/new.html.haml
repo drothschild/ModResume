@@ -21,11 +21,11 @@
           =asset_type.singularize.capitalize
 .row
   .col-md-6.col-sm-6.col-centered#form-container
-  -if asset_saved
-    %h3.text-center
-      = asset_saved
   .saved
-    %h3.text-center Asset Saved. &nbsp; Add another?
+    -if asset_saved
+      %h3.text-center
+        = asset_saved
+  /   %h3.text-center Asset Saved. &nbsp; Add another?
 
 
 =link_to user_assets_path(current_user, session[:new_resume_id]), class: "btn-default onwards-floater floater-left" do

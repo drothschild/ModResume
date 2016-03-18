@@ -31,12 +31,15 @@ class ProjectsController < ApplicationController
     detail_attributes = pass_params.delete(:details) || []
     @project = current_user.projects.new(pass_params)
     if @project.save
-      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @project.tags
+      flash[:asset_saved] = "Asset Saved. Add another?"
       addDescriptions(@project, detail_attributes)
       respond_to do |format|
-        format.json{render :json => {taggable_type: "projects", taggable_id: @project.id}}
-        format.html{redirect_to new_user_asset_path}
+        format.json do render :json => {taggable_type: "projects", taggable_id: @project.id}
+        end
+        format.html do
+          redirect_to new_user_asset_path
+        end
       end
     else
       flash.now[:danger] = @project.errors.full_messages

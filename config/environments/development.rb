@@ -32,7 +32,7 @@ Rails.application.configure do
   #   :enable_starttls_auto => true
   # }
 
-  # config.action_mailer.default_url_options = { host: 'floating-waters-91148.herokuapp.com' }
+  # config.action_mailer.default_url_options = { host: 'modresume.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
     :address => "smtp.sendgrid.net",

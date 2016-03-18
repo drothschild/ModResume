@@ -25,12 +25,16 @@ class EducationsController < ApplicationController
     detail_attributes = pass_params.delete(:details) || []
     @education = current_user.educations.new(pass_params)
     if @education.save
-      flash[:asset_saved] = "Asset Saved. Add another?"
       @user.tags << @education.tags
       addDescriptions(@education, detail_attributes)
+      flash[:asset_saved] = "Asset Saved. Add another?"
       respond_to do |format|
-        format.json{render :json => {taggable_type: "Education", taggable_id: @education.id}}
-        format.html{redirect_to new_user_asset_path}
+        format.json do
+          render :json => {taggable_type: "Education", taggable_id: @education.id}
+        end
+        format.html do
+          redirect_to new_user_asset_path
+        end
       end
     else
       flash.now[:notice] = @education.errors.full_messages

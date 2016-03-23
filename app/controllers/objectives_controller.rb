@@ -26,9 +26,14 @@ class ObjectivesController < ApplicationController
     @objective = @user.objectives.new(objective_params)
     if @objective.save
       @user.tags << @objective.tags
+      flash[:asset_saved] = "Asset Saved. Add another?"
       respond_to do |format|
-        format.json{render :json => {taggable_type: "objective", taggable_id: @objective.id}}
-        format.html{redirect_to new_user_asset_path}
+        format.json do
+          render :json => {taggable_type: "objective", taggable_id: @objective.id}
+        end
+        format.html do
+          redirect_to new_user_asset_path
+        end
       end
     else
       flash.now[:danger] = @objective.errors.full_messages

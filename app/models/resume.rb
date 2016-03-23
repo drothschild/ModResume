@@ -1,7 +1,7 @@
 class Resume < ActiveRecord::Base
   include Taggable
   belongs_to :user
-  has_many :resume_assets
+  has_many :resume_assets, dependent: :destroy
   has_many :experiences, through: :resume_assets, source: :buildable, source_type: "Experience"
   has_many :objectives, through: :resume_assets, source: :buildable, source_type: "Objective"
   has_many :skills, through: :resume_assets, source: :buildable, source_type: "Skill"

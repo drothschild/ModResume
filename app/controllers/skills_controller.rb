@@ -15,11 +15,16 @@ class SkillsController < ApplicationController
   def create
     @user = current_user
     @skill = current_user.skills.new(skill_params)
-    @skill.save
     @user.tags << @skill.tags
+    @skill.save
+    flash[:asset_saved] = "Asset Saved. Add another?"
     respond_to do |format|
-      format.json{render :json => {taggable_type: "Skill", taggable_id: @skill.id}}
-      format.html{redirect_to new_user_asset_path}
+      format.json do
+        render :json => {taggable_type: "Skill", taggable_id: @skill.id}
+      end
+      format.html do
+        redirect_to new_user_asset_path
+      end
     end
   end
 

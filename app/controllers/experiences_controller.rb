@@ -31,9 +31,14 @@ class ExperiencesController < ApplicationController
     if @experience.save
       @user.tags << @experience.tags
       addDescriptions(@experience, descriptions)
+      flash[:asset_saved] = "Asset Saved. Add another?"
       respond_to do |format|
-        format.json{render :json => {taggable_type: "Experience", taggable_id: @experience.id}}
-        format.html{redirect_to new_user_asset_path}
+        format.json do
+          render :json => {taggable_type: "Experience", taggable_id: @experience.id}
+        end
+        format.html do
+          redirect_to new_user_asset_path
+        end
       end
     else
       flash.now[:notice] = @experience.errors.full_messages

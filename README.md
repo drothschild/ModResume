@@ -17,6 +17,6 @@
 * [Roche Janken](https://www.linkedin.com/in/rochejanken)
 * [David Rothschild](https://www.linkedin.com/in/drothschild1)
 * [Lindsey Ullman](https://www.linkedin.com/in/lullman)
-* [Gary Wong](https://www.linkedin.com/in/gaykwong2016)
+* [Gary Wong](https://www.linkedin.com/in/garykwong2016)
 
 [Available on Heroku](https://modresume.herokuapp.com/)

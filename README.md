@@ -15,8 +15,8 @@
 
 ##Team Members
 * [Roche Janken](https://www.linkedin.com/in/rochejanken)
-* [David Rothschild]()
-* [Lindsey Ullman]()
-* [Gary Wong]()
+* [David Rothschild](https://www.linkedin.com/in/drothschild1)
+* [Lindsey Ullman](https://www.linkedin.com/in/lullman)
+* [Gary Wong](https://www.linkedin.com/in/gaykwong2016)
 
 [Available on Heroku](https://modresume.herokuapp.com/)

@@ -12,14 +12,11 @@
 * Devise
 * Sendgrid
 * Heroku
-* 
+
 ##Team Members
 * [Roche Janken](https://www.linkedin.com/in/rochejanken)
 * [David Rothschild]()
 * [Lindsey Ullman]()
 * [Gary Wong]()
 
-
-Available on Heroku
-
-[Heroku](https://modresume.herokuapp.com/)
+[Available on Heroku](https://modresume.herokuapp.com/)

@@ -1,0 +1,11 @@
+= form_for [@user, @skill] do |f|
+  %fieldset.form-group
+    = f.label :title, "Title"
+    = f.text_field :title, class: "form-control"
+  %fieldset.form-group
+    = f.label :tags_string, "Tags"
+    = f.text_field :tags_string, class: "form-control", id: "tags"
+    %p
+  
+    = f.submit "Save", class: "btn btn-default form-submit"
+    #all-tags-names{"data-tag-names" => "#{all_tag_names}"}

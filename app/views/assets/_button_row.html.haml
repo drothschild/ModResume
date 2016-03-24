@@ -1,0 +1,12 @@
+-if !current_url.include?("resume") && session[:new_resume_id] != nil
+  - if asset_type.singularize.capitalize.constantize.find(asset.id).resumes.include? Resume.find(session[:new_resume_id])
+    %button.btn.btn-default.pull-right.btn-round.asset-resume.button-minus{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
+      %span.glpyphicon.glyphicon-minus{"aria-hidden"=>"true"}
+  - else
+    %button.btn.btn-default.pull-right.btn-round.asset-resume.button-plus{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Add to Resume", "current_user_id" => current_user.id}
+      %span.glpyphicon.glyphicon-plus{"aria-hidden"=>"true"}
+-if session[:edit_asset] == true
+  %button.btn.btn-default.pull-right.btn-round.edit-popup{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Edit item", "current_user_id" => current_user.id}
+    %i.fa.fa-pencil.fa
+  %button.btn.btn-default.pull-right.btn-round.delete-popup{"data-asset-id" => "#{asset.id}", "data-asset-type" => "#{asset_type}", "title"=>"Delete item", "current_user_id" => current_user.id}
+    %i.fa.fa-trash.fa

@@ -1,0 +1,4 @@
+= form_for [current_user, @resume]  do |f|
+  %fieldset.form-group
+    = f.text_area :document_data, :class => "tinymce form-control", :id => "resume-description", :rows => 10, :cols => 50
+    = tinymce plugins: ["print"]

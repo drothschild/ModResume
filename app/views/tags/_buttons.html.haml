@@ -1,0 +1,4 @@
+.btn-group{role: "group"}
+-tags.order("name").each do |tag|
+  %a.btn.btn-default.tag-button.button-selected{"tag_id" => tag.id}
+    =tag.name

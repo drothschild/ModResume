@@ -1,0 +1,10 @@
+= form_for [@user, @objective] do |f|
+  %fieldset.form-group
+    = f.text_area :description, :class => "tinymce form-control", :id => "obj-description", :rows => 10, :cols => 50
+    = tinymce
+  %fieldset.form-group
+    = f.label :tags_string, "Tags"
+    = f.text_field :tags_string, class: "form-control", id: "tags"
+  %p
+  = f.submit "Save", class: "btn btn-default form-submit"
+  #all-tags-names{"data-tag-names" => "#{all_tag_names}"}

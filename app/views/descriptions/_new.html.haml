@@ -1,0 +1,5 @@
+= form_for [@user, @education] do |f|
+  %fieldset.form-group
+    = f.label :description, "Description"
+    = f.text_field :descriptions
+  = f.submit 'Add another'

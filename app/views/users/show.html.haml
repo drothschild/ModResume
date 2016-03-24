@@ -1,0 +1,49 @@
+
+%div
+  .row
+    .col-md-10.col-sm-10.col-centered
+      %h2 Information about you
+
+  .row
+    .col-md-10.col-sm-10.col-centered
+      %table.table#user-information
+        %tr
+          %th Name
+          %td= @user.first_name + ' ' + @user.last_name
+        %tr
+          %th Email
+          %td= @user.email
+        %tr
+          %th Phone
+          %td= @user.phone_number
+        %tr
+          %th Websites
+          - if @user.websites
+            - @user.websites.each do |site|
+              %tr{id: "website_#{site.id}"}
+                %th= site.description
+                %td= site.url
+                %td
+                  %button.btn.btn-default.pull-right.btn-round.delete-website{ "title"=>"Delete item", "website_id" => site.id}
+                    %i.fa.fa-trash.fa
+
+
+%div.col-md-10.col-sm-10.col-centered#new-website-form
+
+
+
+.row
+  .col-md-12.col-sm-12.text-center
+    %button.btn.btn-default#edit-information-button{type: "button"}= link_to 'Edit Information', edit_user_registration_path(@user)
+    %button.btn.btn-default#new-website-button{user_id: @user.id, type: "button"} Add website
+
+%script#individual-template{:type => "text/x-handlebars-template"}
+  %tr{id: "website_\{{id}}"}
+    %th {{description}}
+    %td {{url}}
+    %td
+      %button.btn.btn-default.pull-right.btn-round.delete-website{ "title"=>"Delete item", :website_id => "\{{id}}"}
+        %i.fa.fa-trash.fa
+  }
+
+

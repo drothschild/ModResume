@@ -1,0 +1,33 @@
+.page-header.text-center
+  %h4#new-assets-header
+    Click an asset type to add a new asset or &nbsp;
+    %button.btn.btn-default#import-assets-button{type: "button"} Import from LinkedIn PDF
+    %p
+  .linked-in
+
+    = form_for :user, :url => {:controller => 'users', :action => 'upload'} do |f|
+      =f.file_field "linked_in", class: "btn btn-default pull-center"
+      =f.submit 'Import', class: "btn btn-default"
+
+
+-tag_names = all_tag_names
+%div#all-tags-names{"data-tag-names" => tag_names.to_json}
+
+.row
+  .col-md-12.col-sm-12.text-center
+    .btn-group{role: "group"}
+      -@asset_types.each do |asset_type|
+        %a.btn.btn-default.asset-type-button{href: "/users/#{current_user.id}/#{asset_type}/new"}
+          =asset_type.singularize.capitalize
+.row
+  .col-md-6.col-sm-6.col-centered#form-container
+  .saved
+    -if asset_saved
+      %h3.text-center
+        = asset_saved
+  /   %h3.text-center Asset Saved. &nbsp; Add another?
+
+
+=link_to user_assets_path(current_user, session[:new_resume_id]), class: "btn-default onwards-floater floater-left" do
+  %i.fa.fa-angle-left.fa-4x
+

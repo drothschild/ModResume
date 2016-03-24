@@ -1,0 +1,59 @@
+.page-header.text-center
+  - if request.referrer == user_assets_url(current_user)
+    %h4
+      View and edit your assets.
+      &nbsp;
+      %small
+        You can also
+        %a.btn.btn-default{href: new_user_asset_path(current_user)} Add New Asset
+  - else
+    %h4
+      Choose what experience is relevant--all tags are selected by default.
+      &nbsp;
+      %small
+        You can also
+        %a.btn.btn-default{href: new_user_asset_path(current_user)} Add New Asset
+
+%div#resumeID{ "resume_id" => session[:new_resume_id] }
+.row
+  .col-md-8.col-sm-8.col-centered.text-center#tag-buttons
+    .btn-group{role: "group"}
+    -@tags = all_tags
+    -@tags.each do |tag|
+      %a.btn.btn-default.tag-button.button-selected{"tag_id" => tag.id}
+        =tag.name
+
+
+
+
+.row
+  .col-md-10.col-sm-10.col-centered
+    - @assets.each do |key, values|
+      %h2
+        =asset_type_grammar(key)
+      -values.each do |asset|
+        - asset_tags = get_asset_tag_ids(asset)
+        - asset_descriptions = asset.descriptions
+        %div{class: "asset-container", id:"#{key}_#{asset.id}",  asset_id: "#{asset.id}", tags: asset_tags.to_s}
+          =render "/#{key}/show", asset_type: key, asset: asset, tags: asset_tags.to_s, asset_descriptions: asset_descriptions
+
+
+#edit-form{:title => "Edit Asset"}
+  .col-md-8.col-sm-10.col-centered#form-container-edit
+
+#delete-confirm{:title => "Delete this asset?"}
+  %p
+    %span.ui-icon.ui-icon-alert{:style => "float:left; margin:0 7px 20px 0;"}
+    This asset will be permanently deleted and cannot be recovered. Are you sure?
+
+-if session[:new_resume_id] != nil
+  %a.btn-default.onwards-floater.floater-right{href: user_resume_url(current_user, session[:new_resume_id])}
+    %i.fa.fa-angle-right.fa-4x
+%a.btn-default.onwards-floater.floater-left{href: user_resumes_url(current_user)}
+  %i.fa.fa-angle-left.fa-4x
+
+
+
+
+
+

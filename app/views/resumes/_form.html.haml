@@ -1,0 +1,6 @@
+= form_for [@user, @new_resume] do |f|
+  %fieldset.form-group.form-inline
+    = f.label :target_job, :class => "sr-only"
+    = f.text_field :target_job, placeholder: "Target Job"
+    = f.hidden_field :user_id, value: current_user.id
+    = f.submit "Save", class: "btn btn-default"

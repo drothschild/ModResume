@@ -1,0 +1,38 @@
+= form_for [@user, @volunteering] do |f|
+  %fieldset.form-group
+    = f.label :organization
+    = f.text_field :organization, class: "form-control"
+  %fieldset.form-group
+    = f.label :title
+    = f.text_field :title, class: "form-control"
+  %fieldset.form-group
+    = f.label :begin_date
+    = f.date_select :begin_date, class: "form-control", discard_day: true
+    = f.label :end_date
+    = f.date_select :end_date, class: "form-control", discard_day: true
+  %fieldset.form_group
+    = f.label :location
+    = f.text_field :location, class: "form-control"
+
+    = f.label :details
+  %fieldset.form_group.form-inline
+    = f.fields_for :descriptions do |d|
+      =d.text_field :detail, class: "form-control detail"
+    = text_field_tag "volunteering[details][][detail]",nil,  class: "form-control detail"
+
+    = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
+    = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
+  %fieldset.form-group
+    = f.label :tags_string, "Tags"
+    = f.text_field :tags_string, class: "form-control", id: "tags"
+    %p
+    = f.submit "Save", class: "btn btn-default form-submit"
+    #all-tags-names{"data-tag-names" => "#{all_tag_names}"}
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+= form_for [@user, @project] do |f|
+  %fieldset.form-group
+    = f.label :title, "Title"
+    = f.text_field :title, class: "form-control"
+  %fieldset.form-group
+    = f.label :about_project, "About Project"
+    = f.text_field :description, class: "form-control"
+    = f.label :details
+  %fieldset.form_group.form-inline
+    = f.fields_for :descriptions do |d|
+      =d.text_field :detail, class: "form-control details"
+    = text_field_tag "project[details][][detail]",nil,  class: "form-control detail"
+    = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
+    = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
+  %fieldset.form-group
+    = f.label :tags_string, "Tags"
+    = f.text_field :tags_string, class: "form-control", id: "tags"
+    = f.submit "Save", class: "btn btn-default form-submit"
+  #all-tags-names{"data-tag-names" => "#{all_tag_names}"}
+

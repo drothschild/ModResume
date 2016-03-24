@@ -1,0 +1,31 @@
+= form_for [@user, @education] do |f|
+  %fieldset.form-group
+    = f.label :institution_name, "Institution Name"
+    = f.text_field :institution_name, class: "form-control"
+  %fieldset.form-group
+    = f.label :location, "Location"
+    = f.text_field :location, class: "form-control"
+  %fieldset.form-group
+    = f.label :focus, "Area of Studies"
+    = f.text_field :focus, class: "form-control"
+  %fieldset.form-group
+    = f.label :about_institution, "About Institution"
+    = f.text_field :description, class: "form-control"
+  %fieldset.form-group
+    = f.label :completion
+    = f.date_select :completion, class: "form-control", discard_day: true
+    %p
+    = f.label :details
+  %fieldset.form_group.form-inline
+    = f.fields_for :descriptions do |d|
+      =d.text_field :detail, class: "form-control detail"
+    = text_field_tag "education[details][][detail]",nil,  class: "form-control detail"
+    = button_tag "+", class: "btn btn-default btn-round", id: "add_detail"
+    = button_tag "-", class: "btn btn-default btn-round-minus", id: "remove_detail"
+  %fieldset.form-group
+    = f.label :tags_string, "Tags"
+    = f.text_field :tags_string, class: "form-control", id: "tags"
+    %p
+    = f.submit "Save", class: "btn btn-default form-submit"
+    #tags-names{"data-tag-names" => "#{@tags_list}"}
+    #all-tags-names{"data-tag-names" => "#{all_tag_names}"}

@@ -1,0 +1,64 @@
+.page-header.text-center
+  %h4#resume-show-instructions
+    Drag your assets to your resume, then
+    %button.btn.btn-default#print-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+      Print
+    or
+
+    %button.btn.btn-default#save-resume-button{type: "button", current_user_id: "#{current_user.id}", resume_id: "#{@resume.id}"}
+      Save
+
+  %h4.resume-fine-tune
+    Edit your text here, then print from the file menu below!
+
+
+.sortable-wrapper
+
+  .row
+    .col-md-6.col-s-6
+      %h2 Your Resume
+    %h2
+      .col-md-3.col-s-3
+        Your Assets
+      .col-md-3.col-s-3.resume-content.pull-right#trashcan
+        %i.fa.fa-trash-o
+
+
+  .row#divSection_0
+    .col-md-6.col-s-6.text-center.resume-template
+      .row#divSection_1
+        .col-md-12.col-s-12.resume-header
+          %h4="#{current_user.first_name} #{current_user.last_name}"
+          %p.email="#{current_user.email}"
+          - if current_user.phone_number
+            %p.phone=current_user.phone_number
+          - if current_user.websites.first
+            %p.web=current_user.websites.first.url
+
+      .row#divSection_2
+        .col-md-12.col-s-12.resume-content.resume-top-content.resume-section
+          = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 2, asset_header: false
+
+      .row#divSection_3
+        .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
+          = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 3, asset_header: false
+
+        #divSection_4
+          .col-md-12.col-s-12.resume-content.resume-middle-split-content.resume-section
+            = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 4, asset_header: false
+
+
+    .col-md-6.col-s-6.resume-content.library
+      = render 'resumes/show', asset_type: @asset_types, assets: @assets, div_section: 0, asset_header: true
+
+  %a.btn.btn-default.onwards-floater.floater-right.fine-tune-button{href: user_resume_save_document_data_path(@resume)}
+    %i.fa.fa-angle-right.fa-4x
+  %a.btn-default.onwards-floater.floater-left{href: user_assets_url(current_user)}
+    %i.fa.fa-angle-left.fa-4x
+.resume-fine-tune
+  %a.btn-default.onwards-floater.floater-left{href: user_resume_url(current_user, session[:new_resume_id])}
+    %i.fa.fa-angle-left.fa-4x
+
+
+
+

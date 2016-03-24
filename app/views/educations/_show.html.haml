@@ -1,0 +1,10 @@
+.panel.panel-default{"id" => "Education_#{asset.id}"}
+  .panel-heading
+    .row
+      .col-md-10.col-sm-10
+        %strong= asset.institution_name
+        %em= asset.focus
+        = asset.completion.strftime('%b %Y')
+      .col-md-2.col-sm-2.button-col
+        = render "/assets/button_row", asset: asset, asset_type: asset_type
+  = render 'descriptions/show', asset_descriptions: asset_descriptions, asset: asset, asset_type: asset_type

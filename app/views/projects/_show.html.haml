@@ -1,0 +1,8 @@
+.panel.panel-default{"id" => "Project_#{asset.id}"}
+  .panel-heading
+    .row
+      .col-md-10.col-sm-10
+        %strong= asset.title
+      .col-md-2.col-sm-2
+        = render "/assets/button_row", asset_type: asset_type, asset: asset
+  = render 'descriptions/show', asset_descriptions: asset_descriptions, asset: asset, asset_type: asset_type

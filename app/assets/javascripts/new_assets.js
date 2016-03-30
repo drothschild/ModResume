@@ -36,9 +36,9 @@ newAssetsView.prototype.saveForm = function(event){
         setTimeout(function(){
           $('.saved').fadeIn(250, function(){});
         }, 300)
-      }).error(jqXHR, textStatus, errorThrown){$(".alert").html(xhr.status)
+      }).error(jqXHR, textStatus, errorThrown)($(".alert").html(xhr.status)
 
-    }
+    )
     }
 }
 

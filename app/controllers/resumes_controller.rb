@@ -49,7 +49,7 @@ class ResumesController < ApplicationController
 
   def save_document_data
     @resume = Resume.find(params[:id])
-    @resume.document_data = params[:data]
+    @resume.document_data = params[:document_data]
     @resume.save
     redirect_to user_resume_fine_tune_path
   end

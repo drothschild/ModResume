@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'users/:id/assets/reset', to: 'assets#reset', as: 'user_assets_reset'
 
   post 'users/:id/resumes/:id/save_document_data', to: 'resumes#save_document_data', as: 'user_resume_save_document_data'
+  get 'root/about', to: 'root#about', as: 'about'
 
 
   root 'root#index'

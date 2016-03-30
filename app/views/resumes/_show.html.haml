@@ -2,7 +2,7 @@
 -@asset_types.each do |asset_type|
   .asset-portlet
     - if (asset_header == true)
-      .asset-portlet-header=asset_type_grammar(asset_type)
+      .h3.asset-portlet-header=asset_type_grammar(asset_type)
     .nested-sort
       .asset-portlet-content
       -@assets["#{asset_type}"].each do |asset|

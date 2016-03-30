@@ -3,6 +3,7 @@ var bindFineTuneListeners = function(){
 }
 
 var loadFineTuneForm = function(e){
+  console.log("loading fine tune form")
   e.preventDefault();
   tinyMCE.remove();
   var data = $('.resume-template').html();

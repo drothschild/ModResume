@@ -145,3 +145,4 @@ var deleteAsset = function(assetType, assetId) {
     $(assetToDelete).remove();
   });
 }
+
